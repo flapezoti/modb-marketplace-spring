@@ -17,10 +17,9 @@ import static java.lang.System.Logger.Level.DEBUG;
 
 /**
  * Owns a read replica of Product's catalog data, kept fresh purely by consuming
- * Product's own outbound events. This is the pair the vMODB+Spring thesis subset
- * focuses on: vMODB's coordinator delivers PRODUCT_UPDATED/PRICE_UPDATED to this
- * VMS in the same TID order Product emitted them, so the replica can never observe
- * a price update "out of order" the way an unordered Kafka topic could.
+ * Product's own outbound events. vMODB's coordinator delivers PRODUCT_UPDATED and
+ * PRICE_UPDATED to this VMS in the same TID order Product emitted them, so the replica does
+ * not observe price updates out of order.
  */
 @Microservice("cart")
 public final class CartService {

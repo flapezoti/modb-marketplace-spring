@@ -2,41 +2,38 @@ package dk.ku.di.dms.vms.marketplace.cart;
 
 import dk.ku.di.dms.vms.marketplace.cart.entities.ProductReplica;
 import dk.ku.di.dms.vms.marketplace.cart.repositories.IProductReplicaRepository;
-import dk.ku.di.dms.vms.marketplace.common.Constants;
 import dk.ku.di.dms.vms.modb.common.transaction.ITransactionManager;
-import dk.ku.di.dms.vms.modb.common.utils.ConfigUtils;
 import dk.ku.di.dms.vms.sdk.embed.client.DefaultHttpHandler;
 import dk.ku.di.dms.vms.sdk.embed.client.VmsApplication;
-import dk.ku.di.dms.vms.sdk.embed.client.VmsApplicationOptions;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.Bean;
+import vmodb.spring.VmodbBootstrap;
+import vmodb.spring.VmodbProperties;
 
-import java.util.Properties;
+/** Cart VMS bootstrapped as a Spring Boot application using vmodb-spring-starter. */
+@SpringBootApplication
+public class Main {
 
-public final class Main {
-
-    /** Exposed for in-process test verification only -- see Main.VMS / Main.TRANSACTION_MANAGER in the product module. */
+    public static ConfigurableApplicationContext CONTEXT;
     public static VmsApplication VMS;
     public static ITransactionManager TRANSACTION_MANAGER;
     public static IProductReplicaRepository REPOSITORY;
 
-    public static void main(String[] ignoredArgs) throws Exception {
-        Properties properties = ConfigUtils.loadProperties();
-        VMS = buildVms(properties);
-        VMS.start();
+    public static void main(String[] args) {
+        // Not named "application.yml" so this config does not collide with the product module's on a shared classpath.
+        System.setProperty("spring.config.name", "application-cart");
+        CONTEXT = SpringApplication.run(Main.class, args != null ? args : new String[0]);
+        VMS = CONTEXT.getBean(VmsApplication.class);
+        TRANSACTION_MANAGER = CONTEXT.getBean(ITransactionManager.class);
+        REPOSITORY = (IProductReplicaRepository) VMS.getRepositoryProxy("product_replicas");
     }
 
-    private static VmsApplication buildVms(Properties properties) throws Exception {
-        VmsApplicationOptions options = VmsApplicationOptions.build(
-                properties,
-                "0.0.0.0",
-                Constants.CART_VMS_PORT, new String[]{
-                "dk.ku.di.dms.vms.marketplace.cart",
-                "dk.ku.di.dms.vms.marketplace.common"
-        });
-        return VmsApplication.build(options, (x,y) -> {
-            TRANSACTION_MANAGER = x;
-            REPOSITORY = (IProductReplicaRepository) y.apply("product_replicas");
-            return new CartHttpHandler(x, REPOSITORY);
-        });
+    @Bean
+    VmsApplication vmsApplication(VmodbProperties props) throws Exception {
+        return VmsApplication.build(VmodbBootstrap.buildOptions(props), (transactionManager, repoLookup) ->
+                new CartHttpHandler(transactionManager, (IProductReplicaRepository) repoLookup.apply("product_replicas")));
     }
 
     /** Lets a test/client read the product_replicas table directly, to verify what the coordinator delivered. */

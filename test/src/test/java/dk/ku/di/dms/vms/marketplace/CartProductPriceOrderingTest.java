@@ -27,20 +27,15 @@ import static dk.ku.di.dms.vms.marketplace.common.Constants.*;
 import static java.lang.Thread.sleep;
 
 /**
- * End-to-end proof of this thesis subset's correctness story: Cart's product_replicas
- * table can only ever be as fresh, and only ever as consistent, as the TID order the
- * coordinator delivers events in -- there is no ordering key, no partition assignment,
- * and no client-side retry logic anywhere in this test. That is the structural
- * property vMODB gives for free that the Kafka-based reference implementation
- * (work/OnlineMarketLibrary_Spring) documented as missing (§4 S#5: no producer there
- * sets a partition key).
+ * End-to-end test of price-update propagation from Product to Cart: Cart's product_replicas
+ * table is kept consistent by the TID order in which the coordinator delivers events, with no
+ * ordering key, partition assignment or client-side retry logic.
  *
  * State is verified by reading Product's and Cart's repositories directly, in-process,
  * rather than over HTTP: querying a VMS over plain HTTP while it has an active coordinator
- * session returns an empty reply (confirmed with both curl and Java's HttpClient) -- a
- * previously undocumented vMODB constraint distinct from the ones already catalogued in
- * the parent project's vmodb-framework-bugs memory. See Main.TRANSACTION_MANAGER /
- * Main.REPOSITORY in both the product and cart modules, exposed for exactly this reason.
+ * session returns an empty reply (confirmed with both curl and Java's HttpClient). See
+ * Main.TRANSACTION_MANAGER / Main.REPOSITORY in both the product and cart modules, exposed
+ * for this reason.
  *
  * Three steps, each waited out to its own batch commit before the next is sent,
  * because product's own price-update handler requires the product to already exist:

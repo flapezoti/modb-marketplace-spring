@@ -1,0 +1,17 @@
+spring:
+  main:
+    banner-mode: off
+
+vmodb:
+  host: 0.0.0.0
+  port: 18081
+  packages:
+    - dk.ku.di.dms.vms.marketplace.product
+    - dk.ku.di.dms.vms.marketplace.common
+  network-thread-pool-size: 4
+  vms-thread-pool-size: 4
+  num-vms-workers: 1
+  max-sleep: 100
+  logging: false
+  checkpointing: false
+  max-records: 0
