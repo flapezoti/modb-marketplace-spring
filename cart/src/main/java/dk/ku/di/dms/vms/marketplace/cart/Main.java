@@ -27,13 +27,27 @@ public class Main {
         CONTEXT = SpringApplication.run(Main.class, args != null ? args : new String[0]);
         VMS = CONTEXT.getBean(VmsApplication.class);
         TRANSACTION_MANAGER = CONTEXT.getBean(ITransactionManager.class);
-        REPOSITORY = (IProductReplicaRepository) VMS.getRepositoryProxy("product_replicas");
+        REPOSITORY = CONTEXT.getBean(IProductReplicaRepository.class);
     }
 
     @Bean
     VmsApplication vmsApplication(VmodbProperties props) throws Exception {
         return VmsApplication.build(VmodbBootstrap.buildOptions(props), (transactionManager, repoLookup) ->
                 new CartHttpHandler(transactionManager, (IProductReplicaRepository) repoLookup.apply("product_replicas")));
+    }
+
+    // See product's Main.java for why these are declared as @Bean methods depending on
+    // vmsApplication(), not registered as singletons from a lifecycle hook.
+    @Bean
+    IProductReplicaRepository productReplicaRepository(VmsApplication vms) {
+        return VmodbBootstrap.repository(vms, "product_replicas");
+    }
+
+    @Bean
+    CartService cartService(VmsApplication vms) {
+        // See the matching comment in product's Main.java: VmsApplication.getService() is keyed
+        // by canonical class name, not the @Microservice("cart") annotation value.
+        return VmodbBootstrap.service(vms, CartService.class.getName());
     }
 
     /** Lets a test/client read the product_replicas table directly, to verify what the coordinator delivered. */

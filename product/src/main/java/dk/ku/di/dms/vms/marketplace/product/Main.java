@@ -33,13 +33,31 @@ public class Main {
         CONTEXT = SpringApplication.run(Main.class, args != null ? args : new String[0]);
         VMS = CONTEXT.getBean(VmsApplication.class);
         TRANSACTION_MANAGER = CONTEXT.getBean(ITransactionManager.class);
-        REPOSITORY = (IProductRepository) VMS.getRepositoryProxy("products");
+        REPOSITORY = CONTEXT.getBean(IProductRepository.class);
     }
 
     @Bean
     VmsApplication vmsApplication(VmodbProperties props) throws Exception {
         return VmsApplication.build(VmodbBootstrap.buildOptions(props), (transactionManager, repoLookup) ->
                 new ProductHttpHandler(transactionManager, (IProductRepository) repoLookup.apply("products")));
+    }
+
+    // Typed beans exposing what VMODB already built, so other Spring beans (e.g. ProductQueryController)
+    // can @Autowired them directly instead of reaching into VmsApplication by hand. Declared as @Bean
+    // methods depending on vmsApplication(), not registered as singletons from a lifecycle hook, so Spring
+    // orders their construction correctly relative to anything that depends on them.
+    @Bean
+    IProductRepository productRepository(VmsApplication vms) {
+        return VmodbBootstrap.repository(vms, "products");
+    }
+
+    @Bean
+    ProductService productService(VmsApplication vms) {
+        // VmsApplication.getService() keys its map by the @Microservice class's canonical class
+        // name, not the @Microservice("product") annotation value -- confirmed by reading
+        // VmsMetadataLoader.loadMicroserviceClasses(), which does
+        // loadedMicroserviceInstances.put(clazz.getCanonicalName(), vmsInstance).
+        return VmodbBootstrap.service(vms, ProductService.class.getName());
     }
 
     /** Lets a test/client seed or read Product rows directly (outside the coordinator's transaction flow). */

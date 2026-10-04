@@ -1,5 +1,6 @@
 package dk.ku.di.dms.vms.marketplace.cart.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import dk.ku.di.dms.vms.modb.api.annotations.VmsTable;
 import dk.ku.di.dms.vms.modb.api.interfaces.IEntity;
 
@@ -8,6 +9,9 @@ import javax.persistence.Id;
 import javax.persistence.IdClass;
 import java.io.Serializable;
 
+// See the matching comment on Product.java: IEntity.getId() throws by default, and this class
+// does not override it, so Jackson's getter auto-detection must be told to skip it.
+@JsonIgnoreProperties({"id"})
 @VmsTable(name="product_replicas")
 @IdClass(ProductReplica.ProductId.class)
 public final class ProductReplica implements IEntity<ProductReplica.ProductId> {

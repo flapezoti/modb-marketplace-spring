@@ -1,5 +1,6 @@
 package dk.ku.di.dms.vms.marketplace.product;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import dk.ku.di.dms.vms.modb.api.annotations.VmsTable;
 import dk.ku.di.dms.vms.modb.api.interfaces.IEntity;
 
@@ -8,6 +9,13 @@ import javax.persistence.Id;
 import javax.persistence.IdClass;
 import java.io.Serializable;
 
+// IEntity.getId() has a default implementation that throws UnsupportedOperationException, and
+// this class does not override it. Jackson's default bean introspection auto-detects that
+// public getter-shaped method as an "id" property and calls it when serializing to JSON
+// (confirmed: JsonMappingException wrapping the UnsupportedOperationException, through reference
+// chain Product["id"]). Ignored here rather than overriding getId(), which nothing in this
+// module needs.
+@JsonIgnoreProperties({"id"})
 @VmsTable(name="products")
 @IdClass(Product.ProductId.class)
 public final class Product implements IEntity<Product.ProductId> {

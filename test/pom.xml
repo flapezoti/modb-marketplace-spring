@@ -40,6 +40,15 @@
                     <skipTests>false</skipTests>
                     <!-- vMODB compiles with the preview-features flag (memory segments); the test JVM needs it too -->
                     <argLine>--enable-preview --add-exports java.base/jdk.internal.misc=ALL-UNNAMED --add-opens java.base/jdk.internal.misc=ALL-UNNAMED</argLine>
+                    <!-- One fresh JVM per test class (not Surefire's default reuseForks=true): VMODB's
+                         repository-proxy class generation cannot run twice in the same classloader, and
+                         every test class here boots its own product/cart VmsApplication instances.
+                         Confirmed: running two such test classes in one shared fork failed the second
+                         with "Cannot inject already loaded type: class ProductRepositoryImpl". forkCount
+                         stays 1 so test classes still run sequentially, avoiding port conflicts between
+                         them instead of needing per-class port configuration. -->
+                    <reuseForks>false</reuseForks>
+                    <forkCount>1</forkCount>
                 </configuration>
             </plugin>
         </plugins>
