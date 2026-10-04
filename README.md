@@ -8,7 +8,11 @@ delivers events to a VMS in transaction-id order, and no ordering key, polling o
 merge logic is needed.
 
 Both VMSes are Spring Boot applications configured through `application-*.yml` and started with
-[`vmodb-spring-starter`](../vmodb-spring-starter).
+[`vmodb-spring-starter`](../vmodb-spring-starter), using its **deep DI path**: `ProductService`
+and `CartService` are constructed by Spring itself (plain constructor injection), not by VMODB's
+own reflection, via `vmodb-fork`'s `VmsApplication.prepare(...)` / `VmsPreparedApplication
+#complete(...)` split. Neither service class carries any Spring annotation — only each module's
+`Main` knows Spring is involved.
 
 ## Modules
 
@@ -17,13 +21,16 @@ Both VMSes are Spring Boot applications configured through `application-*.yml` a
 - `product` — owns the `products` table. Two transactions: `updateProduct` (create or update,
   emits `PRODUCT_UPDATED`) and `updateProductPrice` (always emits `PRICE_UPDATED`, but applies the
   price locally only if `priceUpdate.version` matches the product's current version).
-  `IProductRepository` and `ProductService` are exposed as typed Spring beans in `Main`, backing
-  `ProductQueryController` (`GET /products/{sellerId}/{productId}`, `GET /system/info`) — a
-  read API over Spring MVC, separate from VMODB's own raw HTTP handler.
+  `IProductRepository` and `ProductService` are exposed as typed Spring beans in `Main` —
+  `ProductService` genuinely constructed by Spring via the deep-DI chain (`preparedVms` →
+  `productRepository` → `productService` → `vmsApplication`) — backing `ProductQueryController`
+  (`GET /products/{sellerId}/{productId}`, `GET /system/info`), a read API over Spring MVC,
+  separate from VMODB's own raw HTTP handler.
 - `cart` — owns `product_replicas`. Applies the same version check to `PRICE_UPDATED`, so a
   stale or conflicting price update is rejected identically on both sides. Same bean/controller
-  pattern as `product`: `IProductReplicaRepository`/`CartService` beans back
-  `ReplicaQueryController` (`GET /replicas/{sellerId}/{productId}`, `GET /system/info`).
+  pattern as `product`: `IProductReplicaRepository`/`CartService` beans (`CartService` likewise
+  Spring-constructed) back `ReplicaQueryController` (`GET /replicas/{sellerId}/{productId}`,
+  `GET /system/info`).
 - `test`:
   - `CartProductPriceOrderingTest` — boots both VMSes and an embedded `Coordinator` with two
     two-node DAGs (`update_product`, `update_price`; Product to Cart), then checks that
@@ -66,10 +73,12 @@ Requires JDK 21 (VMODB compiles with `--enable-preview` for memory-segment APIs)
   in-process, through the beans and repositories exposed as static fields on each `Main`.
 - **`VmsApplication.getService(name)` is keyed by canonical class name, not the
   `@Microservice("...")` annotation value.** `VmsMetadataLoader.loadMicroserviceClasses()` does
-  `loadedMicroserviceInstances.put(clazz.getCanonicalName(), vmsInstance)`. Use
-  `ProductService.class.getName()` (see `VmodbBootstrap.service(...)` in `vmodb-spring-starter`
-  and the `productService`/`cartService` `@Bean` methods here), not the string passed to
-  `@Microservice`.
+  `loadedMicroserviceInstances.put(clazz.getCanonicalName(), vmsInstance)`. This matters here
+  even though `ProductService`/`CartService` are now Spring-constructed (deep DI, not looked up
+  via `getService(...)`): the same `Class#getName()` convention is what the `vmsInstances` map
+  passed to `VmsPreparedApplication#complete(...)` must be keyed by, for VMODB's own internal
+  bookkeeping to find them afterward (e.g. anything still reading `vms.getService(...)`
+  elsewhere).
 - **`IEntity<PK>.getId()`'s default implementation throws `UnsupportedOperationException`**, and
   neither `Product` nor `ProductReplica` overrides it. Jackson's default bean introspection
   auto-detects that public getter-shaped method as an "id" property and calls it when
@@ -86,9 +95,16 @@ Requires JDK 21 (VMODB compiles with `--enable-preview` for memory-segment APIs)
 - **Read with `VMS.lastTidFinished()`, not tid 0.** `beginTransaction(0, 0, 0, true)` after
   coordinator transactions have advanced the tid counter opens a pre-commit snapshot and returns
   `null` or stale data. Pass `lastTidFinished()` as both `tid` and `lastTid`.
-- **The `VmsApplication.build(...)` call stays in each module's `Main`.** VMODB keeps only the
-  `@Microservice` classes in the direct caller's package, so the call must be made from the
-  service's own package (see `vmodb-spring-starter`).
+- **The `VmsApplication.prepare(...)` call (formerly `build(...)`) stays in each module's
+  `Main`.** VMODB keeps only the `@Microservice`/`@VmsTable` classes in the direct caller's
+  package, so the call must be made from the service's own package (see `vmodb-spring-starter`).
+  Each `Main` now wires four beans instead of one — `preparedVms` → the table's repository →
+  the `@Microservice` service (plain `new ProductService(...)`/`new CartService(...)`, genuinely
+  Spring-constructed) → `vmsApplication` (via `prepared.complete(...)`) — the deep-DI path added
+  on top of `vmodb-fork`'s `VmsApplication.prepare(...)`/`VmsPreparedApplication#complete(...)`
+  split (see `vmodb-fork/README.md`). `ProductQueryController`/`ReplicaQueryController` and both
+  test classes needed no changes for this: they depend on `IProductRepository`/`ProductService`/
+  `VmsApplication` by type only, not on how those beans get constructed.
 - **Both VMSes run in one JVM in the test**, so their config files have distinct names
   (`application-product.yml`, `application-cart.yml`), selected with
   `System.setProperty("spring.config.name", ...)` in each `Main.main()`. Otherwise Spring Boot
@@ -97,3 +113,9 @@ Requires JDK 21 (VMODB compiles with `--enable-preview` for memory-segment APIs)
   `TransactionDAG`; one `@Event` class must map to one queue name per VMS; `lookupByKey` does not
   work with a bare `String` primary key; strings in tables are truncated to 32 characters; keys
   are identified by `hashCode()` only; state did not survive a VMS restart in testing.
+- **`ConfigUtils.getCallerPackage()` originally recognized only `VmsApplication.build(...)` as
+  an entry point**, by hardcoding the stack-trace method name `"build"`. Adding
+  `VmsApplication.prepare(...)` (a differently-named entry point, for the deep-DI path) as a
+  second caller needed a one-line widening of that check in `vmodb-fork` — see
+  `vmodb-fork/README.md`'s "Fork-specific changes" section. Without it, `prepare(...)` always
+  threw `IllegalStateException: Cannot identify package.`, regardless of caller.

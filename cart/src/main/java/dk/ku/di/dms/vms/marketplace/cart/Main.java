@@ -5,6 +5,7 @@ import dk.ku.di.dms.vms.marketplace.cart.repositories.IProductReplicaRepository;
 import dk.ku.di.dms.vms.modb.common.transaction.ITransactionManager;
 import dk.ku.di.dms.vms.sdk.embed.client.DefaultHttpHandler;
 import dk.ku.di.dms.vms.sdk.embed.client.VmsApplication;
+import dk.ku.di.dms.vms.sdk.embed.client.VmsPreparedApplication;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -12,7 +13,13 @@ import org.springframework.context.annotation.Bean;
 import vmodb.spring.VmodbBootstrap;
 import vmodb.spring.VmodbProperties;
 
-/** Cart VMS bootstrapped as a Spring Boot application using vmodb-spring-starter. */
+import java.util.Map;
+
+/**
+ * Cart VMS bootstrapped as a Spring Boot application using vmodb-spring-starter, with CartService
+ * constructed by Spring itself -- see product's Main.java for the full rationale behind this
+ * "deep" DI path (VmsApplication.prepare(...)/VmsPreparedApplication#complete(...)).
+ */
 @SpringBootApplication
 public class Main {
 
@@ -31,23 +38,27 @@ public class Main {
     }
 
     @Bean
-    VmsApplication vmsApplication(VmodbProperties props) throws Exception {
-        return VmsApplication.build(VmodbBootstrap.buildOptions(props), (transactionManager, repoLookup) ->
-                new CartHttpHandler(transactionManager, (IProductReplicaRepository) repoLookup.apply("product_replicas")));
-    }
-
-    // See product's Main.java for why these are declared as @Bean methods depending on
-    // vmsApplication(), not registered as singletons from a lifecycle hook.
-    @Bean
-    IProductReplicaRepository productReplicaRepository(VmsApplication vms) {
-        return VmodbBootstrap.repository(vms, "product_replicas");
+    VmsPreparedApplication preparedVms(VmodbProperties props) throws Exception {
+        return VmsApplication.prepare(VmodbBootstrap.buildOptions(props));
     }
 
     @Bean
-    CartService cartService(VmsApplication vms) {
-        // See the matching comment in product's Main.java: VmsApplication.getService() is keyed
-        // by canonical class name, not the @Microservice("cart") annotation value.
-        return VmodbBootstrap.service(vms, CartService.class.getName());
+    IProductReplicaRepository productReplicaRepository(VmsPreparedApplication prepared) {
+        return VmodbBootstrap.repository(prepared, "product_replicas");
+    }
+
+    // A genuine Spring bean: constructed by Spring's own dependency resolution, not by VMODB's
+    // reflection. See the matching comment in product's Main.java.
+    @Bean
+    CartService cartService(IProductReplicaRepository productReplicaRepository) {
+        return new CartService(productReplicaRepository);
+    }
+
+    @Bean
+    VmsApplication vmsApplication(VmsPreparedApplication prepared, CartService cartService) throws Exception {
+        return prepared.complete(Map.of(CartService.class.getName(), cartService),
+                (transactionManager, repoLookup) ->
+                        new CartHttpHandler(transactionManager, (IProductReplicaRepository) repoLookup.apply("product_replicas")));
     }
 
     /** Lets a test/client read the product_replicas table directly, to verify what the coordinator delivered. */

@@ -3,6 +3,7 @@ package dk.ku.di.dms.vms.marketplace.product;
 import dk.ku.di.dms.vms.modb.common.transaction.ITransactionManager;
 import dk.ku.di.dms.vms.sdk.embed.client.DefaultHttpHandler;
 import dk.ku.di.dms.vms.sdk.embed.client.VmsApplication;
+import dk.ku.di.dms.vms.sdk.embed.client.VmsPreparedApplication;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -10,12 +11,19 @@ import org.springframework.context.annotation.Bean;
 import vmodb.spring.VmodbBootstrap;
 import vmodb.spring.VmodbProperties;
 
+import java.util.Map;
+
 /**
- * Product VMS bootstrapped as a Spring Boot application using vmodb-spring-starter.
+ * Product VMS bootstrapped as a Spring Boot application using vmodb-spring-starter, with
+ * ProductService constructed by Spring itself (real @Autowired, full bean lifecycle) rather than
+ * by VMODB's own reflection, via VmsApplication.prepare(...)/VmsPreparedApplication#complete(...).
  *
- * The vmsApplication() @Bean method is declared here, not in the starter, because
- * VmsApplication.build() keeps only the @Microservice classes in its direct caller's package
- * (VMODB's ConfigUtils.getCallerPackage()), so the call must be made from this package.
+ * preparedVms() is declared here, not in the starter, because VmsApplication.prepare(...) keeps
+ * only the @Microservice classes in its direct caller's package (VMODB's
+ * ConfigUtils.getCallerPackage()), so the call must be made from this package.
+ *
+ * ProductQueryController and both test classes depend on IProductRepository/ProductService/
+ * VmsApplication purely by type, not on how these beans are constructed.
  */
 @SpringBootApplication
 public class Main {
@@ -37,27 +45,28 @@ public class Main {
     }
 
     @Bean
-    VmsApplication vmsApplication(VmodbProperties props) throws Exception {
-        return VmsApplication.build(VmodbBootstrap.buildOptions(props), (transactionManager, repoLookup) ->
-                new ProductHttpHandler(transactionManager, (IProductRepository) repoLookup.apply("products")));
-    }
-
-    // Typed beans exposing what VMODB already built, so other Spring beans (e.g. ProductQueryController)
-    // can @Autowired them directly instead of reaching into VmsApplication by hand. Declared as @Bean
-    // methods depending on vmsApplication(), not registered as singletons from a lifecycle hook, so Spring
-    // orders their construction correctly relative to anything that depends on them.
-    @Bean
-    IProductRepository productRepository(VmsApplication vms) {
-        return VmodbBootstrap.repository(vms, "products");
+    VmsPreparedApplication preparedVms(VmodbProperties props) throws Exception {
+        return VmsApplication.prepare(VmodbBootstrap.buildOptions(props));
     }
 
     @Bean
-    ProductService productService(VmsApplication vms) {
-        // VmsApplication.getService() keys its map by the @Microservice class's canonical class
-        // name, not the @Microservice("product") annotation value -- confirmed by reading
-        // VmsMetadataLoader.loadMicroserviceClasses(), which does
-        // loadedMicroserviceInstances.put(clazz.getCanonicalName(), vmsInstance).
-        return VmodbBootstrap.service(vms, ProductService.class.getName());
+    IProductRepository productRepository(VmsPreparedApplication prepared) {
+        return VmodbBootstrap.repository(prepared, "products");
+    }
+
+    // A genuine Spring bean: constructed by Spring's own dependency resolution, not by VMODB's
+    // reflection. ProductService itself carries no Spring annotation at all -- it stays exactly
+    // as portable/testable as before; only this factory method knows Spring exists.
+    @Bean
+    ProductService productService(IProductRepository productRepository) {
+        return new ProductService(productRepository);
+    }
+
+    @Bean
+    VmsApplication vmsApplication(VmsPreparedApplication prepared, ProductService productService) throws Exception {
+        return prepared.complete(Map.of(ProductService.class.getName(), productService),
+                (transactionManager, repoLookup) ->
+                        new ProductHttpHandler(transactionManager, (IProductRepository) repoLookup.apply("products")));
     }
 
     /** Lets a test/client seed or read Product rows directly (outside the coordinator's transaction flow). */
