@@ -44,6 +44,8 @@ public class Main {
         return VmsApplication.prepare(VmodbBootstrap.buildOptions(props));
     }
 
+    // Kept as its own bean: ReplicaQueryController still depends on the raw VMODB repository
+    // directly, for its own read API, unrelated to CartService's internal storage access.
     @Bean
     IProductReplicaRepository productReplicaRepository(VmsPreparedApplication prepared) {
         return VmodbBootstrap.repository(prepared, "product_replicas");
@@ -56,7 +58,8 @@ public class Main {
     }
 
     // A genuine Spring bean: constructed by Spring's own dependency resolution, not by VMODB's
-    // reflection. See the matching comment in product's Main.java.
+    // reflection. See the matching comment in product's Main.java -- same reasoning for why this
+    // still takes IProductReplicaRepository and wraps it internally.
     @Bean
     CartService cartService(IProductReplicaRepository productReplicaRepository, PriceUpdatePolicy priceUpdatePolicy) {
         return new CartService(productReplicaRepository, priceUpdatePolicy);

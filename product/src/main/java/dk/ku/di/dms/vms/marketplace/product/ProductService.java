@@ -1,5 +1,7 @@
 package dk.ku.di.dms.vms.marketplace.product;
 
+import dk.ku.di.dms.vms.marketplace.common.catalog.ProductCatalogPort;
+import dk.ku.di.dms.vms.marketplace.common.catalog.ProductSnapshot;
 import dk.ku.di.dms.vms.marketplace.common.events.PriceUpdated;
 import dk.ku.di.dms.vms.marketplace.common.events.ProductUpdated;
 import dk.ku.di.dms.vms.marketplace.common.inputs.PriceUpdate;
@@ -17,20 +19,30 @@ import static java.lang.System.Logger.Level.WARNING;
 /**
  * @Microservice is the only VMODB-specific surface on this class that does any real work beyond
  * its own methods' annotations: the actual price-update business rule lives in
- * {@link PriceUpdatePolicy}, a plain interface with no VMODB (or Spring) types in its contract.
- * This class's job is purely the VMODB-adapter side: repository I/O, event construction, and the
- * annotations that tell VMODB's coordinator how to dispatch these methods.
+ * {@link PriceUpdatePolicy}, and storage access goes through the {@link ProductCatalogPort} --
+ * both plain interfaces with no VMODB (or Spring) types in their contracts. This class's job is
+ * purely the VMODB-adapter side: event construction and the annotations that tell VMODB's
+ * coordinator how to dispatch these methods.
+ *
+ * The constructor still takes {@link IProductRepository} directly, not {@link ProductCatalogPort}
+ * -- this is VMODB's own constraint, not a design choice: VMODB decides which tables need a
+ * repository proxy built by scanning the @Microservice class's own constructor parameter types,
+ * with no other mechanism to ask for one. Hiding IProductRepository behind the port entirely (as
+ * a first attempt did) told VMODB this VMS needs no repositories at all, and it silently built
+ * none -- breaking even the unrelated productRepository bean ProductQueryController needs. So
+ * the repository type is wrapped into {@link VmodbProductCatalogAdapter} right here, in the
+ * constructor, and never appears in any method body below.
  */
 @Microservice("product")
 public final class ProductService {
 
     private static final System.Logger LOGGER = System.getLogger(ProductService.class.getName());
 
-    private final IProductRepository productRepository;
+    private final ProductCatalogPort productCatalog;
     private final PriceUpdatePolicy priceUpdatePolicy;
 
     public ProductService(IProductRepository productRepository, PriceUpdatePolicy priceUpdatePolicy) {
-        this.productRepository = productRepository;
+        this.productCatalog = new VmodbProductCatalogAdapter(productRepository);
         this.priceUpdatePolicy = priceUpdatePolicy;
     }
 
@@ -41,9 +53,8 @@ public final class ProductService {
     public ProductUpdated updateProduct(UpdateProduct updateProduct) {
         LOGGER.log(DEBUG, "APP: Product received a product update event with version: "+updateProduct.version);
 
-        Product product = new Product(updateProduct.seller_id, updateProduct.product_id, updateProduct.name,
-                updateProduct.price, updateProduct.status, updateProduct.version);
-        this.productRepository.upsert(product);
+        this.productCatalog.save(new ProductSnapshot(updateProduct.seller_id, updateProduct.product_id,
+                updateProduct.name, updateProduct.price, updateProduct.status, updateProduct.version));
 
         return new ProductUpdated(updateProduct.seller_id, updateProduct.product_id, updateProduct.name,
                 updateProduct.price, updateProduct.status, updateProduct.version);
@@ -56,17 +67,15 @@ public final class ProductService {
     public PriceUpdated updateProductPrice(PriceUpdate priceUpdate) {
         LOGGER.log(DEBUG, "APP: Product received an update price event with version: "+priceUpdate.instanceId);
 
-        Product product = this.productRepository.lookupByKey(new Product.ProductId(priceUpdate.sellerId, priceUpdate.productId));
-        if (product == null) {
-            throw new RuntimeException("Product not found "+priceUpdate.sellerId+"-"+priceUpdate.productId);
-        }
+        ProductSnapshot product = this.productCatalog.find(priceUpdate.sellerId, priceUpdate.productId)
+                .orElseThrow(() -> new RuntimeException("Product not found "+priceUpdate.sellerId+"-"+priceUpdate.productId));
 
-        Optional<Float> accepted = this.priceUpdatePolicy.evaluate(product.version, priceUpdate.version, priceUpdate.price);
+        Optional<Float> accepted = this.priceUpdatePolicy.evaluate(product.version(), priceUpdate.version, priceUpdate.price);
         if (accepted.isPresent()) {
-            product.price = accepted.get();
-            this.productRepository.update(product);
+            this.productCatalog.save(new ProductSnapshot(product.sellerId(), product.productId(), product.name(),
+                    accepted.get(), product.status(), product.version()));
         } else {
-            LOGGER.log(WARNING, "APP: Product received an update price event with conflicting version: "+product.version+" != "+priceUpdate.version);
+            LOGGER.log(WARNING, "APP: Product received an update price event with conflicting version: "+product.version()+" != "+priceUpdate.version);
         }
 
         // must send regardless: Cart's replica needs to see every price update, even conflicting ones,

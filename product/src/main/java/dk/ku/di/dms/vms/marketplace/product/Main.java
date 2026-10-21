@@ -51,6 +51,8 @@ public class Main {
         return VmsApplication.prepare(VmodbBootstrap.buildOptions(props));
     }
 
+    // Kept as its own bean: ProductQueryController still depends on the raw VMODB repository
+    // directly, for its own read API, unrelated to ProductService's internal storage access.
     @Bean
     IProductRepository productRepository(VmsPreparedApplication prepared) {
         return VmodbBootstrap.repository(prepared, "products");
@@ -65,7 +67,9 @@ public class Main {
 
     // A genuine Spring bean: constructed by Spring's own dependency resolution, not by VMODB's
     // reflection. ProductService itself carries no Spring annotation at all -- it stays exactly
-    // as portable/testable as before; only this factory method knows Spring exists.
+    // as portable/testable as before; only this factory method knows Spring exists. It still
+    // takes IProductRepository (see ProductService's own constructor comment for why) and wraps
+    // it into VmodbProductCatalogAdapter internally -- the repository type stops there.
     @Bean
     ProductService productService(IProductRepository productRepository, PriceUpdatePolicy priceUpdatePolicy) {
         return new ProductService(productRepository, priceUpdatePolicy);
