@@ -1,5 +1,7 @@
 package dk.ku.di.dms.vms.marketplace.product;
 
+import dk.ku.di.dms.vms.marketplace.common.policy.PriceUpdatePolicy;
+import dk.ku.di.dms.vms.marketplace.common.policy.VersionMatchPriceUpdatePolicy;
 import dk.ku.di.dms.vms.modb.common.transaction.ITransactionManager;
 import dk.ku.di.dms.vms.sdk.embed.client.DefaultHttpHandler;
 import dk.ku.di.dms.vms.sdk.embed.client.VmsApplication;
@@ -54,12 +56,19 @@ public class Main {
         return VmodbBootstrap.repository(prepared, "products");
     }
 
+    // The actual price-update business rule, framework-free -- see PriceUpdatePolicy. Declared
+    // as a @Bean rather than annotated itself, so it stays usable outside Spring too.
+    @Bean
+    PriceUpdatePolicy priceUpdatePolicy() {
+        return new VersionMatchPriceUpdatePolicy();
+    }
+
     // A genuine Spring bean: constructed by Spring's own dependency resolution, not by VMODB's
     // reflection. ProductService itself carries no Spring annotation at all -- it stays exactly
     // as portable/testable as before; only this factory method knows Spring exists.
     @Bean
-    ProductService productService(IProductRepository productRepository) {
-        return new ProductService(productRepository);
+    ProductService productService(IProductRepository productRepository, PriceUpdatePolicy priceUpdatePolicy) {
+        return new ProductService(productRepository, priceUpdatePolicy);
     }
 
     @Bean

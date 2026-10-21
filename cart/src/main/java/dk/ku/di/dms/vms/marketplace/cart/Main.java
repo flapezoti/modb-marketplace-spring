@@ -2,6 +2,8 @@ package dk.ku.di.dms.vms.marketplace.cart;
 
 import dk.ku.di.dms.vms.marketplace.cart.entities.ProductReplica;
 import dk.ku.di.dms.vms.marketplace.cart.repositories.IProductReplicaRepository;
+import dk.ku.di.dms.vms.marketplace.common.policy.PriceUpdatePolicy;
+import dk.ku.di.dms.vms.marketplace.common.policy.VersionMatchPriceUpdatePolicy;
 import dk.ku.di.dms.vms.modb.common.transaction.ITransactionManager;
 import dk.ku.di.dms.vms.sdk.embed.client.DefaultHttpHandler;
 import dk.ku.di.dms.vms.sdk.embed.client.VmsApplication;
@@ -47,11 +49,17 @@ public class Main {
         return VmodbBootstrap.repository(prepared, "product_replicas");
     }
 
+    // Same price-update rule Product's own Main uses -- see the matching comment there.
+    @Bean
+    PriceUpdatePolicy priceUpdatePolicy() {
+        return new VersionMatchPriceUpdatePolicy();
+    }
+
     // A genuine Spring bean: constructed by Spring's own dependency resolution, not by VMODB's
     // reflection. See the matching comment in product's Main.java.
     @Bean
-    CartService cartService(IProductReplicaRepository productReplicaRepository) {
-        return new CartService(productReplicaRepository);
+    CartService cartService(IProductReplicaRepository productReplicaRepository, PriceUpdatePolicy priceUpdatePolicy) {
+        return new CartService(productReplicaRepository, priceUpdatePolicy);
     }
 
     @Bean
