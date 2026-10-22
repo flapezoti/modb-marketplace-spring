@@ -1,7 +1,7 @@
 package dk.ku.di.dms.vms.marketplace.product;
 
-import dk.ku.di.dms.vms.marketplace.common.catalog.ProductCatalogPort;
-import dk.ku.di.dms.vms.marketplace.common.catalog.ProductSnapshot;
+import marketplace.ports.catalog.ProductCatalogPort;
+import marketplace.ports.catalog.ProductSnapshot;
 
 import java.util.Optional;
 

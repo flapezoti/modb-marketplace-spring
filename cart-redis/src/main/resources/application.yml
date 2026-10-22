@@ -1,0 +1,21 @@
+server:
+  port: 58080
+
+spring:
+  application:
+    name: cart-redis
+  data:
+    redis:
+      host: localhost
+      port: 36379
+  kafka:
+    bootstrap-servers: localhost:39092
+    consumer:
+      group-id: cart-service
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.trusted.packages: "marketplace.cart.event"
+        spring.json.type.mapping: productUpdated:marketplace.cart.event.ProductUpdatedEvent,priceUpdated:marketplace.cart.event.PriceUpdatedEvent
+        spring.json.use.type.headers: true

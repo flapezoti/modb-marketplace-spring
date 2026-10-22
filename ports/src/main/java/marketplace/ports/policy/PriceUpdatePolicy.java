@@ -1,13 +1,12 @@
-package dk.ku.di.dms.vms.marketplace.common.policy;
+package marketplace.ports.policy;
 
 import java.util.Optional;
 
 /**
  * Decides whether an incoming price update should be applied, given the current version of the
- * record it targets. No VMODB (or any other infrastructure) types appear in this contract: any
- * adapter -- VMODB, Kafka, a plain HTTP handler, a test -- can call it the same way, which is the
- * point: the actual business rule behind a price update lives here, not inside any one
- * framework's annotated methods.
+ * record it targets. No VMODB, Kafka, Redis, or Spring types in this contract -- any adapter can
+ * satisfy it the same way. This module has zero dependencies, by design: any module on either
+ * backend can depend on it without pulling in the other backend's technology.
  */
 public interface PriceUpdatePolicy {
 

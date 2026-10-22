@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>marketplace-lite</artifactId>
+        <groupId>dk.ku.di.dms.vms.marketplacelite</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>product-redis</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <!-- Deliberately no dependency on modb-api/sdk-embed/common, and no dependency on the
+         product module: this is Product's transaction logic reimplemented against Kafka+Redis,
+         not VMODB adapted to run on them. Only `ports` is shared with product. -->
+    <dependencies>
+        <dependency>
+            <groupId>marketplace</groupId>
+            <artifactId>ports</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.kafka</groupId>
+            <artifactId>spring-kafka</artifactId>
+        </dependency>
+    </dependencies>
+
+</project>

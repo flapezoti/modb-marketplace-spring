@@ -16,9 +16,12 @@
     <packaging>pom</packaging>
 
     <modules>
+        <module>ports</module>
         <module>common</module>
         <module>product</module>
         <module>cart</module>
+        <module>product-redis</module>
+        <module>cart-redis</module>
         <module>test</module>
     </modules>
 
@@ -28,21 +31,11 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
-    <dependencies>
-        <dependency>
-            <groupId>dk.ku.di.dms.vms</groupId>
-            <artifactId>modb-api</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>dk.ku.di.dms.vms</groupId>
-            <artifactId>sdk-embed</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-    </dependencies>
-
-    <!-- Imported (not inherited as <parent>, since we already parent off vms-runtime-java)
-         so product/cart can add Spring Boot dependencies with managed, consistent versions. -->
+    <!-- modb-api/sdk-embed moved from a blanket <dependencies> block (inherited by every child,
+         including product-redis/cart-redis and ports, which must NOT depend on VMODB at all) to
+         <dependencyManagement>: now each module that actually uses VMODB types declares that
+         dependency explicitly (common, product, cart; see their own poms), instead of getting it
+         for free by being in this reactor. -->
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -51,6 +44,16 @@
                 <version>3.5.16</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>dk.ku.di.dms.vms</groupId>
+                <artifactId>modb-api</artifactId>
+                <version>1.0-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>dk.ku.di.dms.vms</groupId>
+                <artifactId>sdk-embed</artifactId>
+                <version>1.0-SNAPSHOT</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

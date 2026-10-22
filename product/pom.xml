@@ -19,6 +19,11 @@
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
+            <groupId>marketplace</groupId>
+            <artifactId>ports</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
@@ -26,6 +31,14 @@
             <groupId>vmodb.spring</groupId>
             <artifactId>vmodb-spring-starter</artifactId>
             <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>dk.ku.di.dms.vms</groupId>
+            <artifactId>modb-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>dk.ku.di.dms.vms</groupId>
+            <artifactId>sdk-embed</artifactId>
         </dependency>
     </dependencies>
 

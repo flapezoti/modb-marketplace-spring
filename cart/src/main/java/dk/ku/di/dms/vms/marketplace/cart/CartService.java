@@ -1,11 +1,11 @@
 package dk.ku.di.dms.vms.marketplace.cart;
 
 import dk.ku.di.dms.vms.marketplace.cart.repositories.IProductReplicaRepository;
-import dk.ku.di.dms.vms.marketplace.common.catalog.ProductReplicaCatalogPort;
-import dk.ku.di.dms.vms.marketplace.common.catalog.ProductSnapshot;
+import marketplace.ports.catalog.ProductReplicaCatalogPort;
+import marketplace.ports.catalog.ProductSnapshot;
 import dk.ku.di.dms.vms.marketplace.common.events.PriceUpdated;
 import dk.ku.di.dms.vms.marketplace.common.events.ProductUpdated;
-import dk.ku.di.dms.vms.marketplace.common.policy.PriceUpdatePolicy;
+import marketplace.ports.policy.PriceUpdatePolicy;
 import dk.ku.di.dms.vms.modb.api.annotations.Inbound;
 import dk.ku.di.dms.vms.modb.api.annotations.Microservice;
 import dk.ku.di.dms.vms.modb.api.annotations.PartitionBy;

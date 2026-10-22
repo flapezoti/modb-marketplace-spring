@@ -1,0 +1,19 @@
+server:
+  port: 58081
+
+spring:
+  application:
+    name: product-redis
+  data:
+    redis:
+      host: localhost
+      port: 36379
+  kafka:
+    bootstrap-servers: localhost:39092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      properties:
+        # a logical alias in the __TypeId__ header, not a class name -- lets cart-redis map the
+        # same alias to ITS OWN event class, no shared library between the two beyond `ports`
+        spring.json.type.mapping: productUpdated:marketplace.product.event.ProductUpdatedEvent,priceUpdated:marketplace.product.event.PriceUpdatedEvent

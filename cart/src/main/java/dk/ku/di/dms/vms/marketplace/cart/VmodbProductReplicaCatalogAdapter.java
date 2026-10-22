@@ -2,8 +2,8 @@ package dk.ku.di.dms.vms.marketplace.cart;
 
 import dk.ku.di.dms.vms.marketplace.cart.entities.ProductReplica;
 import dk.ku.di.dms.vms.marketplace.cart.repositories.IProductReplicaRepository;
-import dk.ku.di.dms.vms.marketplace.common.catalog.ProductReplicaCatalogPort;
-import dk.ku.di.dms.vms.marketplace.common.catalog.ProductSnapshot;
+import marketplace.ports.catalog.ProductReplicaCatalogPort;
+import marketplace.ports.catalog.ProductSnapshot;
 
 import java.util.Optional;
 

@@ -2,8 +2,8 @@ package dk.ku.di.dms.vms.marketplace.cart;
 
 import dk.ku.di.dms.vms.marketplace.cart.entities.ProductReplica;
 import dk.ku.di.dms.vms.marketplace.cart.repositories.IProductReplicaRepository;
-import dk.ku.di.dms.vms.marketplace.common.policy.PriceUpdatePolicy;
-import dk.ku.di.dms.vms.marketplace.common.policy.VersionMatchPriceUpdatePolicy;
+import marketplace.ports.policy.PriceUpdatePolicy;
+import marketplace.ports.policy.VersionMatchPriceUpdatePolicy;
 import dk.ku.di.dms.vms.modb.common.transaction.ITransactionManager;
 import dk.ku.di.dms.vms.sdk.embed.client.DefaultHttpHandler;
 import dk.ku.di.dms.vms.sdk.embed.client.VmsApplication;

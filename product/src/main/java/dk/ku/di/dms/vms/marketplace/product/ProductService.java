@@ -1,12 +1,12 @@
 package dk.ku.di.dms.vms.marketplace.product;
 
-import dk.ku.di.dms.vms.marketplace.common.catalog.ProductCatalogPort;
-import dk.ku.di.dms.vms.marketplace.common.catalog.ProductSnapshot;
+import marketplace.ports.catalog.ProductCatalogPort;
+import marketplace.ports.catalog.ProductSnapshot;
 import dk.ku.di.dms.vms.marketplace.common.events.PriceUpdated;
 import dk.ku.di.dms.vms.marketplace.common.events.ProductUpdated;
 import dk.ku.di.dms.vms.marketplace.common.inputs.PriceUpdate;
 import dk.ku.di.dms.vms.marketplace.common.inputs.UpdateProduct;
-import dk.ku.di.dms.vms.marketplace.common.policy.PriceUpdatePolicy;
+import marketplace.ports.policy.PriceUpdatePolicy;
 import dk.ku.di.dms.vms.modb.api.annotations.*;
 
 import java.util.Optional;

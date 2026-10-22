@@ -12,4 +12,14 @@
     <name>common</name>
     <artifactId>common</artifactId>
 
+    <!-- Only for the @Event-annotated DTOs VMODB's own dispatch uses (PriceUpdate, ProductUpdated,
+         etc.). The hexagonal ports now live in the separate, dependency-free `ports` module,
+         not here, precisely so product-redis/cart-redis never need this. -->
+    <dependencies>
+        <dependency>
+            <groupId>dk.ku.di.dms.vms</groupId>
+            <artifactId>modb-api</artifactId>
+        </dependency>
+    </dependencies>
+
 </project>

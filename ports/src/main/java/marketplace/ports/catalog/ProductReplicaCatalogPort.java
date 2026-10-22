@@ -1,4 +1,4 @@
-package dk.ku.di.dms.vms.marketplace.common.catalog;
+package marketplace.ports.catalog;
 
 import java.util.Optional;
 
