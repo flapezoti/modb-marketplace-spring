@@ -22,6 +22,7 @@
         <module>cart</module>
         <module>product-redis</module>
         <module>cart-redis</module>
+        <module>coordinator-launcher</module>
         <module>test</module>
     </modules>
 
