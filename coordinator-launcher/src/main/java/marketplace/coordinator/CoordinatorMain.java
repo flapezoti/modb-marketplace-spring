@@ -7,10 +7,13 @@ import dk.ku.di.dms.vms.coordinator.transaction.TransactionDAG;
 import dk.ku.di.dms.vms.modb.common.schema.network.node.IdentifiableNode;
 import dk.ku.di.dms.vms.modb.common.schema.network.node.ServerNode;
 import dk.ku.di.dms.vms.modb.common.serdes.VmsSerdesProxyBuilder;
-import dk.ku.di.dms.vms.web_common.IHttpHandler;
 
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Properties;
 
 /**
  * Starts VMODB's coordinator as its own standalone, long-running process -- the same role
@@ -59,20 +62,36 @@ public final class CoordinatorMain {
         starterVMSs.put(productAddress.identifier, productAddress);
         starterVMSs.put(cartAddress.identifier, cartAddress);
 
-        Coordinator coordinator = Coordinator.build(
-                serverMap,
-                starterVMSs,
-                transactionMap,
-                serverIdentifier,
-                new CoordinatorOptions()
-                        .withBatchWindow(batchWindowMs)
-                        .withNetworkThreadPoolSize(networkThreadPoolSize)
-                        .withNetworkBufferSize(0)
-                        .withLogging(false),
-                1,
-                1, _ -> IHttpHandler.DEFAULT,
-                VmsSerdesProxyBuilder.build()
-        );
+        // -Dcoordinator.config=<file>: build through the same Coordinator.build(Properties, ...)
+        // overload the original implementation's proxy uses, so a benchmark can run both
+        // coordinators from identical settings by construction. The file's tcp_port overrides
+        // coordinator.tcp.port. Without it, the system-property defaults below apply, as before.
+        String configFile = System.getProperty("coordinator.config");
+        Coordinator coordinator;
+        if (configFile != null) {
+            Properties properties = new Properties();
+            try (InputStream in = Files.newInputStream(Path.of(configFile))) {
+                properties.load(in);
+            }
+            tcpPort = Integer.parseInt(properties.getProperty("tcp_port"));
+            System.out.println("Coordinator settings loaded from " + configFile + ": " + properties);
+            coordinator = Coordinator.build(properties, starterVMSs, transactionMap, CoordinatorProxyHttpHandler::new);
+        } else {
+            coordinator = Coordinator.build(
+                    serverMap,
+                    starterVMSs,
+                    transactionMap,
+                    serverIdentifier,
+                    new CoordinatorOptions()
+                            .withBatchWindow(batchWindowMs)
+                            .withNetworkThreadPoolSize(networkThreadPoolSize)
+                            .withNetworkBufferSize(0)
+                            .withLogging(false),
+                    1,
+                    1, CoordinatorProxyHttpHandler::new,
+                    VmsSerdesProxyBuilder.build()
+            );
+        }
 
         System.out.println("Coordinator listening on port " + tcpPort + "; waiting for product ("
                 + productHost + ":" + productPort + ") and cart (" + cartHost + ":" + cartPort + ") to connect...");

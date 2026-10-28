@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>marketplace-lite</artifactId>
+        <groupId>dk.ku.di.dms.vms.marketplacelite</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- The product VMS without Spring, for the performance benchmark's third variant: the exact
+         same ProductService/Product/adapter classes (reused from the product module's jar, not
+         copied), bootstrapped by a plain main() instead of a Spring context. Spring is excluded
+         from the classpath entirely, so nothing Spring-related can load at all. -->
+    <artifactId>product-plain</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <!-- The parent imports Spring Boot's BOM, which manages Jackson at Spring's version for every
+         module in this reactor. Pinned back here to the version vmodb-fork's own modb-common
+         declares, so this variant runs VMODB's serdes on VMODB's own Jackson, as the original
+         implementation does. -->
+    <properties>
+        <jackson.version>2.17.2</jackson.version>
+    </properties>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-core</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-annotations</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+        <dependency>
+            <groupId>dk.ku.di.dms.vms.marketplacelite</groupId>
+            <artifactId>product</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>*</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>vmodb.spring</groupId>
+                    <artifactId>*</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+    </dependencies>
+
+</project>
