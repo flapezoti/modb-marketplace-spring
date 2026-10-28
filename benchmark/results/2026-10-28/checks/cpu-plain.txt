@@ -1,0 +1,6 @@
+product a 46.65
+cart a 17.57
+coordinator a 104.97
+product b 115.16
+cart b 43.81
+coordinator b 158.72

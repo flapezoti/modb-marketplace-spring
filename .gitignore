@@ -4,3 +4,6 @@ target/
 .vscode/
 *.iml
 .DS_Store
+
+# benchmark runtime state (pids, process logs, cached classpaths)
+benchmark/run/

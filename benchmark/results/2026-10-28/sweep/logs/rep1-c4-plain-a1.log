@@ -1,0 +1,24 @@
+product pid 68183
+cart pid 68187
+--- product properties: {network_send_timeout=0, checkpointing=true, vms_thread_pool_size=4, network_buffer_size=0, logging_type=default, network_thread_pool_size=4, so_buffer_size=0, max_sleep=100, num_vms_workers=1, logging=true, max_records=0}
+--- cart properties:    {checkpointing=true, vms_thread_pool_size=4, network_buffer_size=0, max_records.cart_items=1000000, network_send_timeout=0, logging_type=default, network_thread_pool_size=4, so_buffer_size=0, max_sleep=250, num_vms_workers=1, logging=true, max_records=0}
+Seeded 10000 products (lite schema) in 1.4s
+Verified: 10000 ok, 0 missing, 0 wrong row (of 10000)
+--- product+cart idle before submission: yes
+target=http://localhost:8091 concurrency=4 epochs=6x10s warmup=2 keys=1000x10 cpus=10
+epoch 1 (warm-up): committed_tps=17000.7 accepted_rps=17609.6 backlog=0
+epoch 2 (warm-up): committed_tps=19389.3 accepted_rps=19456.7 backlog=0
+epoch 3: committed_tps=19219.6 accepted_rps=19436.5 backlog=0
+epoch 4: committed_tps=19704.4 accepted_rps=18830.6 backlog=0
+epoch 5: committed_tps=18776.1 accepted_rps=18780.6 backlog=0
+epoch 6: committed_tps=19360.8 accepted_rps=19460.2 backlog=0
+HTTP: 1135744 accepted, 1 failed; driver used 1.98 cores
+THROUGHPUT (epochs 3-6) committed_tps=19265.2 accepted_rps=19126.9 backlog_at_end=0
+CPU product: 78.41 cpu-s over epochs 3-6 (1.96 cores), 101.76 cpu-us per committed tx
+CPU cart: 27.42 cpu-s over epochs 3-6 (0.69 cores), 35.59 cpu-us per committed tx
+CPU coordinator: 72.13 cpu-s over epochs 3-6 (1.80 cores), 93.61 cpu-us per committed tx
+DRAIN ok: submitted=1135745 (expected 1135744), committed=1135745, after 0.42s
+RESULT,4,19265.2,19126.9,0,1.98,1,drained,0.42
+CPU_RESULT,101.760,35.586,93.610
+--- .llog files written (logging=true): 6
+--- log errors: 0

@@ -1,0 +1,13 @@
+--- idle phase (after seed, before driver):
+ 34316    0.0 /Users/flaviapezoti/.vscode/extensions/redhat.java-1.58.0-darwin-arm64
+ 56049    0.0 project/work/vmodb-marketplace/product-plain/target/classes:/Users/fla
+ 56053    0.0 project/work/vmodb-marketplace/cart-plain/target/classes:/Users/flavia
+ 56087   99.6 target/coordinator-launcher-1.0-SNAPSHOT.jar
+ 56215   21.0 56215  21.0 top -l 2 -n 0 -s 1
+--- under load (epoch ~4):
+ 34316    0.0 /Users/flaviapezoti/.vscode/extensions/redhat.java-1.58.0-darwin-arm64
+ 56049  128.5 project/work/vmodb-marketplace/product-plain/target/classes:/Users/fla
+ 56053   57.4 project/work/vmodb-marketplace/cart-plain/target/classes:/Users/flavia
+ 56087  170.8 target/coordinator-launcher-1.0-SNAPSHOT.jar
+ 56577  375.5 56577 375.5 /opt/homebrew/opt/openjdk@21/bin/java /Users/flaviapezoti/
+CPU usage: 33.6% user, 55.49% sys, 11.43% idle 

@@ -1,0 +1,651 @@
+=== 14:47:15 rep=1 concurrency=1 variant=original attempt=1
+/private/tmp/claude-501/-Users-flaviapezoti-workplace-master-vmodb-project/511b2d3f-d6fb-49d0-aa85-185941aabe75/scratchpad/sweep.sh: line 17: /private/tmp/claude-501/-Users-flaviapezoti-workplace-master-vmodb-project/511b2d3f-d6fb-49d0-aa85-185941aabe75/scratchpad/results/sweep-2026-10-28.csv: No such file or directory
+--- product+cart idle before submission: yes
+THROUGHPUT (epochs 3-6) committed_tps=12357.0 accepted_rps=12339.1 backlog_at_end=0
+CPU product: 45.87 cpu-s over epochs 3-6 (1.15 cores), 92.80 cpu-us per committed tx
+CPU cart: 16.43 cpu-s over epochs 3-6 (0.41 cores), 33.24 cpu-us per committed tx
+CPU coordinator: 51.86 cpu-s over epochs 3-6 (1.30 cores), 104.91 cpu-us per committed tx
+DRAIN ok: submitted=705305 (expected 705305), committed=705305, after 0.42s
+--- log errors: 0
+=== 14:48:24 rep=1 concurrency=1 variant=spring attempt=1
+--- product+cart idle before submission: yes
+THROUGHPUT (epochs 3-6) committed_tps=13529.1 accepted_rps=13530.0 backlog_at_end=0
+CPU product: 51.97 cpu-s over epochs 3-6 (1.30 cores), 96.04 cpu-us per committed tx
+CPU cart: 18.70 cpu-s over epochs 3-6 (0.47 cores), 34.56 cpu-us per committed tx
+CPU coordinator: 54.00 cpu-s over epochs 3-6 (1.35 cores), 99.79 cpu-us per committed tx
+DRAIN ok: submitted=775483 (expected 775483), committed=775483, after 0.31s
+--- log errors: 0
+=== 14:49:33 rep=1 concurrency=1 variant=plain attempt=1
+--- product+cart idle before submission: yes
+THROUGHPUT (epochs 3-6) committed_tps=13360.3 accepted_rps=13327.1 backlog_at_end=0
+CPU product: 50.90 cpu-s over epochs 3-6 (1.27 cores), 95.24 cpu-us per committed tx
+CPU cart: 17.16 cpu-s over epochs 3-6 (0.43 cores), 32.11 cpu-us per committed tx
+CPU coordinator: 54.68 cpu-s over epochs 3-6 (1.37 cores), 102.32 cpu-us per committed tx
+DRAIN ok: submitted=762328 (expected 762328), committed=762328, after 0.32s
+--- log errors: 0
+=== 14:50:41 rep=1 concurrency=4 variant=spring attempt=1
+--- product+cart idle before submission: yes
+THROUGHPUT (epochs 3-6) committed_tps=18903.7 accepted_rps=19048.9 backlog_at_end=0
+CPU product: 77.52 cpu-s over epochs 3-6 (1.94 cores), 102.52 cpu-us per committed tx
+CPU cart: 26.87 cpu-s over epochs 3-6 (0.67 cores), 35.54 cpu-us per committed tx
+CPU coordinator: 70.77 cpu-s over epochs 3-6 (1.77 cores), 93.59 cpu-us per committed tx
+DRAIN ok: submitted=1129173 (expected 1129173), committed=1129173, after 0.11s
+--- log errors: 0
+=== 14:51:50 rep=1 concurrency=4 variant=plain attempt=1
+--- product+cart idle before submission: yes
+THROUGHPUT (epochs 3-6) committed_tps=19265.2 accepted_rps=19126.9 backlog_at_end=0
+CPU product: 78.41 cpu-s over epochs 3-6 (1.96 cores), 101.76 cpu-us per committed tx
+CPU cart: 27.42 cpu-s over epochs 3-6 (0.69 cores), 35.59 cpu-us per committed tx
+CPU coordinator: 72.13 cpu-s over epochs 3-6 (1.80 cores), 93.61 cpu-us per committed tx
+DRAIN ok: submitted=1135745 (expected 1135744), committed=1135745, after 0.42s
+--- log errors: 0
+=== 14:52:59 rep=1 concurrency=4 variant=original attempt=1
+--- product+cart idle before submission: yes
+THROUGHPUT (epochs 3-6) committed_tps=18761.8 accepted_rps=18744.1 backlog_at_end=0
+CPU product: 77.13 cpu-s over epochs 3-6 (1.93 cores), 102.78 cpu-us per committed tx
+CPU cart: 27.38 cpu-s over epochs 3-6 (0.68 cores), 36.48 cpu-us per committed tx
+CPU coordinator: 72.37 cpu-s over epochs 3-6 (1.81 cores), 96.43 cpu-us per committed tx
+DRAIN ok: submitted=1076348 (expected 1076347), committed=1076348, after 0.42s
+--- log errors: 0
+=== 14:54:09 rep=1 concurrency=8 variant=plain attempt=1
+--- product+cart idle before submission: yes
+THROUGHPUT (epochs 3-6) committed_tps=22504.7 accepted_rps=22471.6 backlog_at_end=0
+CPU product: 88.52 cpu-s over epochs 3-6 (2.21 cores), 98.33 cpu-us per committed tx
+CPU cart: 31.21 cpu-s over epochs 3-6 (0.78 cores), 34.67 cpu-us per committed tx
+CPU coordinator: 72.91 cpu-s over epochs 3-6 (1.82 cores), 80.99 cpu-us per committed tx
+DRAIN ok: submitted=1324795 (expected 1324793), committed=1324795, after 0.31s
+--- log errors: 0
+=== 14:55:17 rep=1 concurrency=8 variant=original attempt=1
+--- product+cart idle before submission: yes
+THROUGHPUT (epochs 3-6) committed_tps=22106.0 accepted_rps=21898.7 backlog_at_end=0
+CPU product: 90.67 cpu-s over epochs 3-6 (2.27 cores), 102.55 cpu-us per committed tx
+CPU cart: 31.73 cpu-s over epochs 3-6 (0.79 cores), 35.89 cpu-us per committed tx
+CPU coordinator: 72.11 cpu-s over epochs 3-6 (1.80 cores), 81.55 cpu-us per committed tx
+DRAIN ok: submitted=1250081 (expected 1250077), committed=1250081, after 0.42s
+--- log errors: 0
+=== 14:56:26 rep=1 concurrency=8 variant=spring attempt=1
+--- product+cart idle before submission: yes
+THROUGHPUT (epochs 3-6) committed_tps=19305.7 accepted_rps=19387.1 backlog_at_end=0
+CPU product: 80.30 cpu-s over epochs 3-6 (2.01 cores), 103.99 cpu-us per committed tx
+CPU cart: 28.01 cpu-s over epochs 3-6 (0.70 cores), 36.27 cpu-us per committed tx
+CPU coordinator: 68.38 cpu-s over epochs 3-6 (1.71 cores), 88.55 cpu-us per committed tx
+DRAIN ok: submitted=1198949 (expected 1198948), committed=1198949, after 0.11s
+--- log errors: 0
+=== 14:57:36 rep=1 concurrency=16 variant=original attempt=1
+!!! no result row; last lines:
+Seeded 10000 products (full schema) in 1.6s
+Exception in thread "main" java.net.http.HttpTimeoutException: request timed out
+	at java.net.http/jdk.internal.net.http.HttpClientImpl.send(HttpClientImpl.java:953)
+	at java.net.http/jdk.internal.net.http.HttpClientFacade.send(HttpClientFacade.java:133)
+	at SeedProducts.main(SeedProducts.java:67)
+=== 14:57:55 rep=1 concurrency=16 variant=original attempt=2
+--- product+cart idle before submission: yes
+THROUGHPUT (epochs 3-6) committed_tps=23134.7 accepted_rps=23089.0 backlog_at_end=0
+CPU product: 86.04 cpu-s over epochs 3-6 (2.15 cores), 92.97 cpu-us per committed tx
+CPU cart: 35.40 cpu-s over epochs 3-6 (0.88 cores), 38.25 cpu-us per committed tx
+CPU coordinator: 69.51 cpu-s over epochs 3-6 (1.74 cores), 75.11 cpu-us per committed tx
+DRAIN ok: submitted=1269807 (expected 1269807), committed=1269807, after 0.42s
+--- log errors: 0
+=== 14:59:04 rep=1 concurrency=16 variant=spring attempt=1
+--- product+cart idle before submission: yes
+THROUGHPUT (epochs 3-6) committed_tps=15819.3 accepted_rps=15616.1 backlog_at_end=0
+CPU product: 61.68 cpu-s over epochs 3-6 (1.54 cores), 97.47 cpu-us per committed tx
+CPU cart: 26.50 cpu-s over epochs 3-6 (0.66 cores), 41.88 cpu-us per committed tx
+CPU coordinator: 52.07 cpu-s over epochs 3-6 (1.30 cores), 82.29 cpu-us per committed tx
+DRAIN ok: submitted=1041936 (expected 1041936), committed=1041936, after 0.52s
+--- log errors: 0
+=== 15:00:14 rep=1 concurrency=16 variant=plain attempt=1
+--- product+cart idle before submission: yes
+THROUGHPUT (epochs 3-6) committed_tps=22659.8 accepted_rps=22447.0 backlog_at_end=0
+CPU product: 87.43 cpu-s over epochs 3-6 (2.19 cores), 96.47 cpu-us per committed tx
+CPU cart: 33.27 cpu-s over epochs 3-6 (0.83 cores), 36.71 cpu-us per committed tx
+CPU coordinator: 70.68 cpu-s over epochs 3-6 (1.77 cores), 77.99 cpu-us per committed tx
+DRAIN ok: submitted=1300153 (expected 1300153), committed=1300153, after 0.42s
+--- log errors: 0
+=== 15:01:23 rep=1 concurrency=32 variant=spring attempt=1
+--- product+cart idle before submission: yes
+THROUGHPUT (epochs 3-6) committed_tps=23001.4 accepted_rps=22899.4 backlog_at_end=0
+CPU product: 88.47 cpu-s over epochs 3-6 (2.21 cores), 96.16 cpu-us per committed tx
+CPU cart: 35.32 cpu-s over epochs 3-6 (0.88 cores), 38.39 cpu-us per committed tx
+CPU coordinator: 68.34 cpu-s over epochs 3-6 (1.71 cores), 74.28 cpu-us per committed tx
+DRAIN ok: submitted=1332097 (expected 1332097), committed=1332097, after 0.31s
+--- log errors: 0
+=== 15:02:33 rep=1 concurrency=32 variant=plain attempt=1
+--- product+cart idle before submission: yes
+THROUGHPUT (epochs 3-6) committed_tps=22710.7 accepted_rps=22697.7 backlog_at_end=0
+CPU product: 86.94 cpu-s over epochs 3-6 (2.17 cores), 95.70 cpu-us per committed tx
+CPU cart: 33.24 cpu-s over epochs 3-6 (0.83 cores), 36.59 cpu-us per committed tx
+CPU coordinator: 69.28 cpu-s over epochs 3-6 (1.73 cores), 76.26 cpu-us per committed tx
+DRAIN ok: submitted=1296098 (expected 1296098), committed=1296098, after 0.31s
+--- log errors: 0
+=== 15:03:42 rep=1 concurrency=32 variant=original attempt=1
+!!! no result row; last lines:
+Seeded 10000 products (full schema) in 1.5s
+Exception in thread "main" java.net.http.HttpTimeoutException: request timed out
+	at java.net.http/jdk.internal.net.http.HttpClientImpl.send(HttpClientImpl.java:953)
+	at java.net.http/jdk.internal.net.http.HttpClientFacade.send(HttpClientFacade.java:133)
+	at SeedProducts.main(SeedProducts.java:67)
+=== 15:04:02 rep=1 concurrency=32 variant=original attempt=2
+--- product+cart idle before submission: yes
+THROUGHPUT (epochs 3-6) committed_tps=22782.3 accepted_rps=22657.7 backlog_at_end=0
+CPU product: 84.17 cpu-s over epochs 3-6 (2.10 cores), 92.36 cpu-us per committed tx
+CPU cart: 37.55 cpu-s over epochs 3-6 (0.94 cores), 41.21 cpu-us per committed tx
+CPU coordinator: 66.79 cpu-s over epochs 3-6 (1.67 cores), 73.29 cpu-us per committed tx
+DRAIN ok: submitted=1331218 (expected 1331218), committed=1331218, after 0.31s
+--- log errors: 0
+=== 15:05:10 rep=2 concurrency=1 variant=plain attempt=1
+--- product+cart idle before submission: yes
+THROUGHPUT (epochs 3-6) committed_tps=11702.8 accepted_rps=11728.4 backlog_at_end=0
+CPU product: 45.44 cpu-s over epochs 3-6 (1.14 cores), 97.06 cpu-us per committed tx
+CPU cart: 14.93 cpu-s over epochs 3-6 (0.37 cores), 31.89 cpu-us per committed tx
+CPU coordinator: 54.28 cpu-s over epochs 3-6 (1.36 cores), 115.94 cpu-us per committed tx
+DRAIN ok: submitted=688365 (expected 688365), committed=688365, after 0.21s
+--- log errors: 0
+=== 15:06:19 rep=2 concurrency=1 variant=original attempt=1
+--- product+cart idle before submission: yes
+THROUGHPUT (epochs 3-6) committed_tps=11004.9 accepted_rps=11001.5 backlog_at_end=0
+CPU product: 43.31 cpu-s over epochs 3-6 (1.08 cores), 98.39 cpu-us per committed tx
+CPU cart: 15.98 cpu-s over epochs 3-6 (0.40 cores), 36.30 cpu-us per committed tx
+CPU coordinator: 52.15 cpu-s over epochs 3-6 (1.30 cores), 118.47 cpu-us per committed tx
+DRAIN ok: submitted=645587 (expected 645587), committed=645587, after 0.32s
+--- log errors: 0
+=== 15:07:29 rep=2 concurrency=1 variant=spring attempt=1
+--- product+cart idle before submission: yes
+THROUGHPUT (epochs 3-6) committed_tps=10966.9 accepted_rps=10960.7 backlog_at_end=0
+CPU product: 44.42 cpu-s over epochs 3-6 (1.11 cores), 101.26 cpu-us per committed tx
+CPU cart: 15.64 cpu-s over epochs 3-6 (0.39 cores), 35.65 cpu-us per committed tx
+CPU coordinator: 52.02 cpu-s over epochs 3-6 (1.30 cores), 118.58 cpu-us per committed tx
+DRAIN ok: submitted=588994 (expected 588994), committed=588994, after 0.52s
+--- log errors: 0
+=== 15:08:39 rep=2 concurrency=4 variant=original attempt=1
+--- product+cart idle before submission: yes
+THROUGHPUT (epochs 3-6) committed_tps=16204.2 accepted_rps=16177.7 backlog_at_end=0
+CPU product: 70.50 cpu-s over epochs 3-6 (1.76 cores), 108.77 cpu-us per committed tx
+CPU cart: 23.80 cpu-s over epochs 3-6 (0.60 cores), 36.72 cpu-us per committed tx
+CPU coordinator: 68.11 cpu-s over epochs 3-6 (1.70 cores), 105.08 cpu-us per committed tx
+DRAIN ok: submitted=934490 (expected 934490), committed=934490, after 0.42s
+--- log errors: 0
+=== 15:09:48 rep=2 concurrency=4 variant=spring attempt=1
+--- product+cart idle before submission: yes
+THROUGHPUT (epochs 3-6) committed_tps=16301.2 accepted_rps=16278.1 backlog_at_end=0
+CPU product: 69.62 cpu-s over epochs 3-6 (1.74 cores), 106.77 cpu-us per committed tx
+CPU cart: 24.65 cpu-s over epochs 3-6 (0.62 cores), 37.80 cpu-us per committed tx
+CPU coordinator: 67.04 cpu-s over epochs 3-6 (1.68 cores), 102.81 cpu-us per committed tx
+DRAIN ok: submitted=959671 (expected 959671), committed=959671, after 0.42s
+--- log errors: 0
+=== 15:10:59 rep=2 concurrency=4 variant=plain attempt=1
+--- product+cart idle before submission: yes
+THROUGHPUT (epochs 3-6) committed_tps=18180.7 accepted_rps=18172.1 backlog_at_end=0
+CPU product: 75.60 cpu-s over epochs 3-6 (1.89 cores), 103.95 cpu-us per committed tx
+CPU cart: 24.36 cpu-s over epochs 3-6 (0.61 cores), 33.49 cpu-us per committed tx
+CPU coordinator: 72.81 cpu-s over epochs 3-6 (1.82 cores), 100.11 cpu-us per committed tx
+DRAIN ok: submitted=1054542 (expected 1054542), committed=1054542, after 0.42s
+--- log errors: 0
+=== 15:12:08 rep=2 concurrency=8 variant=spring attempt=1
+--- product+cart idle before submission: yes
+THROUGHPUT (epochs 3-6) committed_tps=21556.8 accepted_rps=21444.9 backlog_at_end=0
+CPU product: 87.08 cpu-s over epochs 3-6 (2.18 cores), 100.99 cpu-us per committed tx
+CPU cart: 30.55 cpu-s over epochs 3-6 (0.76 cores), 35.43 cpu-us per committed tx
+CPU coordinator: 73.12 cpu-s over epochs 3-6 (1.83 cores), 84.80 cpu-us per committed tx
+DRAIN ok: submitted=1268033 (expected 1268032), committed=1268033, after 0.32s
+--- log errors: 0
+=== 15:13:18 rep=2 concurrency=8 variant=plain attempt=1
+--- product+cart idle before submission: yes
+THROUGHPUT (epochs 3-6) committed_tps=23000.5 accepted_rps=23001.7 backlog_at_end=0
+CPU product: 93.88 cpu-s over epochs 3-6 (2.35 cores), 102.04 cpu-us per committed tx
+CPU cart: 30.28 cpu-s over epochs 3-6 (0.76 cores), 32.91 cpu-us per committed tx
+CPU coordinator: 76.37 cpu-s over epochs 3-6 (1.91 cores), 83.01 cpu-us per committed tx
+DRAIN ok: submitted=1344755 (expected 1344753), committed=1344755, after 0.42s
+--- log errors: 0
+=== 15:14:27 rep=2 concurrency=8 variant=original attempt=1
+--- product+cart idle before submission: yes
+THROUGHPUT (epochs 3-6) committed_tps=21950.8 accepted_rps=21963.0 backlog_at_end=0
+CPU product: 90.30 cpu-s over epochs 3-6 (2.26 cores), 102.85 cpu-us per committed tx
+CPU cart: 31.83 cpu-s over epochs 3-6 (0.80 cores), 36.25 cpu-us per committed tx
+CPU coordinator: 74.55 cpu-s over epochs 3-6 (1.86 cores), 84.91 cpu-us per committed tx
+DRAIN ok: submitted=1292186 (expected 1292186), committed=1292186, after 0.21s
+--- log errors: 0
+=== 15:15:36 rep=2 concurrency=16 variant=plain attempt=1
+--- product+cart idle before submission: yes
+THROUGHPUT (epochs 3-6) committed_tps=23751.0 accepted_rps=23722.0 backlog_at_end=0
+CPU product: 93.50 cpu-s over epochs 3-6 (2.34 cores), 98.42 cpu-us per committed tx
+CPU cart: 34.15 cpu-s over epochs 3-6 (0.85 cores), 35.95 cpu-us per committed tx
+CPU coordinator: 75.15 cpu-s over epochs 3-6 (1.88 cores), 79.11 cpu-us per committed tx
+DRAIN ok: submitted=1381887 (expected 1381882), committed=1381887, after 0.31s
+--- log errors: 0
+=== 15:16:44 rep=2 concurrency=16 variant=original attempt=1
+--- product+cart idle before submission: yes
+THROUGHPUT (epochs 3-6) committed_tps=22002.6 accepted_rps=22329.1 backlog_at_end=0
+CPU product: 89.17 cpu-s over epochs 3-6 (2.23 cores), 101.33 cpu-us per committed tx
+CPU cart: 37.41 cpu-s over epochs 3-6 (0.94 cores), 42.51 cpu-us per committed tx
+CPU coordinator: 70.12 cpu-s over epochs 3-6 (1.75 cores), 79.68 cpu-us per committed tx
+DRAIN ok: submitted=1317890 (expected 1317889), committed=1317890, after 0.54s
+--- log errors: 0
+=== 15:17:54 rep=2 concurrency=16 variant=spring attempt=1
+--- product+cart idle before submission: yes
+THROUGHPUT (epochs 3-6) committed_tps=22716.6 accepted_rps=22745.1 backlog_at_end=0
+CPU product: 90.44 cpu-s over epochs 3-6 (2.26 cores), 99.53 cpu-us per committed tx
+CPU cart: 35.59 cpu-s over epochs 3-6 (0.89 cores), 39.17 cpu-us per committed tx
+CPU coordinator: 72.11 cpu-s over epochs 3-6 (1.80 cores), 79.36 cpu-us per committed tx
+DRAIN ok: submitted=1324216 (expected 1324214), committed=1324216, after 0.31s
+--- log errors: 0
+=== 15:19:04 rep=2 concurrency=32 variant=original attempt=1
+!!! no result row; last lines:
+Seeded 10000 products (full schema) in 1.6s
+Exception in thread "main" java.net.http.HttpTimeoutException: request timed out
+	at java.net.http/jdk.internal.net.http.HttpClientImpl.send(HttpClientImpl.java:953)
+	at java.net.http/jdk.internal.net.http.HttpClientFacade.send(HttpClientFacade.java:133)
+	at SeedProducts.main(SeedProducts.java:67)
+=== 15:19:23 rep=2 concurrency=32 variant=original attempt=2
+--- product+cart idle before submission: yes
+THROUGHPUT (epochs 3-6) committed_tps=22409.3 accepted_rps=22438.2 backlog_at_end=0
+CPU product: 84.85 cpu-s over epochs 3-6 (2.12 cores), 94.65 cpu-us per committed tx
+CPU cart: 37.89 cpu-s over epochs 3-6 (0.95 cores), 42.27 cpu-us per committed tx
+CPU coordinator: 66.50 cpu-s over epochs 3-6 (1.66 cores), 74.18 cpu-us per committed tx
+DRAIN ok: submitted=1328811 (expected 1328810), committed=1328811, after 0.21s
+--- log errors: 0
+=== 15:20:32 rep=2 concurrency=32 variant=spring attempt=1
+--- product+cart idle before submission: yes
+THROUGHPUT (epochs 3-6) committed_tps=20722.4 accepted_rps=20842.7 backlog_at_end=0
+CPU product: 80.83 cpu-s over epochs 3-6 (2.02 cores), 97.51 cpu-us per committed tx
+CPU cart: 33.21 cpu-s over epochs 3-6 (0.83 cores), 40.06 cpu-us per committed tx
+CPU coordinator: 64.83 cpu-s over epochs 3-6 (1.62 cores), 78.21 cpu-us per committed tx
+DRAIN ok: submitted=1215572 (expected 1215570), committed=1215572, after 0.65s
+--- log errors: 0
+=== 15:21:42 rep=2 concurrency=32 variant=plain attempt=1
+--- product+cart idle before submission: yes
+THROUGHPUT (epochs 3-6) committed_tps=20557.9 accepted_rps=20718.9 backlog_at_end=0
+CPU product: 80.48 cpu-s over epochs 3-6 (2.01 cores), 97.87 cpu-us per committed tx
+CPU cart: 33.26 cpu-s over epochs 3-6 (0.83 cores), 40.45 cpu-us per committed tx
+CPU coordinator: 65.62 cpu-s over epochs 3-6 (1.64 cores), 79.80 cpu-us per committed tx
+DRAIN ok: submitted=1200354 (expected 1200353), committed=1200354, after 0.73s
+--- log errors: 0
+=== 15:22:51 rep=3 concurrency=1 variant=spring attempt=1
+--- product+cart idle before submission: yes
+THROUGHPUT (epochs 3-6) committed_tps=12617.7 accepted_rps=12618.2 backlog_at_end=0
+CPU product: 51.36 cpu-s over epochs 3-6 (1.28 cores), 101.77 cpu-us per committed tx
+CPU cart: 17.11 cpu-s over epochs 3-6 (0.43 cores), 33.90 cpu-us per committed tx
+CPU coordinator: 54.66 cpu-s over epochs 3-6 (1.37 cores), 108.31 cpu-us per committed tx
+DRAIN ok: submitted=711317 (expected 711317), committed=711317, after 0.31s
+--- log errors: 0
+=== 15:24:01 rep=3 concurrency=1 variant=plain attempt=1
+!!! no result row; last lines:
+Seeded 10000 products (lite schema) in 1.4s
+Exception in thread "main" java.net.http.HttpTimeoutException: request timed out
+	at java.net.http/jdk.internal.net.http.HttpClientImpl.send(HttpClientImpl.java:953)
+	at java.net.http/jdk.internal.net.http.HttpClientFacade.send(HttpClientFacade.java:133)
+	at SeedProducts.main(SeedProducts.java:67)
+=== 15:24:19 rep=3 concurrency=1 variant=plain attempt=2
+--- product+cart idle before submission: yes
+THROUGHPUT (epochs 3-6) committed_tps=13459.2 accepted_rps=13458.1 backlog_at_end=0
+CPU product: 52.80 cpu-s over epochs 3-6 (1.32 cores), 98.07 cpu-us per committed tx
+CPU cart: 16.94 cpu-s over epochs 3-6 (0.42 cores), 31.46 cpu-us per committed tx
+CPU coordinator: 54.76 cpu-s over epochs 3-6 (1.37 cores), 101.71 cpu-us per committed tx
+DRAIN ok: submitted=763439 (expected 763439), committed=763439, after 0.32s
+--- log errors: 0
+=== 15:25:28 rep=3 concurrency=1 variant=original attempt=1
+--- product+cart idle before submission: yes
+THROUGHPUT (epochs 3-6) committed_tps=12689.6 accepted_rps=12681.3 backlog_at_end=0
+CPU product: 52.39 cpu-s over epochs 3-6 (1.31 cores), 103.21 cpu-us per committed tx
+CPU cart: 17.01 cpu-s over epochs 3-6 (0.43 cores), 33.51 cpu-us per committed tx
+CPU coordinator: 55.01 cpu-s over epochs 3-6 (1.38 cores), 108.37 cpu-us per committed tx
+DRAIN ok: submitted=727357 (expected 727357), committed=727357, after 0.31s
+--- log errors: 0
+=== 15:26:36 rep=3 concurrency=4 variant=plain attempt=1
+--- product+cart idle before submission: yes
+THROUGHPUT (epochs 3-6) committed_tps=18034.3 accepted_rps=18015.5 backlog_at_end=0
+CPU product: 80.06 cpu-s over epochs 3-6 (2.00 cores), 110.98 cpu-us per committed tx
+CPU cart: 26.47 cpu-s over epochs 3-6 (0.66 cores), 36.69 cpu-us per committed tx
+CPU coordinator: 74.44 cpu-s over epochs 3-6 (1.86 cores), 103.19 cpu-us per committed tx
+DRAIN ok: submitted=1056348 (expected 1056347), committed=1056348, after 0.42s
+--- log errors: 0
+=== 15:27:45 rep=3 concurrency=4 variant=original attempt=1
+--- product+cart idle before submission: yes
+THROUGHPUT (epochs 3-6) committed_tps=18171.5 accepted_rps=18161.2 backlog_at_end=0
+CPU product: 80.09 cpu-s over epochs 3-6 (2.00 cores), 110.18 cpu-us per committed tx
+CPU cart: 26.88 cpu-s over epochs 3-6 (0.67 cores), 36.98 cpu-us per committed tx
+CPU coordinator: 72.99 cpu-s over epochs 3-6 (1.82 cores), 100.42 cpu-us per committed tx
+DRAIN ok: submitted=1074180 (expected 1074180), committed=1074180, after 0.42s
+--- log errors: 0
+=== 15:28:54 rep=3 concurrency=4 variant=spring attempt=1
+--- product+cart idle before submission: yes
+THROUGHPUT (epochs 3-6) committed_tps=17517.8 accepted_rps=17692.2 backlog_at_end=0
+CPU product: 80.37 cpu-s over epochs 3-6 (2.01 cores), 114.70 cpu-us per committed tx
+CPU cart: 26.97 cpu-s over epochs 3-6 (0.67 cores), 38.49 cpu-us per committed tx
+CPU coordinator: 70.93 cpu-s over epochs 3-6 (1.77 cores), 101.23 cpu-us per committed tx
+DRAIN ok: submitted=1045512 (expected 1045512), committed=1045512, after 0.11s
+--- log errors: 0
+=== 15:30:04 rep=3 concurrency=8 variant=original attempt=1
+--- product+cart idle before submission: yes
+THROUGHPUT (epochs 3-6) committed_tps=20873.2 accepted_rps=20944.4 backlog_at_end=0
+CPU product: 86.88 cpu-s over epochs 3-6 (2.17 cores), 104.06 cpu-us per committed tx
+CPU cart: 31.68 cpu-s over epochs 3-6 (0.79 cores), 37.95 cpu-us per committed tx
+CPU coordinator: 72.93 cpu-s over epochs 3-6 (1.82 cores), 87.35 cpu-us per committed tx
+DRAIN ok: submitted=1255567 (expected 1255567), committed=1255567, after 0.10s
+--- log errors: 0
+=== 15:31:13 rep=3 concurrency=8 variant=spring attempt=1
+--- product+cart idle before submission: yes
+THROUGHPUT (epochs 3-6) committed_tps=19723.1 accepted_rps=19643.1 backlog_at_end=0
+CPU product: 83.11 cpu-s over epochs 3-6 (2.08 cores), 105.34 cpu-us per committed tx
+CPU cart: 29.73 cpu-s over epochs 3-6 (0.74 cores), 37.68 cpu-us per committed tx
+CPU coordinator: 69.02 cpu-s over epochs 3-6 (1.73 cores), 87.48 cpu-us per committed tx
+DRAIN ok: submitted=1187319 (expected 1187316), committed=1187319, after 0.21s
+--- log errors: 0
+=== 15:32:23 rep=3 concurrency=8 variant=plain attempt=1
+--- product+cart idle before submission: yes
+THROUGHPUT (epochs 3-6) committed_tps=22210.0 accepted_rps=22292.7 backlog_at_end=0
+CPU product: 93.75 cpu-s over epochs 3-6 (2.34 cores), 105.53 cpu-us per committed tx
+CPU cart: 29.90 cpu-s over epochs 3-6 (0.75 cores), 33.66 cpu-us per committed tx
+CPU coordinator: 74.65 cpu-s over epochs 3-6 (1.87 cores), 84.03 cpu-us per committed tx
+DRAIN ok: submitted=1261397 (expected 1261396), committed=1261397, after 0.21s
+--- log errors: 0
+=== 15:33:31 rep=3 concurrency=16 variant=spring attempt=1
+--- product+cart idle before submission: yes
+THROUGHPUT (epochs 3-6) committed_tps=20749.5 accepted_rps=22368.7 backlog_at_end=0
+CPU product: 84.34 cpu-s over epochs 3-6 (2.11 cores), 101.61 cpu-us per committed tx
+CPU cart: 31.80 cpu-s over epochs 3-6 (0.79 cores), 38.31 cpu-us per committed tx
+CPU coordinator: 68.54 cpu-s over epochs 3-6 (1.71 cores), 82.58 cpu-us per committed tx
+DRAIN ok: submitted=1311132 (expected 1311132), committed=1311132, after 2.52s
+--- log errors: 0
+=== 15:34:44 rep=3 concurrency=16 variant=plain attempt=1
+--- product+cart idle before submission: yes
+THROUGHPUT (epochs 3-6) committed_tps=22002.2 accepted_rps=24690.0 backlog_at_end=0
+CPU product: 89.83 cpu-s over epochs 3-6 (2.25 cores), 102.08 cpu-us per committed tx
+CPU cart: 30.75 cpu-s over epochs 3-6 (0.77 cores), 34.94 cpu-us per committed tx
+CPU coordinator: 75.56 cpu-s over epochs 3-6 (1.89 cores), 85.86 cpu-us per committed tx
+DRAIN ok: submitted=1308842 (expected 1308840), committed=1308842, after 3.95s
+--- log errors: 0
+=== 15:35:57 rep=3 concurrency=16 variant=original attempt=1
+--- product+cart idle before submission: yes
+THROUGHPUT (epochs 3-6) committed_tps=19248.8 accepted_rps=20883.9 backlog_at_end=10000
+CPU product: 81.80 cpu-s over epochs 3-6 (2.04 cores), 106.23 cpu-us per committed tx
+CPU cart: 30.30 cpu-s over epochs 3-6 (0.76 cores), 39.35 cpu-us per committed tx
+CPU coordinator: 64.47 cpu-s over epochs 3-6 (1.61 cores), 83.73 cpu-us per committed tx
+DRAIN ok: submitted=1236488 (expected 1236488), committed=1236488, after 4.43s
+--- log errors: 0
+=== 15:37:11 rep=3 concurrency=32 variant=plain attempt=1
+--- product+cart idle before submission: yes
+THROUGHPUT (epochs 3-6) committed_tps=22499.6 accepted_rps=23540.1 backlog_at_end=0
+CPU product: 89.58 cpu-s over epochs 3-6 (2.24 cores), 99.53 cpu-us per committed tx
+CPU cart: 34.36 cpu-s over epochs 3-6 (0.86 cores), 38.18 cpu-us per committed tx
+CPU coordinator: 73.04 cpu-s over epochs 3-6 (1.83 cores), 81.16 cpu-us per committed tx
+DRAIN ok: submitted=1370705 (expected 1370705), committed=1370705, after 1.68s
+--- log errors: 0
+=== 15:38:21 rep=3 concurrency=32 variant=original attempt=1
+--- product+cart idle before submission: yes
+THROUGHPUT (epochs 3-6) committed_tps=20286.7 accepted_rps=21377.6 backlog_at_end=0
+CPU product: 80.98 cpu-s over epochs 3-6 (2.02 cores), 99.80 cpu-us per committed tx
+CPU cart: 34.44 cpu-s over epochs 3-6 (0.86 cores), 42.44 cpu-us per committed tx
+CPU coordinator: 66.21 cpu-s over epochs 3-6 (1.66 cores), 81.60 cpu-us per committed tx
+DRAIN ok: submitted=1215927 (expected 1215927), committed=1215927, after 1.79s
+--- log errors: 0
+=== 15:39:31 rep=3 concurrency=32 variant=spring attempt=1
+--- product+cart idle before submission: yes
+THROUGHPUT (epochs 3-6) committed_tps=22248.8 accepted_rps=23775.4 backlog_at_end=0
+CPU product: 89.15 cpu-s over epochs 3-6 (2.23 cores), 100.17 cpu-us per committed tx
+CPU cart: 34.71 cpu-s over epochs 3-6 (0.87 cores), 39.00 cpu-us per committed tx
+CPU coordinator: 73.08 cpu-s over epochs 3-6 (1.83 cores), 82.11 cpu-us per committed tx
+DRAIN ok: submitted=1323941 (expected 1323940), committed=1323941, after 2.90s
+--- log errors: 0
+=== 15:40:44 rep=4 concurrency=1 variant=original attempt=1
+--- product+cart idle before submission: yes
+THROUGHPUT (epochs 3-6) committed_tps=11657.9 accepted_rps=11644.1 backlog_at_end=0
+CPU product: 48.01 cpu-s over epochs 3-6 (1.20 cores), 102.94 cpu-us per committed tx
+CPU cart: 16.17 cpu-s over epochs 3-6 (0.40 cores), 34.67 cpu-us per committed tx
+CPU coordinator: 53.57 cpu-s over epochs 3-6 (1.34 cores), 114.87 cpu-us per committed tx
+DRAIN ok: submitted=675698 (expected 675698), committed=675698, after 0.11s
+--- log errors: 0
+=== 15:41:54 rep=4 concurrency=1 variant=spring attempt=1
+--- product+cart idle before submission: yes
+THROUGHPUT (epochs 3-6) committed_tps=11356.5 accepted_rps=11346.8 backlog_at_end=0
+CPU product: 47.55 cpu-s over epochs 3-6 (1.19 cores), 104.67 cpu-us per committed tx
+CPU cart: 15.92 cpu-s over epochs 3-6 (0.40 cores), 35.05 cpu-us per committed tx
+CPU coordinator: 53.83 cpu-s over epochs 3-6 (1.35 cores), 118.50 cpu-us per committed tx
+DRAIN ok: submitted=622867 (expected 622867), committed=622867, after 0.31s
+--- log errors: 0
+=== 15:43:03 rep=4 concurrency=1 variant=plain attempt=1
+--- product+cart idle before submission: yes
+THROUGHPUT (epochs 3-6) committed_tps=11983.2 accepted_rps=11977.7 backlog_at_end=0
+CPU product: 49.14 cpu-s over epochs 3-6 (1.23 cores), 102.52 cpu-us per committed tx
+CPU cart: 15.99 cpu-s over epochs 3-6 (0.40 cores), 33.36 cpu-us per committed tx
+CPU coordinator: 55.07 cpu-s over epochs 3-6 (1.38 cores), 114.90 cpu-us per committed tx
+DRAIN ok: submitted=682871 (expected 682871), committed=682871, after 0.41s
+--- log errors: 0
+=== 15:44:12 rep=4 concurrency=4 variant=spring attempt=1
+--- product+cart idle before submission: yes
+THROUGHPUT (epochs 3-6) committed_tps=16905.8 accepted_rps=16892.0 backlog_at_end=0
+CPU product: 72.60 cpu-s over epochs 3-6 (1.81 cores), 107.35 cpu-us per committed tx
+CPU cart: 25.26 cpu-s over epochs 3-6 (0.63 cores), 37.35 cpu-us per committed tx
+CPU coordinator: 70.51 cpu-s over epochs 3-6 (1.76 cores), 104.26 cpu-us per committed tx
+DRAIN ok: submitted=999971 (expected 999971), committed=999971, after 0.32s
+--- log errors: 0
+=== 15:45:23 rep=4 concurrency=4 variant=plain attempt=1
+--- product+cart idle before submission: yes
+THROUGHPUT (epochs 3-6) committed_tps=16771.3 accepted_rps=16758.4 backlog_at_end=0
+CPU product: 73.24 cpu-s over epochs 3-6 (1.83 cores), 109.18 cpu-us per committed tx
+CPU cart: 24.54 cpu-s over epochs 3-6 (0.61 cores), 36.58 cpu-us per committed tx
+CPU coordinator: 69.47 cpu-s over epochs 3-6 (1.74 cores), 103.56 cpu-us per committed tx
+DRAIN ok: submitted=958071 (expected 958071), committed=958071, after 0.10s
+--- log errors: 0
+=== 15:46:31 rep=4 concurrency=4 variant=original attempt=1
+--- product+cart idle before submission: yes
+THROUGHPUT (epochs 3-6) committed_tps=16637.1 accepted_rps=16644.1 backlog_at_end=0
+CPU product: 73.78 cpu-s over epochs 3-6 (1.84 cores), 110.87 cpu-us per committed tx
+CPU cart: 26.58 cpu-s over epochs 3-6 (0.66 cores), 39.94 cpu-us per committed tx
+CPU coordinator: 70.60 cpu-s over epochs 3-6 (1.77 cores), 106.09 cpu-us per committed tx
+DRAIN ok: submitted=897942 (expected 897942), committed=897942, after 0.42s
+--- log errors: 0
+=== 15:47:42 rep=4 concurrency=8 variant=plain attempt=1
+--- product+cart idle before submission: yes
+THROUGHPUT (epochs 3-6) committed_tps=22650.0 accepted_rps=22778.3 backlog_at_end=0
+CPU product: 92.69 cpu-s over epochs 3-6 (2.32 cores), 102.30 cpu-us per committed tx
+CPU cart: 32.44 cpu-s over epochs 3-6 (0.81 cores), 35.80 cpu-us per committed tx
+CPU coordinator: 73.97 cpu-s over epochs 3-6 (1.85 cores), 81.64 cpu-us per committed tx
+DRAIN ok: submitted=1351100 (expected 1351100), committed=1351100, after 0.42s
+--- log errors: 0
+=== 15:48:51 rep=4 concurrency=8 variant=original attempt=1
+--- product+cart idle before submission: yes
+THROUGHPUT (epochs 3-6) committed_tps=22118.3 accepted_rps=22166.0 backlog_at_end=0
+CPU product: 93.51 cpu-s over epochs 3-6 (2.34 cores), 105.70 cpu-us per committed tx
+CPU cart: 32.31 cpu-s over epochs 3-6 (0.81 cores), 36.52 cpu-us per committed tx
+CPU coordinator: 74.18 cpu-s over epochs 3-6 (1.85 cores), 83.85 cpu-us per committed tx
+DRAIN ok: submitted=1267423 (expected 1267420), committed=1267423, after 0.64s
+--- log errors: 0
+=== 15:50:00 rep=4 concurrency=8 variant=spring attempt=1
+--- product+cart idle before submission: yes
+THROUGHPUT (epochs 3-6) committed_tps=22739.9 accepted_rps=22717.7 backlog_at_end=0
+CPU product: 94.40 cpu-s over epochs 3-6 (2.36 cores), 103.79 cpu-us per committed tx
+CPU cart: 32.02 cpu-s over epochs 3-6 (0.80 cores), 35.20 cpu-us per committed tx
+CPU coordinator: 75.55 cpu-s over epochs 3-6 (1.89 cores), 83.06 cpu-us per committed tx
+DRAIN ok: submitted=1327597 (expected 1327596), committed=1327597, after 0.32s
+--- log errors: 0
+=== 15:51:10 rep=4 concurrency=16 variant=original attempt=1
+--- product+cart idle before submission: yes
+THROUGHPUT (epochs 3-6) committed_tps=21494.0 accepted_rps=22985.2 backlog_at_end=0
+CPU product: 87.83 cpu-s over epochs 3-6 (2.20 cores), 102.16 cpu-us per committed tx
+CPU cart: 32.44 cpu-s over epochs 3-6 (0.81 cores), 37.73 cpu-us per committed tx
+CPU coordinator: 70.37 cpu-s over epochs 3-6 (1.76 cores), 81.85 cpu-us per committed tx
+DRAIN ok: submitted=1355407 (expected 1355407), committed=1355407, after 2.96s
+--- log errors: 0
+=== 15:52:22 rep=4 concurrency=16 variant=spring attempt=1
+--- product+cart idle before submission: yes
+THROUGHPUT (epochs 3-6) committed_tps=20527.5 accepted_rps=20559.6 backlog_at_end=0
+CPU product: 80.02 cpu-s over epochs 3-6 (2.00 cores), 97.46 cpu-us per committed tx
+CPU cart: 33.39 cpu-s over epochs 3-6 (0.83 cores), 40.67 cpu-us per committed tx
+CPU coordinator: 66.42 cpu-s over epochs 3-6 (1.66 cores), 80.89 cpu-us per committed tx
+DRAIN ok: submitted=1206496 (expected 1206493), committed=1206496, after 0.21s
+--- log errors: 0
+=== 15:53:32 rep=4 concurrency=16 variant=plain attempt=1
+--- product+cart idle before submission: yes
+THROUGHPUT (epochs 3-6) committed_tps=22679.9 accepted_rps=23085.2 backlog_at_end=0
+CPU product: 89.84 cpu-s over epochs 3-6 (2.25 cores), 99.03 cpu-us per committed tx
+CPU cart: 33.56 cpu-s over epochs 3-6 (0.84 cores), 36.99 cpu-us per committed tx
+CPU coordinator: 73.66 cpu-s over epochs 3-6 (1.84 cores), 81.20 cpu-us per committed tx
+DRAIN ok: submitted=1347987 (expected 1347987), committed=1347987, after 0.83s
+--- log errors: 0
+=== 15:54:41 rep=4 concurrency=32 variant=spring attempt=1
+!!! no result row; last lines:
+Seeded 10000 products (lite schema) in 2.1s
+Exception in thread "main" java.net.http.HttpTimeoutException: request timed out
+	at java.net.http/jdk.internal.net.http.HttpClientImpl.send(HttpClientImpl.java:953)
+	at java.net.http/jdk.internal.net.http.HttpClientFacade.send(HttpClientFacade.java:133)
+	at SeedProducts.main(SeedProducts.java:67)
+=== 15:55:02 rep=4 concurrency=32 variant=spring attempt=2
+--- product+cart idle before submission: yes
+THROUGHPUT (epochs 3-6) committed_tps=23001.3 accepted_rps=23238.8 backlog_at_end=0
+CPU product: 85.27 cpu-s over epochs 3-6 (2.13 cores), 92.68 cpu-us per committed tx
+CPU cart: 36.19 cpu-s over epochs 3-6 (0.90 cores), 39.34 cpu-us per committed tx
+CPU coordinator: 71.37 cpu-s over epochs 3-6 (1.78 cores), 77.58 cpu-us per committed tx
+DRAIN ok: submitted=1340962 (expected 1340961), committed=1340962, after 0.53s
+--- log errors: 0
+=== 15:56:10 rep=4 concurrency=32 variant=plain attempt=1
+!!! no result row; last lines:
+Seeded 10000 products (lite schema) in 1.4s
+Exception in thread "main" java.net.http.HttpTimeoutException: request timed out
+	at java.net.http/jdk.internal.net.http.HttpClientImpl.send(HttpClientImpl.java:953)
+	at java.net.http/jdk.internal.net.http.HttpClientFacade.send(HttpClientFacade.java:133)
+	at SeedProducts.main(SeedProducts.java:67)
+=== 15:56:30 rep=4 concurrency=32 variant=plain attempt=2
+--- product+cart idle before submission: yes
+THROUGHPUT (epochs 3-6) committed_tps=23480.5 accepted_rps=24636.3 backlog_at_end=0
+CPU product: 87.62 cpu-s over epochs 3-6 (2.19 cores), 93.28 cpu-us per committed tx
+CPU cart: 31.76 cpu-s over epochs 3-6 (0.79 cores), 33.81 cpu-us per committed tx
+CPU coordinator: 71.48 cpu-s over epochs 3-6 (1.79 cores), 76.10 cpu-us per committed tx
+DRAIN ok: submitted=1380867 (expected 1380867), committed=1380867, after 1.46s
+--- log errors: 0
+=== 15:57:39 rep=4 concurrency=32 variant=original attempt=1
+--- product+cart idle before submission: yes
+THROUGHPUT (epochs 3-6) committed_tps=22501.9 accepted_rps=24626.0 backlog_at_end=0
+CPU product: 93.36 cpu-s over epochs 3-6 (2.33 cores), 103.73 cpu-us per committed tx
+CPU cart: 37.41 cpu-s over epochs 3-6 (0.94 cores), 41.57 cpu-us per committed tx
+CPU coordinator: 76.30 cpu-s over epochs 3-6 (1.91 cores), 84.78 cpu-us per committed tx
+DRAIN ok: submitted=1437657 (expected 1437656), committed=1437657, after 2.83s
+--- log errors: 0
+=== 15:58:50 rep=5 concurrency=1 variant=plain attempt=1
+--- product+cart idle before submission: yes
+THROUGHPUT (epochs 3-6) committed_tps=12993.2 accepted_rps=12988.3 backlog_at_end=0
+CPU product: 53.39 cpu-s over epochs 3-6 (1.33 cores), 102.73 cpu-us per committed tx
+CPU cart: 16.64 cpu-s over epochs 3-6 (0.42 cores), 32.02 cpu-us per committed tx
+CPU coordinator: 55.33 cpu-s over epochs 3-6 (1.38 cores), 106.46 cpu-us per committed tx
+DRAIN ok: submitted=751474 (expected 751474), committed=751474, after 0.32s
+--- log errors: 0
+=== 15:59:59 rep=5 concurrency=1 variant=original attempt=1
+--- product+cart idle before submission: yes
+THROUGHPUT (epochs 3-6) committed_tps=12659.2 accepted_rps=12667.7 backlog_at_end=0
+CPU product: 53.51 cpu-s over epochs 3-6 (1.34 cores), 105.67 cpu-us per committed tx
+CPU cart: 17.05 cpu-s over epochs 3-6 (0.43 cores), 33.67 cpu-us per committed tx
+CPU coordinator: 55.10 cpu-s over epochs 3-6 (1.38 cores), 108.81 cpu-us per committed tx
+DRAIN ok: submitted=728439 (expected 728439), committed=728439, after 0.32s
+--- log errors: 0
+=== 16:01:08 rep=5 concurrency=1 variant=spring attempt=1
+--- product+cart idle before submission: yes
+THROUGHPUT (epochs 3-6) committed_tps=12916.1 accepted_rps=12896.6 backlog_at_end=0
+CPU product: 53.09 cpu-s over epochs 3-6 (1.33 cores), 102.76 cpu-us per committed tx
+CPU cart: 18.10 cpu-s over epochs 3-6 (0.45 cores), 35.03 cpu-us per committed tx
+CPU coordinator: 54.57 cpu-s over epochs 3-6 (1.36 cores), 105.63 cpu-us per committed tx
+DRAIN ok: submitted=739824 (expected 739824), committed=739824, after 0.31s
+--- log errors: 0
+=== 16:02:17 rep=5 concurrency=4 variant=original attempt=1
+--- product+cart idle before submission: yes
+THROUGHPUT (epochs 3-6) committed_tps=17965.1 accepted_rps=17920.5 backlog_at_end=0
+CPU product: 78.60 cpu-s over epochs 3-6 (1.97 cores), 109.40 cpu-us per committed tx
+CPU cart: 25.40 cpu-s over epochs 3-6 (0.64 cores), 35.35 cpu-us per committed tx
+CPU coordinator: 72.26 cpu-s over epochs 3-6 (1.81 cores), 100.58 cpu-us per committed tx
+DRAIN ok: submitted=1036177 (expected 1036176), committed=1036177, after 0.52s
+--- log errors: 0
+=== 16:03:27 rep=5 concurrency=4 variant=spring attempt=1
+--- product+cart idle before submission: yes
+THROUGHPUT (epochs 3-6) committed_tps=18550.1 accepted_rps=18528.2 backlog_at_end=0
+CPU product: 82.95 cpu-s over epochs 3-6 (2.07 cores), 111.80 cpu-us per committed tx
+CPU cart: 28.87 cpu-s over epochs 3-6 (0.72 cores), 38.91 cpu-us per committed tx
+CPU coordinator: 73.38 cpu-s over epochs 3-6 (1.83 cores), 98.90 cpu-us per committed tx
+DRAIN ok: submitted=1099249 (expected 1099249), committed=1099249, after 0.21s
+--- log errors: 0
+=== 16:04:36 rep=5 concurrency=4 variant=plain attempt=1
+--- product+cart idle before submission: yes
+THROUGHPUT (epochs 3-6) committed_tps=18599.4 accepted_rps=18646.1 backlog_at_end=0
+CPU product: 83.16 cpu-s over epochs 3-6 (2.08 cores), 111.78 cpu-us per committed tx
+CPU cart: 25.89 cpu-s over epochs 3-6 (0.65 cores), 34.80 cpu-us per committed tx
+CPU coordinator: 72.96 cpu-s over epochs 3-6 (1.82 cores), 98.07 cpu-us per committed tx
+DRAIN ok: submitted=1096905 (expected 1096905), committed=1096905, after 0.21s
+--- log errors: 0
+=== 16:05:44 rep=5 concurrency=8 variant=spring attempt=1
+--- product+cart idle before submission: yes
+THROUGHPUT (epochs 3-6) committed_tps=22214.4 accepted_rps=22699.8 backlog_at_end=0
+CPU product: 94.32 cpu-s over epochs 3-6 (2.36 cores), 106.15 cpu-us per committed tx
+CPU cart: 31.69 cpu-s over epochs 3-6 (0.79 cores), 35.67 cpu-us per committed tx
+CPU coordinator: 75.44 cpu-s over epochs 3-6 (1.89 cores), 84.90 cpu-us per committed tx
+DRAIN ok: submitted=1339974 (expected 1339972), committed=1339974, after 0.84s
+--- log errors: 0
+=== 16:06:54 rep=5 concurrency=8 variant=plain attempt=1
+--- product+cart idle before submission: yes
+THROUGHPUT (epochs 3-6) committed_tps=20600.5 accepted_rps=20716.9 backlog_at_end=0
+CPU product: 87.51 cpu-s over epochs 3-6 (2.19 cores), 106.19 cpu-us per committed tx
+CPU cart: 28.74 cpu-s over epochs 3-6 (0.72 cores), 34.88 cpu-us per committed tx
+CPU coordinator: 72.29 cpu-s over epochs 3-6 (1.81 cores), 87.72 cpu-us per committed tx
+DRAIN ok: submitted=1201179 (expected 1201177), committed=1201179, after 0.31s
+--- log errors: 0
+=== 16:08:03 rep=5 concurrency=8 variant=original attempt=1
+--- product+cart idle before submission: yes
+THROUGHPUT (epochs 3-6) committed_tps=18938.2 accepted_rps=18865.2 backlog_at_end=0
+CPU product: 78.67 cpu-s over epochs 3-6 (1.97 cores), 103.85 cpu-us per committed tx
+CPU cart: 28.32 cpu-s over epochs 3-6 (0.71 cores), 37.39 cpu-us per committed tx
+CPU coordinator: 66.40 cpu-s over epochs 3-6 (1.66 cores), 87.66 cpu-us per committed tx
+DRAIN ok: submitted=1077158 (expected 1077158), committed=1077158, after 0.31s
+--- log errors: 0
+=== 16:09:12 rep=5 concurrency=16 variant=plain attempt=1
+--- product+cart idle before submission: yes
+THROUGHPUT (epochs 3-6) committed_tps=20641.2 accepted_rps=21068.8 backlog_at_end=0
+CPU product: 85.81 cpu-s over epochs 3-6 (2.15 cores), 103.94 cpu-us per committed tx
+CPU cart: 30.95 cpu-s over epochs 3-6 (0.77 cores), 37.49 cpu-us per committed tx
+CPU coordinator: 68.43 cpu-s over epochs 3-6 (1.71 cores), 82.89 cpu-us per committed tx
+DRAIN ok: submitted=1244040 (expected 1244039), committed=1244040, after 0.95s
+--- log errors: 0
+=== 16:10:21 rep=5 concurrency=16 variant=original attempt=1
+--- product+cart idle before submission: yes
+THROUGHPUT (epochs 3-6) committed_tps=22241.9 accepted_rps=23560.4 backlog_at_end=0
+CPU product: 90.47 cpu-s over epochs 3-6 (2.26 cores), 101.69 cpu-us per committed tx
+CPU cart: 34.68 cpu-s over epochs 3-6 (0.87 cores), 38.98 cpu-us per committed tx
+CPU coordinator: 73.04 cpu-s over epochs 3-6 (1.83 cores), 82.10 cpu-us per committed tx
+DRAIN ok: submitted=1293785 (expected 1293784), committed=1293785, after 3.18s
+--- log errors: 0
+=== 16:11:34 rep=5 concurrency=16 variant=spring attempt=1
+--- product+cart idle before submission: yes
+THROUGHPUT (epochs 3-6) committed_tps=21526.2 accepted_rps=22987.0 backlog_at_end=0
+CPU product: 87.88 cpu-s over epochs 3-6 (2.20 cores), 102.07 cpu-us per committed tx
+CPU cart: 33.25 cpu-s over epochs 3-6 (0.83 cores), 38.62 cpu-us per committed tx
+CPU coordinator: 71.62 cpu-s over epochs 3-6 (1.79 cores), 83.19 cpu-us per committed tx
+DRAIN ok: submitted=1323335 (expected 1323330), committed=1323335, after 1.88s
+--- log errors: 0
+=== 16:12:45 rep=5 concurrency=32 variant=original attempt=1
+--- product+cart idle before submission: yes
+THROUGHPUT (epochs 3-6) committed_tps=21750.6 accepted_rps=22628.8 backlog_at_end=0
+CPU product: 87.14 cpu-s over epochs 3-6 (2.18 cores), 100.16 cpu-us per committed tx
+CPU cart: 33.79 cpu-s over epochs 3-6 (0.84 cores), 38.84 cpu-us per committed tx
+CPU coordinator: 70.94 cpu-s over epochs 3-6 (1.77 cores), 81.54 cpu-us per committed tx
+DRAIN ok: submitted=1349398 (expected 1349398), committed=1349398, after 1.48s
+--- log errors: 0
+=== 16:13:56 rep=5 concurrency=32 variant=spring attempt=1
+!!! no result row; last lines:
+Seeded 10000 products (lite schema) in 1.9s
+Exception in thread "main" java.net.http.HttpTimeoutException: request timed out
+	at java.net.http/jdk.internal.net.http.HttpClientImpl.send(HttpClientImpl.java:953)
+	at java.net.http/jdk.internal.net.http.HttpClientFacade.send(HttpClientFacade.java:133)
+	at SeedProducts.main(SeedProducts.java:67)
+=== 16:14:17 rep=5 concurrency=32 variant=spring attempt=2
+--- product+cart idle before submission: yes
+THROUGHPUT (epochs 3-6) committed_tps=22231.4 accepted_rps=22460.1 backlog_at_end=0
+CPU product: 83.07 cpu-s over epochs 3-6 (2.08 cores), 93.42 cpu-us per committed tx
+CPU cart: 33.71 cpu-s over epochs 3-6 (0.84 cores), 37.91 cpu-us per committed tx
+CPU coordinator: 67.15 cpu-s over epochs 3-6 (1.68 cores), 75.52 cpu-us per committed tx
+DRAIN ok: submitted=1326712 (expected 1326711), committed=1326712, after 0.53s
+--- log errors: 0
+=== 16:15:26 rep=5 concurrency=32 variant=plain attempt=1
+--- product+cart idle before submission: yes
+THROUGHPUT (epochs 3-6) committed_tps=22719.0 accepted_rps=23217.1 backlog_at_end=0
+CPU product: 89.66 cpu-s over epochs 3-6 (2.24 cores), 98.66 cpu-us per committed tx
+CPU cart: 34.09 cpu-s over epochs 3-6 (0.85 cores), 37.51 cpu-us per committed tx
+CPU coordinator: 72.65 cpu-s over epochs 3-6 (1.82 cores), 79.95 cpu-us per committed tx
+DRAIN ok: submitted=1338995 (expected 1338993), committed=1338995, after 0.94s
+--- log errors: 0
+=== 16:16:36 sweep done

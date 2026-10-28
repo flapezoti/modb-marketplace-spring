@@ -1,0 +1,7 @@
+variant,rep,concurrency,committed_tps,accepted_rps,backlog_at_end,driver_cores,http_failed,drain,drain_secs,cpu_idle_before,log_errors,exit
+plain,0,32,27500.0,27406.6,0,2.66,0,drained,0.42,69.68,0,0
+plain,0,1,13366.9,13369.1,0,0.92,0,drained,0.41,75.61,0,0
+spring,0,32,27250.8,27410.2,0,2.70,0,drained,0.73,50.73,0,0
+spring,0,1,13202.6,13191.2,0,0.96,0,drained,0.10,69.68,0,0
+original,0,32,25480.0,25458.7,0,2.58,0,drained,0.42,77.98,0,0
+original,0,1,13235.9,13222.3,0,0.93,0,drained,0.41,73.11,0,0

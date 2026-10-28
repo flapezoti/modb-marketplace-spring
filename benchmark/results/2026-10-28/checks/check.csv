@@ -1,0 +1,3 @@
+variant,rep,concurrency,committed_tps,accepted_rps,backlog_at_end,driver_cores,http_failed,drain,drain_secs,idle_before,log_errors,exit,product_cpu_us_tx,cart_cpu_us_tx,coordinator_cpu_us_tx
+original,0,4,16828.8,17008.3,0,2.05,0,drained,0.32,yes,0,0,92.415,34.886,97.051
+spring,0,4,19040.8,19364.9,0,2.19,0,drained,0.11,yes,0,0,87.819,33.300,90.182
