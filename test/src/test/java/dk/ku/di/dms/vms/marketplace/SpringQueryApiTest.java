@@ -53,6 +53,7 @@ public class SpringQueryApiTest {
         Assert.assertEquals(10.0F, getJson(productUrl(1, 1)).get("price").floatValue(), 0.01);
         Assert.assertEquals(10.0F, getJson(replicaUrl(1, 1)).get("price").floatValue(), 0.01);
         Assert.assertEquals("1", getJson(replicaUrl(1, 1)).get("version").asText());
+        Assert.assertEquals(10.0F, getFloat(productUrl(1, 1) + "/price-only"), 0.01);
 
         // step 2: matching-version price update must be applied on both Product and Cart
         CoordinatorTestSupport.submit(coordinator, UPDATE_PRICE,
@@ -61,6 +62,10 @@ public class SpringQueryApiTest {
 
         Assert.assertEquals(12.5F, getJson(productUrl(1, 1)).get("price").floatValue(), 0.01);
         Assert.assertEquals(12.5F, getJson(replicaUrl(1, 1)).get("price").floatValue(), 0.01);
+        // IProductRepository#getPriceOnly carries Spring Data's own @Query, not VMODB's -- this
+        // confirms VMODB's query engine actually executed it and returned the live value, not a
+        // stale or default one.
+        Assert.assertEquals(12.5F, getFloat(productUrl(1, 1) + "/price-only"), 0.01);
 
         // step 3: stale/conflicting-version price update must be rejected on both sides
         CoordinatorTestSupport.submit(coordinator, UPDATE_PRICE,
@@ -96,6 +101,17 @@ public class SpringQueryApiTest {
                 throw new AssertionError("GET " + url + " -> " + response.statusCode() + ": " + response.body());
             }
             return new ObjectMapper().readTree(response.body());
+        }
+    }
+
+    private static float getFloat(String url) throws Exception {
+        try (HttpClient client = HttpClient.newBuilder().version(HttpClient.Version.HTTP_1_1).build()) {
+            HttpRequest request = HttpRequest.newBuilder(URI.create(url)).GET().build();
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            if (response.statusCode() != 200) {
+                throw new AssertionError("GET " + url + " -> " + response.statusCode() + ": " + response.body());
+            }
+            return Float.parseFloat(response.body());
         }
     }
 

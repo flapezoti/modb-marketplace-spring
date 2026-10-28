@@ -53,9 +53,11 @@ public class Main {
 
     // Kept as its own bean: ProductQueryController still depends on the raw VMODB repository
     // directly, for its own read API, unrelated to ProductService's internal storage access.
+    // VmodbBootstrap.repository also recognizes Spring Data's own @Query on IProductRepository
+    // (see getPriceOnly there), alongside VMODB's own.
     @Bean
     IProductRepository productRepository(VmsPreparedApplication prepared) {
-        return VmodbBootstrap.repository(prepared, "products");
+        return VmodbBootstrap.repository(prepared, "products", IProductRepository.class);
     }
 
     // The actual price-update business rule, framework-free -- see PriceUpdatePolicy. Declared

@@ -48,7 +48,7 @@ public class Main {
     // directly, for its own read API, unrelated to CartService's internal storage access.
     @Bean
     IProductReplicaRepository productReplicaRepository(VmsPreparedApplication prepared) {
-        return VmodbBootstrap.repository(prepared, "product_replicas");
+        return VmodbBootstrap.repository(prepared, "product_replicas", IProductReplicaRepository.class);
     }
 
     // Same price-update rule Product's own Main uses -- see the matching comment there.
