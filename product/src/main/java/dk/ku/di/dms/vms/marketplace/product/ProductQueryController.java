@@ -43,6 +43,18 @@ public class ProductQueryController {
     }
 
     /**
+     * Backed by IProductRepository#getPriceOnly, which carries Spring Data's own @Query, not
+     * VMODB's -- proves the method is actually executed by VMODB's query engine, not just
+     * present on the interface.
+     */
+    @GetMapping("/products/{sellerId}/{productId}/price-only")
+    public float getPriceOnly(@PathVariable int sellerId, @PathVariable int productId) {
+        long lastTid = vms.lastTidFinished();
+        transactionManager.beginTransaction(lastTid, 0, lastTid, true);
+        return repository.getPriceOnly(sellerId, productId);
+    }
+
+    /**
      * Confirms the @Microservice bean itself is reachable through Spring injection. Only reports
      * on it -- never calls its @Inbound/@Outbound methods, which must run through VMODB's own
      * coordinator-driven scheduler, not as an ordinary method call.
