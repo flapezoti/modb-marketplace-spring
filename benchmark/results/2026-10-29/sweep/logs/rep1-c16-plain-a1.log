@@ -1,0 +1,11 @@
+product pid 69878
+cart pid 69886
+--- product properties: {network_send_timeout=0, checkpointing=true, vms_thread_pool_size=4, network_buffer_size=0, logging_type=default, network_thread_pool_size=4, so_buffer_size=0, max_sleep=100, num_vms_workers=1, logging=true, max_records=0}
+--- cart properties:    {checkpointing=true, vms_thread_pool_size=4, network_buffer_size=0, max_records.cart_items=1000000, network_send_timeout=0, logging_type=default, network_thread_pool_size=4, so_buffer_size=0, max_sleep=250, num_vms_workers=1, logging=true, max_records=0}
+--- memory started product: rss=132928KB heap_used=44397KB heap_live=-KB metaspace=15767KB classes=3869
+--- memory started cart: rss=131248KB heap_used=43955KB heap_live=-KB metaspace=15757KB classes=3877
+Seeded 10000 products (lite schema) in 1.5s
+Exception in thread "main" java.net.http.HttpTimeoutException: request timed out
+	at java.net.http/jdk.internal.net.http.HttpClientImpl.send(HttpClientImpl.java:953)
+	at java.net.http/jdk.internal.net.http.HttpClientFacade.send(HttpClientFacade.java:133)
+	at SeedProducts.main(SeedProducts.java:67)

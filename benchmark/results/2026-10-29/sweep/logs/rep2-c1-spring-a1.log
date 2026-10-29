@@ -1,0 +1,32 @@
+product pid 73479
+cart pid 73488
+--- product properties: {network_send_timeout=0, checkpointing=true, vms_thread_pool_size=4, network_buffer_size=0, so_buffer_size=0, network_thread_pool_size=4, max_sleep=100, num_vms_workers=1, logging=true, max_records=0}
+--- cart properties:    {network_send_timeout=0, checkpointing=true, vms_thread_pool_size=4, network_buffer_size=0, so_buffer_size=0, network_thread_pool_size=4, max_sleep=250, num_vms_workers=1, logging=true, max_records=0}
+--- memory started product: rss=261328KB heap_used=67029KB heap_live=-KB metaspace=40594KB classes=9215
+--- memory started cart: rss=273392KB heap_used=67075KB heap_live=-KB metaspace=40355KB classes=9160
+Seeded 10000 products (lite schema) in 1.4s
+Verified: 10000 ok, 0 missing, 0 wrong row (of 10000)
+--- product+cart idle before submission: yes
+--- memory seeded product: rss=310352KB heap_used=67288KB heap_live=-KB metaspace=42825KB classes=9581
+--- memory seeded cart: rss=275728KB heap_used=72649KB heap_live=-KB metaspace=41959KB classes=9457
+--- memory seeded coordinator: rss=81696KB heap_used=11627KB heap_live=-KB metaspace=8501KB classes=2436
+target=http://localhost:8091 concurrency=1 epochs=6x10s warmup=2 keys=1000x10 cpus=10
+epoch 1 (warm-up): committed_tps=9524.4 accepted_rps=9745.4 backlog=0
+epoch 2 (warm-up): committed_tps=12270.0 accepted_rps=12137.0 backlog=0
+epoch 3: committed_tps=12570.3 accepted_rps=12707.8 backlog=0
+epoch 4: committed_tps=12923.4 accepted_rps=12882.9 backlog=0
+epoch 5: committed_tps=13232.9 accepted_rps=13220.0 backlog=0
+epoch 6: committed_tps=13113.9 accepted_rps=13171.7 backlog=0
+HTTP: 738646 accepted, 0 failed; driver used 0.98 cores
+THROUGHPUT (epochs 3-6) committed_tps=12960.2 accepted_rps=12995.6 backlog_at_end=0
+CPU product: 54.78 cpu-s over epochs 3-6 (1.37 cores), 105.68 cpu-us per committed tx
+CPU cart: 18.11 cpu-s over epochs 3-6 (0.45 cores), 34.94 cpu-us per committed tx
+CPU coordinator: 54.60 cpu-s over epochs 3-6 (1.37 cores), 105.34 cpu-us per committed tx
+DRAIN ok: submitted=738646 (expected 738646), committed=738646, after 0.32s
+RESULT,1,12960.2,12995.6,0,0.98,0,drained,0.32
+CPU_RESULT,105.683,34.938,105.336
+--- memory after_load product: rss=652304KB heap_used=417829KB heap_live=265383KB metaspace=43631KB classes=9746
+--- memory after_load cart: rss=578336KB heap_used=363184KB heap_live=228603KB metaspace=42911KB classes=9596
+--- memory after_load coordinator: rss=338688KB heap_used=73593KB heap_live=4826KB metaspace=9483KB classes=2572
+--- .llog files written (logging=true): 6
+--- log errors: 0

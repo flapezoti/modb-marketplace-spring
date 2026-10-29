@@ -1,0 +1,676 @@
+=== 12:41:37 rep=1 concurrency=1 variant=original attempt=1
+--- product+cart idle before submission: yes
+THROUGHPUT (epochs 3-6) committed_tps=13604.1 accepted_rps=13588.1 backlog_at_end=0
+CPU product: 51.32 cpu-s over epochs 3-6 (1.28 cores), 94.31 cpu-us per committed tx
+CPU cart: 16.88 cpu-s over epochs 3-6 (0.42 cores), 31.02 cpu-us per committed tx
+CPU coordinator: 53.70 cpu-s over epochs 3-6 (1.34 cores), 98.68 cpu-us per committed tx
+DRAIN ok: submitted=787132 (expected 787132), committed=787132, after 0.31s
+--- log errors: 0
+=== 12:42:47 rep=1 concurrency=1 variant=spring attempt=1
+!!! no result row; last lines:
+Seeded 10000 products (lite schema) in 1.3s
+Exception in thread "main" java.net.http.HttpTimeoutException: request timed out
+	at java.net.http/jdk.internal.net.http.HttpClientImpl.send(HttpClientImpl.java:953)
+	at java.net.http/jdk.internal.net.http.HttpClientFacade.send(HttpClientFacade.java:133)
+	at SeedProducts.main(SeedProducts.java:67)
+=== 12:43:08 rep=1 concurrency=1 variant=spring attempt=2
+--- product+cart idle before submission: yes
+THROUGHPUT (epochs 3-6) committed_tps=12960.5 accepted_rps=12959.2 backlog_at_end=0
+CPU product: 51.02 cpu-s over epochs 3-6 (1.28 cores), 98.42 cpu-us per committed tx
+CPU cart: 17.83 cpu-s over epochs 3-6 (0.45 cores), 34.39 cpu-us per committed tx
+CPU coordinator: 53.60 cpu-s over epochs 3-6 (1.34 cores), 103.39 cpu-us per committed tx
+DRAIN ok: submitted=754177 (expected 754177), committed=754177, after 0.42s
+--- log errors: 0
+=== 12:44:19 rep=1 concurrency=1 variant=plain attempt=1
+--- product+cart idle before submission: yes
+THROUGHPUT (epochs 3-6) committed_tps=10127.1 accepted_rps=10164.9 backlog_at_end=0
+CPU product: 39.60 cpu-s over epochs 3-6 (0.99 cores), 97.76 cpu-us per committed tx
+CPU cart: 13.31 cpu-s over epochs 3-6 (0.33 cores), 32.86 cpu-us per committed tx
+CPU coordinator: 47.70 cpu-s over epochs 3-6 (1.19 cores), 117.75 cpu-us per committed tx
+DRAIN ok: submitted=635595 (expected 635595), committed=635595, after 0.33s
+--- log errors: 0
+=== 12:45:29 rep=1 concurrency=4 variant=spring attempt=1
+--- product+cart idle before submission: yes
+THROUGHPUT (epochs 3-6) committed_tps=18552.5 accepted_rps=18670.9 backlog_at_end=0
+CPU product: 74.28 cpu-s over epochs 3-6 (1.86 cores), 100.10 cpu-us per committed tx
+CPU cart: 25.06 cpu-s over epochs 3-6 (0.63 cores), 33.77 cpu-us per committed tx
+CPU coordinator: 67.63 cpu-s over epochs 3-6 (1.69 cores), 91.14 cpu-us per committed tx
+DRAIN ok: submitted=1112356 (expected 1112356), committed=1112356, after 0.21s
+--- log errors: 0
+=== 12:46:40 rep=1 concurrency=4 variant=plain attempt=1
+--- product+cart idle before submission: yes
+THROUGHPUT (epochs 3-6) committed_tps=16813.5 accepted_rps=16707.6 backlog_at_end=0
+CPU product: 69.71 cpu-s over epochs 3-6 (1.74 cores), 103.64 cpu-us per committed tx
+CPU cart: 23.99 cpu-s over epochs 3-6 (0.60 cores), 35.67 cpu-us per committed tx
+CPU coordinator: 65.93 cpu-s over epochs 3-6 (1.65 cores), 98.02 cpu-us per committed tx
+DRAIN ok: submitted=1031109 (expected 1031109), committed=1031109, after 0.42s
+--- log errors: 0
+=== 12:47:50 rep=1 concurrency=4 variant=original attempt=1
+--- product+cart idle before submission: yes
+THROUGHPUT (epochs 3-6) committed_tps=17312.2 accepted_rps=17295.9 backlog_at_end=0
+CPU product: 73.61 cpu-s over epochs 3-6 (1.84 cores), 106.31 cpu-us per committed tx
+CPU cart: 27.22 cpu-s over epochs 3-6 (0.68 cores), 39.31 cpu-us per committed tx
+CPU coordinator: 69.36 cpu-s over epochs 3-6 (1.73 cores), 100.17 cpu-us per committed tx
+DRAIN ok: submitted=968058 (expected 968058), committed=968058, after 0.41s
+--- log errors: 0
+=== 12:49:03 rep=1 concurrency=8 variant=plain attempt=1
+--- product+cart idle before submission: yes
+FAILURE #1 at 1793274551795 (epoch ms) after 3 ms on Thread-1: java.io.IOException: HTTP/1.1 header parser received no bytes; request {"sellerId":868,"productId":2,"price":47.0,"version":"0","instanceId":"4237"}
+THROUGHPUT (epochs 3-6) committed_tps=21979.3 accepted_rps=21913.4 backlog_at_end=0
+CPU product: 87.03 cpu-s over epochs 3-6 (2.18 cores), 99.00 cpu-us per committed tx
+CPU cart: 28.97 cpu-s over epochs 3-6 (0.72 cores), 32.95 cpu-us per committed tx
+CPU coordinator: 71.11 cpu-s over epochs 3-6 (1.78 cores), 80.89 cpu-us per committed tx
+DRAIN ok: submitted=1310680 (expected 1310679), committed=1310680, after 0.41s
+--- log errors: 0
+=== 12:50:13 rep=1 concurrency=8 variant=original attempt=1
+--- product+cart idle before submission: yes
+THROUGHPUT (epochs 3-6) committed_tps=17361.6 accepted_rps=17515.1 backlog_at_end=0
+CPU product: 71.50 cpu-s over epochs 3-6 (1.79 cores), 102.95 cpu-us per committed tx
+CPU cart: 27.20 cpu-s over epochs 3-6 (0.68 cores), 39.17 cpu-us per committed tx
+CPU coordinator: 60.99 cpu-s over epochs 3-6 (1.52 cores), 87.82 cpu-us per committed tx
+DRAIN ok: submitted=1024272 (expected 1024272), committed=1024272, after 0.21s
+--- log errors: 0
+=== 12:51:24 rep=1 concurrency=8 variant=spring attempt=1
+--- product+cart idle before submission: yes
+FAILURE #1 at 1793274704431 (epoch ms) after 6 ms on Thread-0: java.io.IOException: HTTP/1.1 header parser received no bytes; request {"sellerId":621,"productId":9,"price":58.0,"version":"0","instanceId":"98911"}
+FAILURE #2 at 1793274741648 (epoch ms) after 5 ms on Thread-5: java.io.IOException: HTTP/1.1 header parser received no bytes; request {"sellerId":876,"productId":3,"price":84.0,"version":"0","instanceId":"818162"}
+THROUGHPUT (epochs 3-6) committed_tps=19915.7 accepted_rps=20113.5 backlog_at_end=0
+CPU product: 82.65 cpu-s over epochs 3-6 (2.07 cores), 103.74 cpu-us per committed tx
+CPU cart: 28.50 cpu-s over epochs 3-6 (0.71 cores), 35.77 cpu-us per committed tx
+CPU coordinator: 68.54 cpu-s over epochs 3-6 (1.71 cores), 86.03 cpu-us per committed tx
+DRAIN ok: submitted=1080324 (expected 1080322), committed=1080324, after 0.10s
+--- log errors: 0
+=== 12:52:36 rep=1 concurrency=16 variant=original attempt=1
+--- product+cart idle before submission: yes
+THROUGHPUT (epochs 3-6) committed_tps=20837.5 accepted_rps=21719.7 backlog_at_end=0
+CPU product: 83.01 cpu-s over epochs 3-6 (2.08 cores), 99.59 cpu-us per committed tx
+CPU cart: 32.48 cpu-s over epochs 3-6 (0.81 cores), 38.97 cpu-us per committed tx
+CPU coordinator: 66.50 cpu-s over epochs 3-6 (1.66 cores), 79.78 cpu-us per committed tx
+DRAIN ok: submitted=1243341 (expected 1243341), committed=1243341, after 1.87s
+--- log errors: 0
+=== 12:53:50 rep=1 concurrency=16 variant=spring attempt=1
+--- product+cart idle before submission: yes
+THROUGHPUT (epochs 3-6) committed_tps=20964.0 accepted_rps=21732.5 backlog_at_end=0
+CPU product: 86.23 cpu-s over epochs 3-6 (2.16 cores), 102.82 cpu-us per committed tx
+CPU cart: 30.81 cpu-s over epochs 3-6 (0.77 cores), 36.74 cpu-us per committed tx
+CPU coordinator: 69.36 cpu-s over epochs 3-6 (1.73 cores), 82.71 cpu-us per committed tx
+DRAIN ok: submitted=1247184 (expected 1247184), committed=1247184, after 1.26s
+--- log errors: 0
+=== 12:55:03 rep=1 concurrency=16 variant=plain attempt=1
+!!! no result row; last lines:
+Seeded 10000 products (lite schema) in 1.5s
+Exception in thread "main" java.net.http.HttpTimeoutException: request timed out
+	at java.net.http/jdk.internal.net.http.HttpClientImpl.send(HttpClientImpl.java:953)
+	at java.net.http/jdk.internal.net.http.HttpClientFacade.send(HttpClientFacade.java:133)
+	at SeedProducts.main(SeedProducts.java:67)
+=== 12:55:23 rep=1 concurrency=16 variant=plain attempt=2
+--- product+cart idle before submission: yes
+THROUGHPUT (epochs 3-6) committed_tps=22500.3 accepted_rps=23135.6 backlog_at_end=0
+CPU product: 86.17 cpu-s over epochs 3-6 (2.15 cores), 95.74 cpu-us per committed tx
+CPU cart: 30.43 cpu-s over epochs 3-6 (0.76 cores), 33.81 cpu-us per committed tx
+CPU coordinator: 70.62 cpu-s over epochs 3-6 (1.77 cores), 78.47 cpu-us per committed tx
+DRAIN ok: submitted=1316897 (expected 1316897), committed=1316897, after 1.26s
+--- log errors: 0
+=== 12:56:35 rep=1 concurrency=32 variant=spring attempt=1
+--- product+cart idle before submission: yes
+FAILURE #1 at 1793275049053 (epoch ms) after 6 ms on Thread-4: java.io.IOException: HTTP/1.1 header parser received no bytes; request {"sellerId":580,"productId":8,"price":86.0,"version":"0","instanceId":"926642"}
+THROUGHPUT (epochs 3-6) committed_tps=21000.2 accepted_rps=22028.2 backlog_at_end=0
+CPU product: 83.93 cpu-s over epochs 3-6 (2.10 cores), 99.92 cpu-us per committed tx
+CPU cart: 31.44 cpu-s over epochs 3-6 (0.79 cores), 37.43 cpu-us per committed tx
+CPU coordinator: 69.64 cpu-s over epochs 3-6 (1.74 cores), 82.90 cpu-us per committed tx
+DRAIN ok: submitted=1281173 (expected 1281172), committed=1281173, after 2.09s
+--- log errors: 0
+=== 12:57:50 rep=1 concurrency=32 variant=plain attempt=1
+--- product+cart idle before submission: yes
+THROUGHPUT (epochs 3-6) committed_tps=20499.7 accepted_rps=21761.8 backlog_at_end=0
+CPU product: 82.45 cpu-s over epochs 3-6 (2.06 cores), 100.55 cpu-us per committed tx
+CPU cart: 31.48 cpu-s over epochs 3-6 (0.79 cores), 38.39 cpu-us per committed tx
+CPU coordinator: 68.29 cpu-s over epochs 3-6 (1.71 cores), 83.28 cpu-us per committed tx
+DRAIN ok: submitted=1259935 (expected 1259935), committed=1259935, after 1.98s
+--- log errors: 0
+=== 12:59:03 rep=1 concurrency=32 variant=original attempt=1
+--- product+cart idle before submission: yes
+THROUGHPUT (epochs 3-6) committed_tps=21751.4 accepted_rps=25024.9 backlog_at_end=0
+CPU product: 89.07 cpu-s over epochs 3-6 (2.23 cores), 102.38 cpu-us per committed tx
+CPU cart: 33.00 cpu-s over epochs 3-6 (0.83 cores), 37.93 cpu-us per committed tx
+CPU coordinator: 75.38 cpu-s over epochs 3-6 (1.88 cores), 86.64 cpu-us per committed tx
+DRAIN ok: submitted=1424704 (expected 1424704), committed=1424704, after 4.59s
+--- log errors: 0
+=== 13:00:19 rep=2 concurrency=1 variant=plain attempt=1
+--- product+cart idle before submission: yes
+THROUGHPUT (epochs 3-6) committed_tps=13132.8 accepted_rps=13131.9 backlog_at_end=0
+CPU product: 54.01 cpu-s over epochs 3-6 (1.35 cores), 102.83 cpu-us per committed tx
+CPU cart: 16.64 cpu-s over epochs 3-6 (0.42 cores), 31.68 cpu-us per committed tx
+CPU coordinator: 55.05 cpu-s over epochs 3-6 (1.38 cores), 104.81 cpu-us per committed tx
+DRAIN ok: submitted=759968 (expected 759968), committed=759968, after 0.31s
+--- log errors: 0
+=== 13:01:29 rep=2 concurrency=1 variant=original attempt=1
+--- product+cart idle before submission: yes
+THROUGHPUT (epochs 3-6) committed_tps=12948.0 accepted_rps=12953.8 backlog_at_end=0
+CPU product: 53.39 cpu-s over epochs 3-6 (1.33 cores), 103.10 cpu-us per committed tx
+CPU cart: 17.85 cpu-s over epochs 3-6 (0.45 cores), 34.47 cpu-us per committed tx
+CPU coordinator: 54.50 cpu-s over epochs 3-6 (1.36 cores), 105.24 cpu-us per committed tx
+DRAIN ok: submitted=743829 (expected 743829), committed=743829, after 0.32s
+--- log errors: 0
+=== 13:02:39 rep=2 concurrency=1 variant=spring attempt=1
+--- product+cart idle before submission: yes
+THROUGHPUT (epochs 3-6) committed_tps=12960.2 accepted_rps=12995.6 backlog_at_end=0
+CPU product: 54.78 cpu-s over epochs 3-6 (1.37 cores), 105.68 cpu-us per committed tx
+CPU cart: 18.11 cpu-s over epochs 3-6 (0.45 cores), 34.94 cpu-us per committed tx
+CPU coordinator: 54.60 cpu-s over epochs 3-6 (1.37 cores), 105.34 cpu-us per committed tx
+DRAIN ok: submitted=738646 (expected 738646), committed=738646, after 0.32s
+--- log errors: 0
+=== 13:03:51 rep=2 concurrency=4 variant=original attempt=1
+--- product+cart idle before submission: yes
+FAILURE #1 at 1793275487906 (epoch ms) after 6 ms on Thread-0: java.io.IOException: HTTP/1.1 header parser received no bytes; request {"sellerId":618,"productId":9,"price":93.0,"version":"0","instanceId":"875232"}
+THROUGHPUT (epochs 3-6) committed_tps=18659.0 accepted_rps=18626.6 backlog_at_end=0
+CPU product: 82.44 cpu-s over epochs 3-6 (2.06 cores), 110.47 cpu-us per committed tx
+CPU cart: 27.09 cpu-s over epochs 3-6 (0.68 cores), 36.30 cpu-us per committed tx
+CPU coordinator: 71.85 cpu-s over epochs 3-6 (1.80 cores), 96.28 cpu-us per committed tx
+DRAIN ok: submitted=1106117 (expected 1106116), committed=1106117, after 0.33s
+--- log errors: 0
+=== 13:05:02 rep=2 concurrency=4 variant=spring attempt=1
+--- product+cart idle before submission: yes
+FAILURE #1 at 1793275528962 (epoch ms) after 3 ms on Thread-2: java.io.IOException: HTTP/1.1 header parser received no bytes; request {"sellerId":357,"productId":9,"price":72.0,"version":"0","instanceId":"210675"}
+FAILURE #2 at 1793275549003 (epoch ms) after 1 ms on Thread-3: java.io.IOException: HTTP/1.1 header parser received no bytes; request {"sellerId":850,"productId":4,"price":44.0,"version":"0","instanceId":"535389"}
+THROUGHPUT (epochs 3-6) committed_tps=16466.7 accepted_rps=16652.9 backlog_at_end=0
+CPU product: 74.80 cpu-s over epochs 3-6 (1.87 cores), 113.56 cpu-us per committed tx
+CPU cart: 26.66 cpu-s over epochs 3-6 (0.67 cores), 40.48 cpu-us per committed tx
+CPU coordinator: 70.58 cpu-s over epochs 3-6 (1.76 cores), 107.15 cpu-us per committed tx
+DRAIN ok: submitted=945393 (expected 945391), committed=945393, after 0.10s
+--- log errors: 0
+=== 13:06:15 rep=2 concurrency=4 variant=plain attempt=1
+--- product+cart idle before submission: yes
+FAILURE #1 at 1793275630972 (epoch ms) after 11 ms on Thread-1: java.io.IOException: HTTP/1.1 header parser received no bytes; request {"sellerId":434,"productId":7,"price":38.0,"version":"0","instanceId":"779947"}
+THROUGHPUT (epochs 3-6) committed_tps=16982.6 accepted_rps=16969.2 backlog_at_end=0
+CPU product: 75.23 cpu-s over epochs 3-6 (1.88 cores), 110.74 cpu-us per committed tx
+CPU cart: 26.93 cpu-s over epochs 3-6 (0.67 cores), 39.64 cpu-us per committed tx
+CPU coordinator: 70.41 cpu-s over epochs 3-6 (1.76 cores), 103.65 cpu-us per committed tx
+DRAIN ok: submitted=1002071 (expected 1002070), committed=1002071, after 0.52s
+--- log errors: 0
+=== 13:07:26 rep=2 concurrency=8 variant=spring attempt=1
+--- product+cart idle before submission: yes
+THROUGHPUT (epochs 3-6) committed_tps=20042.7 accepted_rps=20679.3 backlog_at_end=0
+CPU product: 86.41 cpu-s over epochs 3-6 (2.16 cores), 107.78 cpu-us per committed tx
+CPU cart: 29.05 cpu-s over epochs 3-6 (0.73 cores), 36.24 cpu-us per committed tx
+CPU coordinator: 69.45 cpu-s over epochs 3-6 (1.74 cores), 86.63 cpu-us per committed tx
+DRAIN ok: submitted=1221634 (expected 1221634), committed=1221634, after 0.84s
+--- log errors: 0
+=== 13:08:38 rep=2 concurrency=8 variant=plain attempt=1
+--- product+cart idle before submission: yes
+THROUGHPUT (epochs 3-6) committed_tps=21714.7 accepted_rps=22108.2 backlog_at_end=0
+CPU product: 90.96 cpu-s over epochs 3-6 (2.27 cores), 104.71 cpu-us per committed tx
+CPU cart: 30.27 cpu-s over epochs 3-6 (0.76 cores), 34.85 cpu-us per committed tx
+CPU coordinator: 73.49 cpu-s over epochs 3-6 (1.84 cores), 84.60 cpu-us per committed tx
+DRAIN ok: submitted=1265032 (expected 1265032), committed=1265032, after 0.84s
+--- log errors: 0
+=== 13:09:49 rep=2 concurrency=8 variant=original attempt=1
+--- product+cart idle before submission: yes
+FAILURE #1 at 1793275838973 (epoch ms) after 6 ms on Thread-4: java.io.IOException: HTTP/1.1 header parser received no bytes; request {"sellerId":924,"productId":9,"price":53.0,"version":"0","instanceId":"864573"}
+THROUGHPUT (epochs 3-6) committed_tps=22499.7 accepted_rps=22653.9 backlog_at_end=0
+CPU product: 95.94 cpu-s over epochs 3-6 (2.40 cores), 106.60 cpu-us per committed tx
+CPU cart: 32.46 cpu-s over epochs 3-6 (0.81 cores), 36.07 cpu-us per committed tx
+CPU coordinator: 75.59 cpu-s over epochs 3-6 (1.89 cores), 83.99 cpu-us per committed tx
+DRAIN ok: submitted=1308755 (expected 1308754), committed=1308755, after 0.21s
+--- log errors: 0
+=== 13:11:00 rep=2 concurrency=16 variant=plain attempt=1
+--- product+cart idle before submission: yes
+FAILURE #1 at 1793275888268 (epoch ms) after 3 ms on Thread-11: java.io.IOException: HTTP/1.1 header parser received no bytes; request {"sellerId":894,"productId":9,"price":68.0,"version":"0","instanceId":"430120"}
+FAILURE #2 at 1793275927029 (epoch ms) after 3 ms on Thread-5: java.io.IOException: HTTP/1.1 header parser received no bytes; request {"sellerId":948,"productId":8,"price":90.0,"version":"0","instanceId":"1297392"}
+THROUGHPUT (epochs 3-6) committed_tps=20999.0 accepted_rps=22503.9 backlog_at_end=0
+CPU product: 85.10 cpu-s over epochs 3-6 (2.13 cores), 101.31 cpu-us per committed tx
+CPU cart: 30.00 cpu-s over epochs 3-6 (0.75 cores), 35.71 cpu-us per committed tx
+CPU coordinator: 70.23 cpu-s over epochs 3-6 (1.76 cores), 83.61 cpu-us per committed tx
+DRAIN ok: submitted=1345290 (expected 1345288), committed=1345290, after 2.21s
+--- log errors: 0
+=== 13:12:13 rep=2 concurrency=16 variant=original attempt=1
+--- product+cart idle before submission: yes
+FAILURE #1 at 1793275970465 (epoch ms) after 3 ms on Thread-4: java.io.IOException: HTTP/1.1 header parser received no bytes; request {"sellerId":119,"productId":3,"price":35.0,"version":"0","instanceId":"645463"}
+FAILURE #2 at 1793275972475 (epoch ms) after 1 ms on Thread-11: java.io.IOException: HTTP/1.1 header parser received no bytes; request {"sellerId":808,"productId":9,"price":82.0,"version":"0","instanceId":"696536"}
+THROUGHPUT (epochs 3-6) committed_tps=21749.9 accepted_rps=24684.3 backlog_at_end=0
+CPU product: 90.27 cpu-s over epochs 3-6 (2.26 cores), 103.76 cpu-us per committed tx
+CPU cart: 31.54 cpu-s over epochs 3-6 (0.79 cores), 36.25 cpu-us per committed tx
+CPU coordinator: 75.52 cpu-s over epochs 3-6 (1.89 cores), 86.80 cpu-us per committed tx
+DRAIN ok: submitted=1417083 (expected 1417081), committed=1417083, after 4.20s
+--- log errors: 0
+=== 13:13:28 rep=2 concurrency=16 variant=spring attempt=1
+--- product+cart idle before submission: yes
+FAILURE #1 at 1793276070311 (epoch ms) after 9 ms on Thread-11: java.io.IOException: HTTP/1.1 header parser received no bytes; request {"sellerId":874,"productId":3,"price":26.0,"version":"0","instanceId":"1199779"}
+FAILURE #2 at 1793276071284 (epoch ms) after 0 ms on Thread-10: java.io.IOException: HTTP/1.1 header parser received no bytes; request {"sellerId":70,"productId":1,"price":60.0,"version":"0","instanceId":"1217047"}
+THROUGHPUT (epochs 3-6) committed_tps=20749.1 accepted_rps=23361.4 backlog_at_end=0
+CPU product: 86.91 cpu-s over epochs 3-6 (2.17 cores), 104.71 cpu-us per committed tx
+CPU cart: 29.87 cpu-s over epochs 3-6 (0.75 cores), 35.99 cpu-us per committed tx
+CPU coordinator: 72.13 cpu-s over epochs 3-6 (1.80 cores), 86.90 cpu-us per committed tx
+DRAIN ok: submitted=1374420 (expected 1374418), committed=1374420, after 3.77s
+--- log errors: 0
+=== 13:14:43 rep=2 concurrency=32 variant=original attempt=1
+--- product+cart idle before submission: yes
+FAILURE #1 at 1793276116568 (epoch ms) after 5 ms on Thread-19: java.io.IOException: HTTP/1.1 header parser received no bytes; request {"sellerId":424,"productId":10,"price":66.0,"version":"0","instanceId":"536821"}
+FAILURE #2 at 1793276120891 (epoch ms) after 1 ms on Thread-3: java.io.IOException: HTTP/1.1 header parser received no bytes; request {"sellerId":571,"productId":5,"price":15.0,"version":"0","instanceId":"633510"}
+THROUGHPUT (epochs 3-6) committed_tps=21499.3 accepted_rps=24215.3 backlog_at_end=0
+CPU product: 88.00 cpu-s over epochs 3-6 (2.20 cores), 102.33 cpu-us per committed tx
+CPU cart: 33.59 cpu-s over epochs 3-6 (0.84 cores), 39.06 cpu-us per committed tx
+CPU coordinator: 73.36 cpu-s over epochs 3-6 (1.83 cores), 85.30 cpu-us per committed tx
+DRAIN ok: submitted=1401197 (expected 1401195), committed=1401197, after 4.72s
+--- log errors: 0
+=== 13:15:59 rep=2 concurrency=32 variant=spring attempt=1
+--- product+cart idle before submission: yes
+THROUGHPUT (epochs 3-6) committed_tps=21499.4 accepted_rps=22966.0 backlog_at_end=0
+CPU product: 86.62 cpu-s over epochs 3-6 (2.17 cores), 100.72 cpu-us per committed tx
+CPU cart: 33.02 cpu-s over epochs 3-6 (0.83 cores), 38.40 cpu-us per committed tx
+CPU coordinator: 71.55 cpu-s over epochs 3-6 (1.79 cores), 83.20 cpu-us per committed tx
+DRAIN ok: submitted=1335615 (expected 1335615), committed=1335615, after 2.23s
+--- log errors: 0
+=== 13:17:13 rep=2 concurrency=32 variant=plain attempt=1
+--- product+cart idle before submission: yes
+THROUGHPUT (epochs 3-6) committed_tps=16219.3 accepted_rps=17176.7 backlog_at_end=0
+CPU product: 64.34 cpu-s over epochs 3-6 (1.61 cores), 99.17 cpu-us per committed tx
+CPU cart: 26.43 cpu-s over epochs 3-6 (0.66 cores), 40.74 cpu-us per committed tx
+CPU coordinator: 54.62 cpu-s over epochs 3-6 (1.37 cores), 84.18 cpu-us per committed tx
+DRAIN ok: submitted=1080443 (expected 1080443), committed=1080443, after 1.14s
+--- log errors: 0
+=== 13:18:24 rep=3 concurrency=1 variant=spring attempt=1
+--- product+cart idle before submission: yes
+THROUGHPUT (epochs 3-6) committed_tps=11431.4 accepted_rps=11413.5 backlog_at_end=0
+CPU product: 49.02 cpu-s over epochs 3-6 (1.23 cores), 107.20 cpu-us per committed tx
+CPU cart: 16.84 cpu-s over epochs 3-6 (0.42 cores), 36.83 cpu-us per committed tx
+CPU coordinator: 52.99 cpu-s over epochs 3-6 (1.32 cores), 115.88 cpu-us per committed tx
+DRAIN ok: submitted=661024 (expected 661024), committed=661024, after 0.31s
+--- log errors: 0
+=== 13:19:37 rep=3 concurrency=1 variant=plain attempt=1
+--- product+cart idle before submission: yes
+THROUGHPUT (epochs 3-6) committed_tps=9413.0 accepted_rps=9398.7 backlog_at_end=0
+CPU product: 42.08 cpu-s over epochs 3-6 (1.05 cores), 111.77 cpu-us per committed tx
+CPU cart: 14.09 cpu-s over epochs 3-6 (0.35 cores), 37.42 cpu-us per committed tx
+CPU coordinator: 51.02 cpu-s over epochs 3-6 (1.28 cores), 135.51 cpu-us per committed tx
+DRAIN ok: submitted=568180 (expected 568180), committed=568180, after 0.31s
+--- log errors: 0
+=== 13:20:48 rep=3 concurrency=1 variant=original attempt=1
+--- product+cart idle before submission: yes
+THROUGHPUT (epochs 3-6) committed_tps=12673.7 accepted_rps=12655.6 backlog_at_end=0
+CPU product: 54.75 cpu-s over epochs 3-6 (1.37 cores), 107.99 cpu-us per committed tx
+CPU cart: 17.03 cpu-s over epochs 3-6 (0.43 cores), 33.59 cpu-us per committed tx
+CPU coordinator: 55.11 cpu-s over epochs 3-6 (1.38 cores), 108.70 cpu-us per committed tx
+DRAIN ok: submitted=691829 (expected 691829), committed=691829, after 0.31s
+--- log errors: 0
+=== 13:21:59 rep=3 concurrency=4 variant=plain attempt=1
+--- product+cart idle before submission: yes
+THROUGHPUT (epochs 3-6) committed_tps=17868.9 accepted_rps=17834.7 backlog_at_end=0
+CPU product: 79.19 cpu-s over epochs 3-6 (1.98 cores), 110.79 cpu-us per committed tx
+CPU cart: 26.30 cpu-s over epochs 3-6 (0.66 cores), 36.80 cpu-us per committed tx
+CPU coordinator: 72.85 cpu-s over epochs 3-6 (1.82 cores), 101.92 cpu-us per committed tx
+DRAIN ok: submitted=1063920 (expected 1063920), committed=1063920, after 0.52s
+--- log errors: 0
+=== 13:23:10 rep=3 concurrency=4 variant=original attempt=1
+--- product+cart idle before submission: yes
+FAILURE #1 at 1793276637759 (epoch ms) after 4 ms on Thread-1: java.io.IOException: HTTP/1.1 header parser received no bytes; request {"sellerId":845,"productId":6,"price":63.0,"version":"0","instanceId":"682320"}
+THROUGHPUT (epochs 3-6) committed_tps=17912.3 accepted_rps=18036.3 backlog_at_end=0
+CPU product: 82.81 cpu-s over epochs 3-6 (2.07 cores), 115.57 cpu-us per committed tx
+CPU cart: 27.57 cpu-s over epochs 3-6 (0.69 cores), 38.48 cpu-us per committed tx
+CPU coordinator: 74.03 cpu-s over epochs 3-6 (1.85 cores), 103.32 cpu-us per committed tx
+DRAIN ok: submitted=1065443 (expected 1065442), committed=1065443, after 0.10s
+--- log errors: 0
+=== 13:24:21 rep=3 concurrency=4 variant=spring attempt=1
+--- product+cart idle before submission: yes
+THROUGHPUT (epochs 3-6) committed_tps=18325.7 accepted_rps=18466.2 backlog_at_end=0
+CPU product: 85.38 cpu-s over epochs 3-6 (2.13 cores), 116.47 cpu-us per committed tx
+CPU cart: 27.50 cpu-s over epochs 3-6 (0.69 cores), 37.51 cpu-us per committed tx
+CPU coordinator: 73.76 cpu-s over epochs 3-6 (1.84 cores), 100.62 cpu-us per committed tx
+DRAIN ok: submitted=1072937 (expected 1072937), committed=1072937, after 0.21s
+--- log errors: 0
+=== 13:25:32 rep=3 concurrency=8 variant=original attempt=1
+--- product+cart idle before submission: yes
+FAILURE #1 at 1793276771479 (epoch ms) after 4 ms on Thread-5: java.io.IOException: HTTP/1.1 header parser received no bytes; request {"sellerId":806,"productId":9,"price":27.0,"version":"0","instanceId":"634023"}
+FAILURE #2 at 1793276793289 (epoch ms) after 1 ms on Thread-3: java.io.IOException: HTTP/1.1 header parser received no bytes; request {"sellerId":337,"productId":10,"price":59.0,"version":"0","instanceId":"1098468"}
+THROUGHPUT (epochs 3-6) committed_tps=21757.7 accepted_rps=21771.0 backlog_at_end=0
+CPU product: 94.32 cpu-s over epochs 3-6 (2.36 cores), 108.36 cpu-us per committed tx
+CPU cart: 33.55 cpu-s over epochs 3-6 (0.84 cores), 38.55 cpu-us per committed tx
+CPU coordinator: 74.92 cpu-s over epochs 3-6 (1.87 cores), 86.08 cpu-us per committed tx
+DRAIN ok: submitted=1286786 (expected 1286784), committed=1286786, after 0.10s
+--- log errors: 0
+=== 13:26:43 rep=3 concurrency=8 variant=spring attempt=1
+--- product+cart idle before submission: yes
+FAILURE #1 at 1793276818617 (epoch ms) after 3 ms on Thread-0: java.io.IOException: HTTP/1.1 header parser received no bytes; request {"sellerId":125,"productId":2,"price":76.0,"version":"0","instanceId":"91387"}
+FAILURE #2 at 1793276835762 (epoch ms) after 1 ms on Thread-3: java.io.IOException: HTTP/1.1 header parser received no bytes; request {"sellerId":462,"productId":10,"price":56.0,"version":"0","instanceId":"478864"}
+FAILURE #3 at 1793276869956 (epoch ms) after 1 ms on Thread-7: java.io.IOException: HTTP/1.1 header parser received no bytes; request {"sellerId":498,"productId":3,"price":41.0,"version":"0","instanceId":"1282935"}
+THROUGHPUT (epochs 3-6) committed_tps=23249.5 accepted_rps=23404.3 backlog_at_end=0
+CPU product: 99.23 cpu-s over epochs 3-6 (2.48 cores), 106.70 cpu-us per committed tx
+CPU cart: 33.61 cpu-s over epochs 3-6 (0.84 cores), 36.14 cpu-us per committed tx
+CPU coordinator: 77.17 cpu-s over epochs 3-6 (1.93 cores), 82.98 cpu-us per committed tx
+DRAIN ok: submitted=1359890 (expected 1359887), committed=1359890, after 0.83s
+--- log errors: 0
+=== 13:27:56 rep=3 concurrency=8 variant=plain attempt=1
+--- product+cart idle before submission: yes
+FAILURE #1 at 1793276899813 (epoch ms) after 4 ms on Thread-0: java.io.IOException: HTTP/1.1 header parser received no bytes; request {"sellerId":554,"productId":5,"price":25.0,"version":"0","instanceId":"329928"}
+FAILURE #2 at 1793276936233 (epoch ms) after 1 ms on Thread-4: java.io.IOException: HTTP/1.1 header parser received no bytes; request {"sellerId":324,"productId":5,"price":24.0,"version":"0","instanceId":"1170090"}
+THROUGHPUT (epochs 3-6) committed_tps=23249.6 accepted_rps=23447.2 backlog_at_end=0
+CPU product: 97.08 cpu-s over epochs 3-6 (2.43 cores), 104.39 cpu-us per committed tx
+CPU cart: 31.69 cpu-s over epochs 3-6 (0.79 cores), 34.08 cpu-us per committed tx
+CPU coordinator: 77.99 cpu-s over epochs 3-6 (1.95 cores), 83.86 cpu-us per committed tx
+DRAIN ok: submitted=1365595 (expected 1365593), committed=1365595, after 0.73s
+--- log errors: 0
+=== 13:29:06 rep=3 concurrency=16 variant=spring attempt=1
+--- product+cart idle before submission: yes
+THROUGHPUT (epochs 3-6) committed_tps=19500.2 accepted_rps=21349.7 backlog_at_end=0
+CPU product: 83.19 cpu-s over epochs 3-6 (2.08 cores), 106.65 cpu-us per committed tx
+CPU cart: 30.42 cpu-s over epochs 3-6 (0.76 cores), 39.00 cpu-us per committed tx
+CPU coordinator: 67.90 cpu-s over epochs 3-6 (1.70 cores), 87.05 cpu-us per committed tx
+DRAIN ok: submitted=1244464 (expected 1244464), committed=1244464, after 3.86s
+--- log errors: 0
+=== 13:30:22 rep=3 concurrency=16 variant=plain attempt=1
+--- product+cart idle before submission: yes
+THROUGHPUT (epochs 3-6) committed_tps=18779.1 accepted_rps=21265.8 backlog_at_end=0
+CPU product: 77.00 cpu-s over epochs 3-6 (1.93 cores), 102.51 cpu-us per committed tx
+CPU cart: 27.39 cpu-s over epochs 3-6 (0.68 cores), 36.46 cpu-us per committed tx
+CPU coordinator: 68.16 cpu-s over epochs 3-6 (1.70 cores), 90.74 cpu-us per committed tx
+DRAIN ok: submitted=1275912 (expected 1275912), committed=1275912, after 3.68s
+--- log errors: 0
+=== 13:31:36 rep=3 concurrency=16 variant=original attempt=1
+--- product+cart idle before submission: yes
+FAILURE #1 at 1793277138708 (epoch ms) after 7 ms on Thread-9: java.io.IOException: HTTP/1.1 header parser received no bytes; request {"sellerId":73,"productId":5,"price":30.0,"version":"0","instanceId":"535694"}
+FAILURE #2 at 1793277153555 (epoch ms) after 1 ms on Thread-13: java.io.IOException: HTTP/1.1 header parser received no bytes; request {"sellerId":685,"productId":10,"price":47.0,"version":"0","instanceId":"877219"}
+THROUGHPUT (epochs 3-6) committed_tps=16595.3 accepted_rps=18045.8 backlog_at_end=0
+CPU product: 70.04 cpu-s over epochs 3-6 (1.75 cores), 105.50 cpu-us per committed tx
+CPU cart: 27.74 cpu-s over epochs 3-6 (0.69 cores), 41.79 cpu-us per committed tx
+CPU coordinator: 59.27 cpu-s over epochs 3-6 (1.48 cores), 89.28 cpu-us per committed tx
+DRAIN ok: submitted=1102714 (expected 1102712), committed=1102714, after 3.27s
+--- log errors: 0
+=== 13:32:51 rep=3 concurrency=32 variant=plain attempt=1
+--- product+cart idle before submission: yes
+THROUGHPUT (epochs 3-6) committed_tps=19999.3 accepted_rps=21122.0 backlog_at_end=10000
+CPU product: 82.46 cpu-s over epochs 3-6 (2.06 cores), 103.08 cpu-us per committed tx
+CPU cart: 33.30 cpu-s over epochs 3-6 (0.83 cores), 41.63 cpu-us per committed tx
+CPU coordinator: 68.48 cpu-s over epochs 3-6 (1.71 cores), 85.60 cpu-us per committed tx
+DRAIN ok: submitted=1200961 (expected 1200961), committed=1200961, after 1.87s
+--- log errors: 0
+=== 13:34:04 rep=3 concurrency=32 variant=original attempt=1
+--- product+cart idle before submission: yes
+FAILURE #1 at 1793277260882 (epoch ms) after 3 ms on Thread-6: java.io.IOException: HTTP/1.1 header parser received no bytes; request {"sellerId":884,"productId":2,"price":95.0,"version":"0","instanceId":"90071"}
+THROUGHPUT (epochs 3-6) committed_tps=21497.3 accepted_rps=22869.5 backlog_at_end=0
+CPU product: 88.73 cpu-s over epochs 3-6 (2.22 cores), 103.17 cpu-us per committed tx
+CPU cart: 35.82 cpu-s over epochs 3-6 (0.90 cores), 41.65 cpu-us per committed tx
+CPU coordinator: 71.62 cpu-s over epochs 3-6 (1.79 cores), 83.28 cpu-us per committed tx
+DRAIN ok: submitted=1300853 (expected 1300852), committed=1300853, after 2.31s
+--- log errors: 0
+=== 13:35:18 rep=3 concurrency=32 variant=spring attempt=1
+--- product+cart idle before submission: yes
+FAILURE #1 at 1793277360123 (epoch ms) after 6 ms on Thread-18: java.io.IOException: HTTP/1.1 header parser received no bytes; request {"sellerId":795,"productId":1,"price":59.0,"version":"0","instanceId":"723901"}
+FAILURE #2 at 1793277381463 (epoch ms) after 1 ms on Thread-6: java.io.IOException: HTTP/1.1 header parser received no bytes; request {"sellerId":812,"productId":7,"price":39.0,"version":"0","instanceId":"1196246"}
+THROUGHPUT (epochs 3-6) committed_tps=20250.8 accepted_rps=21632.8 backlog_at_end=0
+CPU product: 82.32 cpu-s over epochs 3-6 (2.06 cores), 101.63 cpu-us per committed tx
+CPU cart: 31.34 cpu-s over epochs 3-6 (0.78 cores), 38.69 cpu-us per committed tx
+CPU coordinator: 67.79 cpu-s over epochs 3-6 (1.69 cores), 83.69 cpu-us per committed tx
+DRAIN ok: submitted=1314630 (expected 1314628), committed=1314630, after 2.52s
+--- log errors: 0
+=== 13:36:33 rep=4 concurrency=1 variant=original attempt=1
+--- product+cart idle before submission: yes
+THROUGHPUT (epochs 3-6) committed_tps=10492.8 accepted_rps=10436.0 backlog_at_end=0
+CPU product: 46.02 cpu-s over epochs 3-6 (1.15 cores), 109.65 cpu-us per committed tx
+CPU cart: 15.32 cpu-s over epochs 3-6 (0.38 cores), 36.50 cpu-us per committed tx
+CPU coordinator: 52.98 cpu-s over epochs 3-6 (1.32 cores), 126.23 cpu-us per committed tx
+DRAIN ok: submitted=590205 (expected 590205), committed=590205, after 0.12s
+--- log errors: 0
+=== 13:37:44 rep=4 concurrency=1 variant=spring attempt=1
+--- product+cart idle before submission: yes
+THROUGHPUT (epochs 3-6) committed_tps=10867.1 accepted_rps=10849.6 backlog_at_end=0
+CPU product: 47.62 cpu-s over epochs 3-6 (1.19 cores), 109.54 cpu-us per committed tx
+CPU cart: 16.12 cpu-s over epochs 3-6 (0.40 cores), 37.08 cpu-us per committed tx
+CPU coordinator: 52.80 cpu-s over epochs 3-6 (1.32 cores), 121.45 cpu-us per committed tx
+DRAIN ok: submitted=613819 (expected 613819), committed=613819, after 0.32s
+--- log errors: 0
+=== 13:38:55 rep=4 concurrency=1 variant=plain attempt=1
+!!! no result row; last lines:
+Seeded 10000 products (lite schema) in 1.4s
+Exception in thread "main" java.net.http.HttpTimeoutException: request timed out
+	at java.net.http/jdk.internal.net.http.HttpClientImpl.send(HttpClientImpl.java:953)
+	at java.net.http/jdk.internal.net.http.HttpClientFacade.send(HttpClientFacade.java:133)
+	at SeedProducts.main(SeedProducts.java:67)
+=== 13:39:15 rep=4 concurrency=1 variant=plain attempt=2
+--- product+cart idle before submission: yes
+THROUGHPUT (epochs 3-6) committed_tps=11768.2 accepted_rps=11765.1 backlog_at_end=0
+CPU product: 47.03 cpu-s over epochs 3-6 (1.18 cores), 99.91 cpu-us per committed tx
+CPU cart: 14.99 cpu-s over epochs 3-6 (0.37 cores), 31.84 cpu-us per committed tx
+CPU coordinator: 53.07 cpu-s over epochs 3-6 (1.33 cores), 112.74 cpu-us per committed tx
+DRAIN ok: submitted=692187 (expected 692187), committed=692187, after 0.32s
+--- log errors: 0
+=== 13:40:25 rep=4 concurrency=4 variant=spring attempt=1
+--- product+cart idle before submission: yes
+THROUGHPUT (epochs 3-6) committed_tps=17544.6 accepted_rps=17759.7 backlog_at_end=0
+CPU product: 78.23 cpu-s over epochs 3-6 (1.96 cores), 111.48 cpu-us per committed tx
+CPU cart: 25.92 cpu-s over epochs 3-6 (0.65 cores), 36.94 cpu-us per committed tx
+CPU coordinator: 72.33 cpu-s over epochs 3-6 (1.81 cores), 103.07 cpu-us per committed tx
+DRAIN ok: submitted=1005306 (expected 1005306), committed=1005306, after 0.10s
+--- log errors: 0
+=== 13:41:37 rep=4 concurrency=4 variant=plain attempt=1
+--- product+cart idle before submission: yes
+THROUGHPUT (epochs 3-6) committed_tps=17108.2 accepted_rps=17039.1 backlog_at_end=0
+CPU product: 75.59 cpu-s over epochs 3-6 (1.89 cores), 110.46 cpu-us per committed tx
+CPU cart: 26.30 cpu-s over epochs 3-6 (0.66 cores), 38.43 cpu-us per committed tx
+CPU coordinator: 71.49 cpu-s over epochs 3-6 (1.79 cores), 104.47 cpu-us per committed tx
+DRAIN ok: submitted=1020543 (expected 1020543), committed=1020543, after 0.32s
+--- log errors: 0
+=== 13:42:47 rep=4 concurrency=4 variant=original attempt=1
+--- product+cart idle before submission: yes
+THROUGHPUT (epochs 3-6) committed_tps=17416.9 accepted_rps=17422.0 backlog_at_end=0
+CPU product: 78.74 cpu-s over epochs 3-6 (1.97 cores), 113.01 cpu-us per committed tx
+CPU cart: 27.04 cpu-s over epochs 3-6 (0.68 cores), 38.81 cpu-us per committed tx
+CPU coordinator: 72.71 cpu-s over epochs 3-6 (1.82 cores), 104.35 cpu-us per committed tx
+DRAIN ok: submitted=968544 (expected 968544), committed=968544, after 0.42s
+--- log errors: 0
+=== 13:43:58 rep=4 concurrency=8 variant=plain attempt=1
+--- product+cart idle before submission: yes
+FAILURE #1 at 1793277856105 (epoch ms) after 4 ms on Thread-3: java.io.IOException: HTTP/1.1 header parser received no bytes; request {"sellerId":370,"productId":8,"price":30.0,"version":"0","instanceId":"131647"}
+FAILURE #2 at 1793277864277 (epoch ms) after 0 ms on Thread-3: java.io.IOException: HTTP/1.1 header parser received no bytes; request {"sellerId":208,"productId":9,"price":25.0,"version":"0","instanceId":"300132"}
+THROUGHPUT (epochs 3-6) committed_tps=19135.6 accepted_rps=19010.4 backlog_at_end=0
+CPU product: 82.35 cpu-s over epochs 3-6 (2.06 cores), 107.58 cpu-us per committed tx
+CPU cart: 27.89 cpu-s over epochs 3-6 (0.70 cores), 36.43 cpu-us per committed tx
+CPU coordinator: 68.27 cpu-s over epochs 3-6 (1.71 cores), 89.19 cpu-us per committed tx
+DRAIN ok: submitted=1122375 (expected 1122373), committed=1122375, after 0.43s
+--- log errors: 0
+=== 13:45:09 rep=4 concurrency=8 variant=original attempt=1
+--- product+cart idle before submission: yes
+FAILURE #1 at 1793277934064 (epoch ms) after 4 ms on Thread-3: java.io.IOException: HTTP/1.1 header parser received no bytes; request {"sellerId":466,"productId":3,"price":72.0,"version":"0","instanceId":"269861"}
+THROUGHPUT (epochs 3-6) committed_tps=18406.3 accepted_rps=18241.2 backlog_at_end=0
+CPU product: 78.61 cpu-s over epochs 3-6 (1.97 cores), 106.77 cpu-us per committed tx
+CPU cart: 29.62 cpu-s over epochs 3-6 (0.74 cores), 40.23 cpu-us per committed tx
+CPU coordinator: 65.62 cpu-s over epochs 3-6 (1.64 cores), 89.13 cpu-us per committed tx
+DRAIN ok: submitted=1116760 (expected 1116759), committed=1116760, after 0.42s
+--- log errors: 0
+=== 13:46:21 rep=4 concurrency=8 variant=spring attempt=1
+--- product+cart idle before submission: yes
+FAILURE #1 at 1793278018951 (epoch ms) after 3 ms on Thread-1: java.io.IOException: HTTP/1.1 header parser received no bytes; request {"sellerId":134,"productId":4,"price":53.0,"version":"0","instanceId":"529282"}
+THROUGHPUT (epochs 3-6) committed_tps=20676.9 accepted_rps=20731.2 backlog_at_end=0
+CPU product: 87.62 cpu-s over epochs 3-6 (2.19 cores), 105.94 cpu-us per committed tx
+CPU cart: 31.38 cpu-s over epochs 3-6 (0.78 cores), 37.94 cpu-us per committed tx
+CPU coordinator: 71.96 cpu-s over epochs 3-6 (1.80 cores), 87.01 cpu-us per committed tx
+DRAIN ok: submitted=1192464 (expected 1192463), committed=1192464, after 0.21s
+--- log errors: 0
+=== 13:47:33 rep=4 concurrency=16 variant=original attempt=1
+--- product+cart idle before submission: yes
+FAILURE #1 at 1793278079021 (epoch ms) after 4 ms on Thread-1: java.io.IOException: HTTP/1.1 header parser received no bytes; request {"sellerId":994,"productId":4,"price":44.0,"version":"0","instanceId":"304579"}
+FAILURE #2 at 1793278121623 (epoch ms) after 1 ms on Thread-2: java.io.IOException: HTTP/1.1 header parser received no bytes; request {"sellerId":265,"productId":2,"price":77.0,"version":"0","instanceId":"1263742"}
+THROUGHPUT (epochs 3-6) committed_tps=22001.1 accepted_rps=22328.7 backlog_at_end=0
+CPU product: 90.60 cpu-s over epochs 3-6 (2.27 cores), 102.95 cpu-us per committed tx
+CPU cart: 35.58 cpu-s over epochs 3-6 (0.89 cores), 40.43 cpu-us per committed tx
+CPU coordinator: 72.36 cpu-s over epochs 3-6 (1.81 cores), 82.23 cpu-us per committed tx
+DRAIN ok: submitted=1302812 (expected 1302810), committed=1302812, after 1.04s
+--- log errors: 0
+=== 13:48:46 rep=4 concurrency=16 variant=spring attempt=1
+--- product+cart idle before submission: yes
+FAILURE #1 at 1793278156557 (epoch ms) after 3 ms on Thread-12: java.io.IOException: HTTP/1.1 header parser received no bytes; request {"sellerId":122,"productId":2,"price":60.0,"version":"0","instanceId":"421371"}
+FAILURE #2 at 1793278168000 (epoch ms) after 0 ms on Thread-5: java.io.IOException: HTTP/1.1 header parser received no bytes; request {"sellerId":398,"productId":5,"price":88.0,"version":"0","instanceId":"686204"}
+FAILURE #3 at 1793278194541 (epoch ms) after 0 ms on Thread-8: java.io.IOException: HTTP/1.1 header parser received no bytes; request {"sellerId":134,"productId":10,"price":26.0,"version":"0","instanceId":"1302230"}
+THROUGHPUT (epochs 3-6) committed_tps=22498.9 accepted_rps=23168.3 backlog_at_end=0
+CPU product: 91.55 cpu-s over epochs 3-6 (2.29 cores), 101.72 cpu-us per committed tx
+CPU cart: 33.19 cpu-s over epochs 3-6 (0.83 cores), 36.88 cpu-us per committed tx
+CPU coordinator: 74.25 cpu-s over epochs 3-6 (1.86 cores), 82.50 cpu-us per committed tx
+DRAIN ok: submitted=1342177 (expected 1342174), committed=1342177, after 1.45s
+--- log errors: 0
+=== 13:49:59 rep=4 concurrency=16 variant=plain attempt=1
+--- product+cart idle before submission: yes
+FAILURE #1 at 1793278224283 (epoch ms) after 4 ms on Thread-0: java.io.IOException: HTTP/1.1 header parser received no bytes; request {"sellerId":914,"productId":9,"price":89.0,"version":"0","instanceId":"324050"}
+FAILURE #2 at 1793278242720 (epoch ms) after 1 ms on Thread-0: java.io.IOException: HTTP/1.1 header parser received no bytes; request {"sellerId":2,"productId":2,"price":69.0,"version":"0","instanceId":"712771"}
+THROUGHPUT (epochs 3-6) committed_tps=20680.4 accepted_rps=21282.3 backlog_at_end=0
+CPU product: 85.01 cpu-s over epochs 3-6 (2.13 cores), 102.78 cpu-us per committed tx
+CPU cart: 30.15 cpu-s over epochs 3-6 (0.75 cores), 36.45 cpu-us per committed tx
+CPU coordinator: 69.53 cpu-s over epochs 3-6 (1.74 cores), 84.06 cpu-us per committed tx
+DRAIN ok: submitted=1255799 (expected 1255797), committed=1255799, after 0.94s
+--- log errors: 0
+=== 13:51:11 rep=4 concurrency=32 variant=spring attempt=1
+--- product+cart idle before submission: yes
+FAILURE #1 at 1793278337789 (epoch ms) after 7 ms on Thread-27: java.io.IOException: HTTP/1.1 header parser received no bytes; request {"sellerId":470,"productId":1,"price":86.0,"version":"0","instanceId":"1271657"}
+THROUGHPUT (epochs 3-6) committed_tps=21750.6 accepted_rps=23414.3 backlog_at_end=0
+CPU product: 88.46 cpu-s over epochs 3-6 (2.21 cores), 101.68 cpu-us per committed tx
+CPU cart: 34.54 cpu-s over epochs 3-6 (0.86 cores), 39.70 cpu-us per committed tx
+CPU coordinator: 72.76 cpu-s over epochs 3-6 (1.82 cores), 83.63 cpu-us per committed tx
+DRAIN ok: submitted=1352004 (expected 1352003), committed=1352004, after 2.51s
+--- log errors: 0
+=== 13:52:25 rep=4 concurrency=32 variant=plain attempt=1
+--- product+cart idle before submission: yes
+FAILURE #1 at 1793278357806 (epoch ms) after 3 ms on Thread-16: java.io.IOException: HTTP/1.1 header parser received no bytes; request {"sellerId":170,"productId":6,"price":60.0,"version":"0","instanceId":"43348"}
+THROUGHPUT (epochs 3-6) committed_tps=22252.6 accepted_rps=23641.6 backlog_at_end=0
+CPU product: 92.10 cpu-s over epochs 3-6 (2.30 cores), 103.48 cpu-us per committed tx
+CPU cart: 34.28 cpu-s over epochs 3-6 (0.86 cores), 38.52 cpu-us per committed tx
+CPU coordinator: 75.50 cpu-s over epochs 3-6 (1.89 cores), 84.83 cpu-us per committed tx
+DRAIN ok: submitted=1345676 (expected 1345675), committed=1345676, after 1.87s
+--- log errors: 0
+=== 13:53:38 rep=4 concurrency=32 variant=original attempt=1
+--- product+cart idle before submission: yes
+THROUGHPUT (epochs 3-6) committed_tps=21747.5 accepted_rps=23004.9 backlog_at_end=0
+CPU product: 90.05 cpu-s over epochs 3-6 (2.25 cores), 103.51 cpu-us per committed tx
+CPU cart: 35.57 cpu-s over epochs 3-6 (0.89 cores), 40.89 cpu-us per committed tx
+CPU coordinator: 73.29 cpu-s over epochs 3-6 (1.83 cores), 84.24 cpu-us per committed tx
+DRAIN ok: submitted=1298272 (expected 1298272), committed=1298272, after 2.54s
+--- log errors: 0
+=== 13:54:52 rep=5 concurrency=1 variant=plain attempt=1
+--- product+cart idle before submission: yes
+THROUGHPUT (epochs 3-6) committed_tps=11447.4 accepted_rps=11437.7 backlog_at_end=0
+CPU product: 48.68 cpu-s over epochs 3-6 (1.22 cores), 106.30 cpu-us per committed tx
+CPU cart: 15.39 cpu-s over epochs 3-6 (0.38 cores), 33.61 cpu-us per committed tx
+CPU coordinator: 54.38 cpu-s over epochs 3-6 (1.36 cores), 118.75 cpu-us per committed tx
+DRAIN ok: submitted=657750 (expected 657750), committed=657750, after 0.31s
+--- log errors: 0
+=== 13:56:03 rep=5 concurrency=1 variant=original attempt=1
+--- product+cart idle before submission: yes
+THROUGHPUT (epochs 3-6) committed_tps=11704.6 accepted_rps=11698.2 backlog_at_end=0
+CPU product: 49.14 cpu-s over epochs 3-6 (1.23 cores), 104.96 cpu-us per committed tx
+CPU cart: 15.78 cpu-s over epochs 3-6 (0.39 cores), 33.71 cpu-us per committed tx
+CPU coordinator: 54.36 cpu-s over epochs 3-6 (1.36 cores), 116.11 cpu-us per committed tx
+DRAIN ok: submitted=665380 (expected 665380), committed=665380, after 0.31s
+--- log errors: 0
+=== 13:57:14 rep=5 concurrency=1 variant=spring attempt=1
+--- product+cart idle before submission: yes
+THROUGHPUT (epochs 3-6) committed_tps=11778.5 accepted_rps=11762.9 backlog_at_end=0
+CPU product: 51.74 cpu-s over epochs 3-6 (1.29 cores), 109.82 cpu-us per committed tx
+CPU cart: 17.69 cpu-s over epochs 3-6 (0.44 cores), 37.55 cpu-us per committed tx
+CPU coordinator: 54.05 cpu-s over epochs 3-6 (1.35 cores), 114.72 cpu-us per committed tx
+DRAIN ok: submitted=664734 (expected 664734), committed=664734, after 0.31s
+--- log errors: 0
+=== 13:58:26 rep=5 concurrency=4 variant=original attempt=1
+--- product+cart idle before submission: yes
+FAILURE #1 at 1793278762649 (epoch ms) after 4 ms on Thread-1: java.io.IOException: HTTP/1.1 header parser received no bytes; request {"sellerId":639,"productId":4,"price":47.0,"version":"0","instanceId":"774701"}
+THROUGHPUT (epochs 3-6) committed_tps=17371.4 accepted_rps=17309.6 backlog_at_end=0
+CPU product: 77.95 cpu-s over epochs 3-6 (1.95 cores), 112.18 cpu-us per committed tx
+CPU cart: 26.27 cpu-s over epochs 3-6 (0.66 cores), 37.81 cpu-us per committed tx
+CPU coordinator: 71.63 cpu-s over epochs 3-6 (1.79 cores), 103.09 cpu-us per committed tx
+DRAIN ok: submitted=999485 (expected 999484), committed=999485, after 0.51s
+--- log errors: 0
+=== 13:59:38 rep=5 concurrency=4 variant=spring attempt=1
+--- product+cart idle before submission: yes
+THROUGHPUT (epochs 3-6) committed_tps=17361.2 accepted_rps=17246.3 backlog_at_end=0
+CPU product: 77.61 cpu-s over epochs 3-6 (1.94 cores), 111.76 cpu-us per committed tx
+CPU cart: 26.47 cpu-s over epochs 3-6 (0.66 cores), 38.12 cpu-us per committed tx
+CPU coordinator: 72.15 cpu-s over epochs 3-6 (1.80 cores), 103.89 cpu-us per committed tx
+DRAIN ok: submitted=1013277 (expected 1013277), committed=1013277, after 0.32s
+--- log errors: 0
+=== 14:00:49 rep=5 concurrency=4 variant=plain attempt=1
+--- product+cart idle before submission: yes
+THROUGHPUT (epochs 3-6) committed_tps=18754.1 accepted_rps=18709.8 backlog_at_end=0
+CPU product: 85.26 cpu-s over epochs 3-6 (2.13 cores), 113.67 cpu-us per committed tx
+CPU cart: 25.86 cpu-s over epochs 3-6 (0.65 cores), 34.48 cpu-us per committed tx
+CPU coordinator: 73.37 cpu-s over epochs 3-6 (1.83 cores), 97.82 cpu-us per committed tx
+DRAIN ok: submitted=1059487 (expected 1059487), committed=1059487, after 0.31s
+--- log errors: 0
+=== 14:02:00 rep=5 concurrency=8 variant=spring attempt=1
+--- product+cart idle before submission: yes
+FAILURE #1 at 1793278964430 (epoch ms) after 3 ms on Thread-6: java.io.IOException: HTTP/1.1 header parser received no bytes; request {"sellerId":363,"productId":4,"price":14.0,"version":"0","instanceId":"759964"}
+FAILURE #2 at 1793278978348 (epoch ms) after 0 ms on Thread-7: java.io.IOException: HTTP/1.1 header parser received no bytes; request {"sellerId":897,"productId":2,"price":53.0,"version":"0","instanceId":"1075639"}
+THROUGHPUT (epochs 3-6) committed_tps=23250.2 accepted_rps=23663.0 backlog_at_end=0
+CPU product: 99.87 cpu-s over epochs 3-6 (2.50 cores), 107.39 cpu-us per committed tx
+CPU cart: 33.77 cpu-s over epochs 3-6 (0.84 cores), 36.31 cpu-us per committed tx
+CPU coordinator: 77.50 cpu-s over epochs 3-6 (1.94 cores), 83.33 cpu-us per committed tx
+DRAIN ok: submitted=1361025 (expected 1361023), committed=1361025, after 0.62s
+--- log errors: 0
+=== 14:03:12 rep=5 concurrency=8 variant=plain attempt=1
+--- product+cart idle before submission: yes
+FAILURE #1 at 1793279018156 (epoch ms) after 3 ms on Thread-7: java.io.IOException: HTTP/1.1 header parser received no bytes; request {"sellerId":882,"productId":5,"price":15.0,"version":"0","instanceId":"384338"}
+FAILURE #2 at 1793279042928 (epoch ms) after 1 ms on Thread-7: java.io.IOException: HTTP/1.1 header parser received no bytes; request {"sellerId":878,"productId":5,"price":10.0,"version":"0","instanceId":"966303"}
+THROUGHPUT (epochs 3-6) committed_tps=23501.1 accepted_rps=23442.0 backlog_at_end=0
+CPU product: 97.47 cpu-s over epochs 3-6 (2.44 cores), 103.69 cpu-us per committed tx
+CPU cart: 31.30 cpu-s over epochs 3-6 (0.78 cores), 33.30 cpu-us per committed tx
+CPU coordinator: 77.38 cpu-s over epochs 3-6 (1.93 cores), 82.32 cpu-us per committed tx
+DRAIN ok: submitted=1383853 (expected 1383851), committed=1383853, after 0.41s
+--- log errors: 0
+=== 14:04:23 rep=5 concurrency=8 variant=original attempt=1
+--- product+cart idle before submission: yes
+FAILURE #1 at 1793279113261 (epoch ms) after 4 ms on Thread-1: java.io.IOException: HTTP/1.1 header parser received no bytes; request {"sellerId":264,"productId":2,"price":95.0,"version":"0","instanceId":"873564"}
+FAILURE #2 at 1793279119122 (epoch ms) after 0 ms on Thread-3: java.io.IOException: HTTP/1.1 header parser received no bytes; request {"sellerId":98,"productId":6,"price":73.0,"version":"0","instanceId":"1006203"}
+THROUGHPUT (epochs 3-6) committed_tps=21198.8 accepted_rps=21371.8 backlog_at_end=0
+CPU product: 90.33 cpu-s over epochs 3-6 (2.26 cores), 106.52 cpu-us per committed tx
+CPU cart: 32.28 cpu-s over epochs 3-6 (0.81 cores), 38.06 cpu-us per committed tx
+CPU coordinator: 73.17 cpu-s over epochs 3-6 (1.83 cores), 86.28 cpu-us per committed tx
+DRAIN ok: submitted=1288704 (expected 1288702), committed=1288704, after 0.21s
+--- log errors: 0
+=== 14:05:34 rep=5 concurrency=16 variant=plain attempt=1
+--- product+cart idle before submission: yes
+THROUGHPUT (epochs 3-6) committed_tps=22500.0 accepted_rps=23697.9 backlog_at_end=0
+CPU product: 92.01 cpu-s over epochs 3-6 (2.30 cores), 102.23 cpu-us per committed tx
+CPU cart: 32.26 cpu-s over epochs 3-6 (0.81 cores), 35.84 cpu-us per committed tx
+CPU coordinator: 74.52 cpu-s over epochs 3-6 (1.86 cores), 82.80 cpu-us per committed tx
+DRAIN ok: submitted=1397012 (expected 1397012), committed=1397012, after 1.90s
+--- log errors: 0
+=== 14:06:46 rep=5 concurrency=16 variant=original attempt=1
+--- product+cart idle before submission: yes
+FAILURE #1 at 1793279252700 (epoch ms) after 4 ms on Thread-2: java.io.IOException: HTTP/1.1 header parser received no bytes; request {"sellerId":690,"productId":6,"price":99.0,"version":"0","instanceId":"900626"}
+FAILURE #2 at 1793279256712 (epoch ms) after 1 ms on Thread-4: java.io.IOException: HTTP/1.1 header parser received no bytes; request {"sellerId":354,"productId":8,"price":88.0,"version":"0","instanceId":"995179"}
+FAILURE #3 at 1793279265013 (epoch ms) after 0 ms on Thread-6: java.io.IOException: HTTP/1.1 header parser received no bytes; request {"sellerId":667,"productId":7,"price":93.0,"version":"0","instanceId":"1200318"}
+THROUGHPUT (epochs 3-6) committed_tps=21249.9 accepted_rps=23288.2 backlog_at_end=0
+CPU product: 88.29 cpu-s over epochs 3-6 (2.21 cores), 103.87 cpu-us per committed tx
+CPU cart: 33.22 cpu-s over epochs 3-6 (0.83 cores), 39.08 cpu-us per committed tx
+CPU coordinator: 73.09 cpu-s over epochs 3-6 (1.83 cores), 85.99 cpu-us per committed tx
+DRAIN ok: submitted=1388584 (expected 1388581), committed=1388584, after 3.45s
+--- log errors: 0
+=== 14:08:00 rep=5 concurrency=16 variant=spring attempt=1
+--- product+cart idle before submission: yes
+FAILURE #1 at 1793279323106 (epoch ms) after 10 ms on Thread-4: java.io.IOException: HTTP/1.1 header parser received no bytes; request {"sellerId":971,"productId":7,"price":75.0,"version":"0","instanceId":"598085"}
+THROUGHPUT (epochs 3-6) committed_tps=19512.2 accepted_rps=19653.4 backlog_at_end=0
+CPU product: 77.75 cpu-s over epochs 3-6 (1.94 cores), 99.62 cpu-us per committed tx
+CPU cart: 30.30 cpu-s over epochs 3-6 (0.76 cores), 38.82 cpu-us per committed tx
+CPU coordinator: 63.74 cpu-s over epochs 3-6 (1.59 cores), 81.67 cpu-us per committed tx
+DRAIN ok: submitted=1148065 (expected 1148064), committed=1148065, after 0.63s
+--- log errors: 0
+=== 14:09:13 rep=5 concurrency=32 variant=original attempt=1
+--- product+cart idle before submission: yes
+THROUGHPUT (epochs 3-6) committed_tps=22998.3 accepted_rps=23895.9 backlog_at_end=0
+CPU product: 92.71 cpu-s over epochs 3-6 (2.32 cores), 100.77 cpu-us per committed tx
+CPU cart: 35.91 cpu-s over epochs 3-6 (0.90 cores), 39.03 cpu-us per committed tx
+CPU coordinator: 75.31 cpu-s over epochs 3-6 (1.88 cores), 81.86 cpu-us per committed tx
+DRAIN ok: submitted=1300936 (expected 1300936), committed=1300936, after 1.58s
+--- log errors: 0
+=== 14:10:26 rep=5 concurrency=32 variant=spring attempt=1
+--- product+cart idle before submission: yes
+THROUGHPUT (epochs 3-6) committed_tps=22750.7 accepted_rps=23502.1 backlog_at_end=0
+CPU product: 89.70 cpu-s over epochs 3-6 (2.24 cores), 98.57 cpu-us per committed tx
+CPU cart: 33.68 cpu-s over epochs 3-6 (0.84 cores), 37.01 cpu-us per committed tx
+CPU coordinator: 72.53 cpu-s over epochs 3-6 (1.81 cores), 79.70 cpu-us per committed tx
+DRAIN ok: submitted=1340916 (expected 1340916), committed=1340916, after 1.38s
+--- log errors: 0
+=== 14:11:39 rep=5 concurrency=32 variant=plain attempt=1
+--- product+cart idle before submission: yes
+THROUGHPUT (epochs 3-6) committed_tps=22750.7 accepted_rps=23441.3 backlog_at_end=0
+CPU product: 89.87 cpu-s over epochs 3-6 (2.25 cores), 98.76 cpu-us per committed tx
+CPU cart: 33.28 cpu-s over epochs 3-6 (0.83 cores), 36.57 cpu-us per committed tx
+CPU coordinator: 73.20 cpu-s over epochs 3-6 (1.83 cores), 80.44 cpu-us per committed tx
+DRAIN ok: submitted=1362665 (expected 1362665), committed=1362665, after 1.34s
+--- log errors: 0
+=== 14:12:50 sweep done

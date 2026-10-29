@@ -1,0 +1,36 @@
+product pid 3894
+cart pid 3903
+--- product properties: {network_send_timeout=0, checkpointing=true, vms_thread_pool_size=4, network_buffer_size=0, logging_type=default, network_thread_pool_size=4, so_buffer_size=0, max_sleep=100, num_vms_workers=1, logging=true, max_records=0}
+--- cart properties:    {checkpointing=true, vms_thread_pool_size=4, network_buffer_size=0, max_records.cart_items=1000000, network_send_timeout=0, logging_type=default, network_thread_pool_size=4, so_buffer_size=0, max_sleep=250, num_vms_workers=1, logging=true, max_records=0}
+--- memory started product: rss=350896KB heap_used=64200KB heap_live=-KB metaspace=15437KB classes=4124
+--- memory started cart: rss=356608KB heap_used=60474KB heap_live=-KB metaspace=15729KB classes=4195
+Seeded 10000 products (full schema) in 1.5s
+Verified: 10000 ok, 0 missing, 0 wrong row (of 10000)
+proxy pid 3991
+--- product+cart idle before submission: yes
+--- memory seeded product: rss=426128KB heap_used=191176KB heap_live=-KB metaspace=18437KB classes=4643
+--- memory seeded cart: rss=359952KB heap_used=64570KB heap_live=-KB metaspace=17783KB classes=4585
+--- memory seeded proxy: rss=81872KB heap_used=13741KB heap_live=-KB metaspace=8305KB classes=2402
+FAILURE #1 at 1793279252700 (epoch ms) after 4 ms on Thread-2: java.io.IOException: HTTP/1.1 header parser received no bytes; request {"sellerId":690,"productId":6,"price":99.0,"version":"0","instanceId":"900626"}
+FAILURE #2 at 1793279256712 (epoch ms) after 1 ms on Thread-4: java.io.IOException: HTTP/1.1 header parser received no bytes; request {"sellerId":354,"productId":8,"price":88.0,"version":"0","instanceId":"995179"}
+FAILURE #3 at 1793279265013 (epoch ms) after 0 ms on Thread-6: java.io.IOException: HTTP/1.1 header parser received no bytes; request {"sellerId":667,"productId":7,"price":93.0,"version":"0","instanceId":"1200318"}
+target=http://localhost:8091 concurrency=16 epochs=6x10s warmup=2 keys=1000x10 cpus=10
+epoch 1 (warm-up): committed_tps=19913.7 accepted_rps=21281.5 backlog=0
+epoch 2 (warm-up): committed_tps=24000.7 accepted_rps=24413.1 backlog=0
+epoch 3: committed_tps=23004.9 accepted_rps=25872.3 backlog=0
+epoch 4: committed_tps=21995.0 accepted_rps=24761.5 backlog=0
+epoch 5: committed_tps=22000.0 accepted_rps=24357.2 backlog=0
+epoch 6: committed_tps=18000.0 accepted_rps=18162.1 backlog=0
+HTTP: 1388581 accepted, 3 failed; driver used 2.60 cores
+THROUGHPUT (epochs 3-6) committed_tps=21249.9 accepted_rps=23288.2 backlog_at_end=0
+CPU product: 88.29 cpu-s over epochs 3-6 (2.21 cores), 103.87 cpu-us per committed tx
+CPU cart: 33.22 cpu-s over epochs 3-6 (0.83 cores), 39.08 cpu-us per committed tx
+CPU coordinator: 73.09 cpu-s over epochs 3-6 (1.83 cores), 85.99 cpu-us per committed tx
+DRAIN ok: submitted=1388584 (expected 1388581), committed=1388584, after 3.45s
+RESULT,16,21249.9,23288.2,0,2.60,3,drained,3.45
+CPU_RESULT,103.871,39.082,85.988
+--- memory after_load product: rss=918528KB heap_used=646513KB heap_live=448678KB metaspace=19416KB classes=4888
+--- memory after_load cart: rss=762544KB heap_used=500021KB heap_live=392898KB metaspace=19123KB classes=4818
+--- memory after_load proxy: rss=355792KB heap_used=252614KB heap_live=6130KB metaspace=9296KB classes=2545
+--- .llog files written (logging=true): 6
+--- log errors: 0

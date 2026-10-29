@@ -1,0 +1,326 @@
+Coordinator settings loaded from benchmark-coordinator.properties: {tcp_port=8091, num_queues_vms_worker=1, batch_window_ms=500, network_buffer_size=0, num_transaction_workers=1, network_send_timeout=0, num_max_transactions_batch=10000, logging_type=default, network_thread_pool_size=8, so_buffer_size=0, max_sleep=0, num_vms_workers=1, logging=true}
+Could not find logging file in the classpath. Resorting to default configuration.
+Error loading application configuration. Error details:
+inStream parameter is null
+Coordinator listening on port 8091; waiting for product (localhost:18081) and cart (localhost:18080) to connect...
+Oct 28, 2026 10:40:42 PM dk.ku.di.dms.vms.coordinator.vms.VmsWorker run
+INFO: VmsWorker starting for consumer VMS: {identifier='product', host='localhost', port=18081}
+Oct 28, 2026 10:40:42 PM dk.ku.di.dms.vms.coordinator.vms.VmsWorker run
+INFO: VmsWorker starting for consumer VMS: {identifier='cart', host='localhost', port=18080}
+Oct 28, 2026 10:40:42 PM dk.ku.di.dms.vms.coordinator.vms.VmsWorker initHandshakeProtocol
+INFO: Leader: Attempting connection to product
+Oct 28, 2026 10:40:42 PM dk.ku.di.dms.vms.coordinator.vms.VmsWorker initHandshakeProtocol
+INFO: Leader: Attempting connection to cart
+Oct 28, 2026 10:40:42 PM dk.ku.di.dms.vms.coordinator.vms.VmsWorker initHandshakeProtocol
+INFO: Leader: Connection established to cart
+Oct 28, 2026 10:40:42 PM dk.ku.di.dms.vms.coordinator.vms.VmsWorker initHandshakeProtocol
+INFO: Leader: Connection established to product
+Oct 28, 2026 10:40:42 PM dk.ku.di.dms.vms.coordinator.vms.VmsWorker initHandshakeProtocol
+INFO: Leader: Sending presentation to cart
+Oct 28, 2026 10:40:42 PM dk.ku.di.dms.vms.coordinator.vms.VmsWorker initHandshakeProtocol
+INFO: Leader: Sending presentation to product
+Oct 28, 2026 10:40:43 PM dk.ku.di.dms.vms.coordinator.vms.VmsWorker run
+INFO: VmsWorker finished for consumer VMS: {identifier='cart', host='localhost', port=18080}
+Oct 28, 2026 10:40:43 PM dk.ku.di.dms.vms.coordinator.Coordinator processVmsIdentifier
+INFO: Leader: Received a VMS_IDENTIFIER from: cart
+Oct 28, 2026 10:40:43 PM dk.ku.di.dms.vms.coordinator.Coordinator processVmsIdentifier
+INFO: Leader: 1 starter(s) VMSs remain to be processed.
+Oct 28, 2026 10:40:43 PM dk.ku.di.dms.vms.coordinator.Coordinator processVmsIdentifier
+INFO: Leader: Received a VMS_IDENTIFIER from: product
+Oct 28, 2026 10:40:43 PM dk.ku.di.dms.vms.coordinator.Coordinator processVmsIdentifier
+INFO: Leader: All VMS starters have sent their VMS_IDENTIFIER
+Oct 28, 2026 10:40:43 PM dk.ku.di.dms.vms.coordinator.Coordinator processVmsIdentifier
+INFO: Leader: Consumer set built for product: 
+{"product_updated":[{"host":"localhost","port":18080,"identifier":"cart"}],"price_updated":[{"host":"localhost","port":18080,"identifier":"cart"}]}
+Oct 28, 2026 10:40:43 PM dk.ku.di.dms.vms.coordinator.Coordinator processVmsIdentifier
+WARNING: Leader: No consumer set built for cart
+Oct 28, 2026 10:40:43 PM dk.ku.di.dms.vms.coordinator.vms.VmsWorker sendConsumerSet
+INFO: Leader: Consumer set will be sent to: cart
+Oct 28, 2026 10:40:43 PM dk.ku.di.dms.vms.coordinator.transaction.TransactionWorker run
+INFO: Starting transaction worker # 1
+Oct 28, 2026 10:40:43 PM dk.ku.di.dms.vms.coordinator.vms.VmsWorker sendConsumerSet
+INFO: Leader: Consumer set will be sent to: product
+HTTPDIAG 1793223645765 open conn#1
+Number of TIDs committed: 0
+Last TID submitted: 0
+HTTPDIAG 1793223645776 open conn#2
+HTTPDIAG 1793223645776 open conn#3
+HTTPDIAG 1793223645776 open conn#4
+Oct 28, 2026 10:40:46 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 1 with 1491 transactions
+Oct 28, 2026 10:40:46 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 2 with 5326 transactions
+Oct 28, 2026 10:40:47 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 3 with 5868 transactions
+Oct 28, 2026 10:40:47 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 4 with 4729 transactions
+Oct 28, 2026 10:40:48 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 5 with 7592 transactions
+Oct 28, 2026 10:40:48 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 6 with 7392 transactions
+Oct 28, 2026 10:40:49 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 7 with 8875 transactions
+Oct 28, 2026 10:40:49 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 8 with 7797 transactions
+Oct 28, 2026 10:40:50 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 9 with 7767 transactions
+Oct 28, 2026 10:40:50 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 10 with 6519 transactions
+Oct 28, 2026 10:40:51 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 11 with 7316 transactions
+Oct 28, 2026 10:40:51 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 12 with 8977 transactions
+Oct 28, 2026 10:40:52 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 13 with 9982 transactions
+Oct 28, 2026 10:40:52 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 14 with 9262 transactions
+Oct 28, 2026 10:40:53 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 15 with 9668 transactions
+Oct 28, 2026 10:40:53 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 16 with 7889 transactions
+Oct 28, 2026 10:40:54 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 17 with 9280 transactions
+Oct 28, 2026 10:40:54 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 18 with 10000 transactions
+Oct 28, 2026 10:40:55 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 19 with 9786 transactions
+Oct 28, 2026 10:40:55 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 20 with 10000 transactions
+Number of TIDs committed: 155516
+Last TID submitted: 155516
+HTTPDIAG 1793223655779 open conn#5
+Oct 28, 2026 10:40:56 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 21 with 9238 transactions
+Oct 28, 2026 10:40:56 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 22 with 9276 transactions
+Oct 28, 2026 10:40:57 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 23 with 9407 transactions
+Oct 28, 2026 10:40:57 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 24 with 10000 transactions
+Oct 28, 2026 10:40:58 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 25 with 8756 transactions
+Oct 28, 2026 10:40:58 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 26 with 10000 transactions
+Oct 28, 2026 10:40:59 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 27 with 9918 transactions
+Oct 28, 2026 10:40:59 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 28 with 10000 transactions
+Oct 28, 2026 10:41:00 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 29 with 10000 transactions
+Oct 28, 2026 10:41:00 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 30 with 10000 transactions
+Oct 28, 2026 10:41:00 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 31 with 8833 transactions
+Oct 28, 2026 10:41:01 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 32 with 10000 transactions
+Oct 28, 2026 10:41:01 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 33 with 8843 transactions
+Oct 28, 2026 10:41:02 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 34 with 10000 transactions
+Oct 28, 2026 10:41:02 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 35 with 10000 transactions
+Oct 28, 2026 10:41:03 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 36 with 10000 transactions
+Oct 28, 2026 10:41:03 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 37 with 10000 transactions
+Oct 28, 2026 10:41:04 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 38 with 10000 transactions
+Oct 28, 2026 10:41:04 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 39 with 10000 transactions
+Oct 28, 2026 10:41:05 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 40 with 10000 transactions
+Number of TIDs committed: 359787
+Last TID submitted: 359787
+Oct 28, 2026 10:41:05 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 41 with 10000 transactions
+Oct 28, 2026 10:41:06 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 42 with 9632 transactions
+Oct 28, 2026 10:41:06 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 43 with 10000 transactions
+Oct 28, 2026 10:41:07 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 44 with 9795 transactions
+Oct 28, 2026 10:41:07 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 45 with 9487 transactions
+Oct 28, 2026 10:41:08 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 46 with 10000 transactions
+Oct 28, 2026 10:41:08 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 47 with 10000 transactions
+Oct 28, 2026 10:41:09 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 48 with 10000 transactions
+Oct 28, 2026 10:41:09 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 49 with 7588 transactions
+Oct 28, 2026 10:41:10 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 50 with 10000 transactions
+Oct 28, 2026 10:41:10 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 51 with 10000 transactions
+Oct 28, 2026 10:41:10 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 52 with 10000 transactions
+Oct 28, 2026 10:41:11 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 53 with 10000 transactions
+Oct 28, 2026 10:41:12 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 54 with 10000 transactions
+Oct 28, 2026 10:41:12 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 55 with 7949 transactions
+Oct 28, 2026 10:41:12 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 56 with 10000 transactions
+Oct 28, 2026 10:41:13 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 57 with 10000 transactions
+Oct 28, 2026 10:41:13 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 58 with 9585 transactions
+Oct 28, 2026 10:41:14 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 59 with 10000 transactions
+Oct 28, 2026 10:41:14 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 60 with 10000 transactions
+Oct 28, 2026 10:41:15 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 61 with 10000 transactions
+Oct 28, 2026 10:41:15 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 62 with 10000 transactions
+Number of TIDs committed: 563823
+Last TID submitted: 563823
+Oct 28, 2026 10:41:16 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 63 with 6857 transactions
+Oct 28, 2026 10:41:16 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 64 with 10000 transactions
+Oct 28, 2026 10:41:17 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 65 with 10000 transactions
+Oct 28, 2026 10:41:17 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 66 with 10000 transactions
+Oct 28, 2026 10:41:18 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 67 with 10000 transactions
+Oct 28, 2026 10:41:18 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 68 with 10000 transactions
+Oct 28, 2026 10:41:19 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 69 with 9042 transactions
+Oct 28, 2026 10:41:19 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 70 with 9610 transactions
+Oct 28, 2026 10:41:20 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 71 with 10000 transactions
+Oct 28, 2026 10:41:20 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 72 with 10000 transactions
+Oct 28, 2026 10:41:20 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 73 with 10000 transactions
+Oct 28, 2026 10:41:21 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 74 with 8620 transactions
+Oct 28, 2026 10:41:21 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 75 with 9790 transactions
+Oct 28, 2026 10:41:22 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 76 with 7070 transactions
+Oct 28, 2026 10:41:22 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 77 with 8850 transactions
+Oct 28, 2026 10:41:23 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 78 with 9985 transactions
+Oct 28, 2026 10:41:23 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 79 with 10000 transactions
+Oct 28, 2026 10:41:24 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 80 with 10000 transactions
+Oct 28, 2026 10:41:24 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 81 with 10000 transactions
+Oct 28, 2026 10:41:25 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 82 with 9693 transactions
+Oct 28, 2026 10:41:25 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 83 with 10000 transactions
+Number of TIDs committed: 763340
+Last TID submitted: 763340
+Oct 28, 2026 10:41:26 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 84 with 10000 transactions
+Oct 28, 2026 10:41:26 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 85 with 10000 transactions
+Oct 28, 2026 10:41:27 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 86 with 10000 transactions
+Oct 28, 2026 10:41:27 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 87 with 10000 transactions
+Oct 28, 2026 10:41:28 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 88 with 10000 transactions
+Oct 28, 2026 10:41:28 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 89 with 7455 transactions
+Oct 28, 2026 10:41:29 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 90 with 8629 transactions
+Oct 28, 2026 10:41:29 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 91 with 6229 transactions
+Oct 28, 2026 10:41:30 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 92 with 10000 transactions
+Oct 28, 2026 10:41:30 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 93 with 8771 transactions
+Oct 28, 2026 10:41:31 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 94 with 8491 transactions
+Oct 28, 2026 10:41:31 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 95 with 7981 transactions
+Oct 28, 2026 10:41:32 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 96 with 7748 transactions
+Oct 28, 2026 10:41:32 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 97 with 9183 transactions
+Oct 28, 2026 10:41:33 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 98 with 9601 transactions
+Oct 28, 2026 10:41:33 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 99 with 8616 transactions
+Oct 28, 2026 10:41:34 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 100 with 10000 transactions
+Oct 28, 2026 10:41:34 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 101 with 9985 transactions
+Oct 28, 2026 10:41:35 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 102 with 10000 transactions
+HTTPDIAG 1793223695477 conn#2 peer-closed after 191485 requests, bytes expected=7276478 written=7276478, tracking headersParsed=false buffered=0
+Oct 28, 2026 10:41:35 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 103 with 8423 transactions
+HTTPDIAG 1793223695778 open conn#6
+Number of TIDs committed: 944452
+Last TID submitted: 944452
+Oct 28, 2026 10:41:36 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 104 with 7907 transactions
+Oct 28, 2026 10:41:36 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 105 with 7470 transactions
+Oct 28, 2026 10:41:37 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 106 with 9591 transactions
+Oct 28, 2026 10:41:37 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 107 with 4608 transactions
+Oct 28, 2026 10:41:38 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 108 with 9772 transactions
+Oct 28, 2026 10:41:38 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 109 with 7145 transactions
+Oct 28, 2026 10:41:38 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 110 with 3336 transactions
+Oct 28, 2026 10:41:39 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 111 with 10000 transactions
+Oct 28, 2026 10:41:40 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 112 with 8857 transactions
+Oct 28, 2026 10:41:40 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 113 with 8414 transactions
+Oct 28, 2026 10:41:41 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 114 with 9302 transactions
+Oct 28, 2026 10:41:41 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 115 with 9416 transactions
+Oct 28, 2026 10:41:42 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 116 with 10000 transactions
+Oct 28, 2026 10:41:42 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 117 with 10000 transactions
+Oct 28, 2026 10:41:43 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 118 with 10000 transactions
+Oct 28, 2026 10:41:43 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 119 with 10000 transactions
+Oct 28, 2026 10:41:43 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 120 with 10000 transactions
+Oct 28, 2026 10:41:44 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 121 with 10000 transactions
+Oct 28, 2026 10:41:44 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 122 with 10000 transactions
+Oct 28, 2026 10:41:45 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 123 with 9726 transactions
+Number of TIDs committed: 1129996
+Last TID submitted: 1129996
+Oct 28, 2026 10:41:45 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 124 with 10000 transactions
+Last TID submitted: 1129996
+Number of TIDs committed: 1129996
+Last TID submitted: 1129996
+Number of TIDs committed: 1129996
+Last TID submitted: 1129996
+Number of TIDs committed: 1129996
+Oct 28, 2026 10:41:46 PM dk.ku.di.dms.vms.coordinator.Coordinator processBatchComplete
+INFO: Leader: Received all missing votes of batch 125 with 1170 transactions
+Last TID submitted: 1131166
+Number of TIDs committed: 1131166
+HTTPDIAG 1793223706602 conn#1 peer-closed after 245503 requests, bytes expected=9329306 written=9329306, tracking headersParsed=false buffered=0
+HTTPDIAG 1793223706602 conn#3 peer-closed after 232915 requests, bytes expected=8850962 written=8850962, tracking headersParsed=false buffered=0
+HTTPDIAG 1793223706602 conn#5 peer-closed after 184239 requests, bytes expected=7001274 written=7001274, tracking headersParsed=false buffered=0
+HTTPDIAG 1793223706602 conn#4 peer-closed after 238814 requests, bytes expected=9075220 written=9075220, tracking headersParsed=false buffered=0
+HTTPDIAG 1793223706602 conn#6 peer-closed after 38232 requests, bytes expected=1452960 written=1452960, tracking headersParsed=false buffered=0

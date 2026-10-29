@@ -57,10 +57,37 @@ benchmark/
 Files from before 2026-10-28's move into this repo show the session scratchpad paths the
 harness ran from at the time, not these paths.
 
-**Status: paused.** The sweep failed a check: 31 of 75 runs had 1–5 requests (out of ~0.6–1.0M)
-time out after 5 s, in all three variants, so `aggregate.py` excludes them. The suspected cause
-is a write-buffer race in VMODB's `ModbHttpServer`. Supporting evidence: in a re-check after the
-move (1 run per variant, 4 threads), each run had 1 timeout and a drain line of
-`submitted = expected + 1`, i.e. the server committed the "failed" request and only its response
-was lost. Whether to keep the runs, reproduce the
-timeouts, or fix the fork and re-run is still open (see the plan's Section 0 log).
+- `repro-before/`: 9 runs (3 per variant, 4 threads) on vmodb-fork `a7c0efd`, the first with the
+  driver printing each failed request.
+- `diagnostics/`: the logs that identified the HTTP failures (see its README).
+
+## Findings (sweep of 2026-10-28)
+
+The sweep ran on the runtime of that afternoon: vmodb-fork `32337f2`, before the fork commits of
+2026-10-28 evening. Every run drained and logged no errors.
+
+**HTTP failures are a driver artifact, so all 75 runs are kept.** 31 runs had 1–5 failed requests
+out of ~0.6–1.0M. The diagnostics show the driver's Java HttpClient closing the connection after
+VMODB had already committed the request and written exactly one correct reply. The error is
+`header parser received no bytes`, within a few ms. `analysis/aggregate.py` keeps these runs and
+reports their count per cell.
+
+**On one machine, throughput is machine-bound.** All variants saturate at ~22k tx/s with backlog
+~0, so throughput mostly measures the shared machine. CPU per committed transaction, per process,
+is the metric that can separate the variants.
+
+**No Spring cost is measurable.** Spring minus plain, total CPU µs per committed transaction
+(product + cart + coordinator), mean difference ± 95% Welch interval, n = 5 per cell:
+
+| concurrency | Spring − plain | relative | Spring − original |
+|---|---|---|---|
+| 1  | +6.7 ± 15.1 | +2.8% ± 6.3% | +0.1% ± 6.2% |
+| 4  | +3.7 ± 12.7 | +1.5% ± 5.2% | −0.3% ± 5.0% |
+| 8  | +5.1 ± 7.3  | +2.3% ± 3.3% | +0.1% ± 2.6% |
+| 16 | +3.2 ± 7.2  | +1.5% ± 3.3% | +0.1% ± 5.0% |
+| 32 | −0.5 ± 9.6  | −0.2% ± 4.5% | −2.8% ± 5.6% |
+
+Every interval includes 0, so the defensible claim is an upper bound. At 95% confidence, Spring
+adds at most ~4–9% CPU per transaction, depending on concurrency. The point estimates are
+positive (+1.5–2.8%) at four of five levels: a hint of a small cost this design cannot resolve.
+Throughput differences also all include 0.

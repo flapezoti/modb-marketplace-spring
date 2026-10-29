@@ -1,0 +1,10 @@
+variant,rep,concurrency,committed_tps,accepted_rps,backlog_at_end,driver_cores,http_failed,drain,drain_secs,idle_before,log_errors,exit,product_cpu_us_tx,cart_cpu_us_tx,coordinator_cpu_us_tx
+original,1,4,21096.3,21038.9,0,2.05,0,drained,0.31,yes,0,0,100.290,33.075,85.145
+spring,1,4,20739.7,20755.2,0,2.12,1,drained,0.41,yes,0,1,102.569,33.892,87.262
+plain,1,4,20144.2,20076.8,0,2.10,0,drained,0.31,yes,0,0,102.826,34.300,89.461
+spring,2,4,18272.2,18303.3,0,1.91,0,drained,0.42,yes,0,0,100.768,35.737,95.418
+plain,2,4,18595.3,18436.6,0,1.94,0,drained,0.52,yes,0,0,101.410,35.600,95.992
+original,2,4,20317.5,20154.9,0,2.06,1,drained,0.42,yes,0,1,106.093,35.697,89.531
+plain,3,4,19601.6,19688.1,0,2.10,0,drained,0.21,yes,0,0,106.883,35.096,93.811
+original,3,4,19521.4,19477.4,0,2.09,0,drained,0.21,yes,0,0,109.331,37.033,94.067
+spring,3,4,19550.1,19522.9,0,2.10,1,drained,0.52,yes,0,1,106.744,37.060,93.943

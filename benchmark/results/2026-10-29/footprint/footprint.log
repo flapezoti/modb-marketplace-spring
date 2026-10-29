@@ -1,0 +1,91 @@
+=== 12:40:37 rep=1 variant=original
+product pid 61280
+cart pid 61289
+--- product+cart idle: yes
+--- memory footprint product: rss=340416KB heap_used=68938KB heap_live=9923KB metaspace=15443KB classes=4124
+--- memory footprint cart: rss=336400KB heap_used=74988KB heap_live=9994KB metaspace=15754KB classes=4195
+=== 12:40:41 rep=1 variant=spring
+product pid 61428
+cart pid 61436
+--- product+cart idle: yes
+--- memory footprint product: rss=217344KB heap_used=66433KB heap_live=24365KB metaspace=40554KB classes=9208
+--- memory footprint cart: rss=209584KB heap_used=30045KB heap_live=24095KB metaspace=40332KB classes=9153
+=== 12:40:45 rep=1 variant=plain
+product pid 61565
+cart pid 61573
+--- product+cart idle: yes
+--- memory footprint product: rss=131312KB heap_used=44043KB heap_live=12628KB metaspace=15770KB classes=3870
+--- memory footprint cart: rss=130608KB heap_used=44071KB heap_live=12625KB metaspace=15729KB classes=3874
+=== 12:40:49 rep=2 variant=spring
+product pid 61688
+cart pid 61696
+--- product+cart idle: yes
+--- memory footprint product: rss=232560KB heap_used=65363KB heap_live=24258KB metaspace=40579KB classes=9218
+--- memory footprint cart: rss=218592KB heap_used=30366KB heap_live=24109KB metaspace=40327KB classes=9156
+=== 12:40:53 rep=2 variant=plain
+product pid 61811
+cart pid 61819
+--- product+cart idle: yes
+--- memory footprint product: rss=103120KB heap_used=43992KB heap_live=12630KB metaspace=15763KB classes=3871
+--- memory footprint cart: rss=99488KB heap_used=44106KB heap_live=12627KB metaspace=15751KB classes=3877
+=== 12:40:58 rep=2 variant=original
+product pid 61947
+cart pid 61956
+--- product+cart idle: yes
+--- memory footprint product: rss=306176KB heap_used=68778KB heap_live=9923KB metaspace=15394KB classes=4124
+--- memory footprint cart: rss=309584KB heap_used=73070KB heap_live=9993KB metaspace=15743KB classes=4195
+=== 12:41:02 rep=3 variant=plain
+product pid 62069
+cart pid 62077
+--- product+cart idle: yes
+--- memory footprint product: rss=131376KB heap_used=44067KB heap_live=12628KB metaspace=15733KB classes=3863
+--- memory footprint cart: rss=128528KB heap_used=43702KB heap_live=12625KB metaspace=15719KB classes=3874
+=== 12:41:05 rep=3 variant=original
+product pid 62185
+cart pid 62194
+--- product+cart idle: yes
+--- memory footprint product: rss=237040KB heap_used=70904KB heap_live=9921KB metaspace=15422KB classes=4124
+--- memory footprint cart: rss=242992KB heap_used=72958KB heap_live=9993KB metaspace=15705KB classes=4195
+=== 12:41:09 rep=3 variant=spring
+product pid 62300
+cart pid 62308
+--- product+cart idle: yes
+--- memory footprint product: rss=215360KB heap_used=28846KB heap_live=24138KB metaspace=40583KB classes=9213
+--- memory footprint cart: rss=210320KB heap_used=70946KB heap_live=24137KB metaspace=40328KB classes=9155
+=== 12:41:14 rep=4 variant=original
+product pid 62437
+cart pid 62446
+--- product+cart idle: yes
+--- memory footprint product: rss=307008KB heap_used=71017KB heap_live=9923KB metaspace=15419KB classes=4124
+--- memory footprint cart: rss=310752KB heap_used=73083KB heap_live=9992KB metaspace=15696KB classes=4195
+=== 12:41:17 rep=4 variant=spring
+product pid 62550
+cart pid 62558
+--- product+cart idle: yes
+--- memory footprint product: rss=225648KB heap_used=28891KB heap_live=24224KB metaspace=40555KB classes=9213
+--- memory footprint cart: rss=244544KB heap_used=68073KB heap_live=24035KB metaspace=40296KB classes=9151
+=== 12:41:22 rep=4 variant=plain
+product pid 62685
+cart pid 62693
+--- product+cart idle: yes
+--- memory footprint product: rss=135248KB heap_used=44024KB heap_live=12630KB metaspace=15778KB classes=3869
+--- memory footprint cart: rss=132464KB heap_used=44067KB heap_live=12626KB metaspace=15750KB classes=3872
+=== 12:41:25 rep=5 variant=spring
+product pid 62796
+cart pid 62804
+--- product+cart idle: yes
+--- memory footprint product: rss=241248KB heap_used=66561KB heap_live=24228KB metaspace=40577KB classes=9210
+--- memory footprint cart: rss=241424KB heap_used=67082KB heap_live=24129KB metaspace=40331KB classes=9157
+=== 12:41:30 rep=5 variant=plain
+product pid 62930
+cart pid 62938
+--- product+cart idle: yes
+--- memory footprint product: rss=134832KB heap_used=44029KB heap_live=12629KB metaspace=15746KB classes=3869
+--- memory footprint cart: rss=134480KB heap_used=44088KB heap_live=12627KB metaspace=15735KB classes=3877
+=== 12:41:33 rep=5 variant=original
+product pid 63040
+cart pid 63049
+--- product+cart idle: yes
+--- memory footprint product: rss=340224KB heap_used=71043KB heap_live=9924KB metaspace=15432KB classes=4124
+--- memory footprint cart: rss=338112KB heap_used=77091KB heap_live=9994KB metaspace=15714KB classes=4195
+=== 12:41:37 footprint done

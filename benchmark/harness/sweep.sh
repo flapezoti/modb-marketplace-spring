@@ -5,6 +5,10 @@
 # Per-run logs are kept in logs/ next to the CSV.
 # usage: sweep.sh <csvFile> <reps> <level...>
 set -uo pipefail
+# a macOS idle sleep mid-run freezes every process and breaks that run, so keep the machine awake
+if [ -z "${CAFFEINATED:-}" ] && command -v caffeinate >/dev/null; then
+  CAFFEINATED=1 exec caffeinate -dimsu "$0" "$@"
+fi
 S="$(cd "$(dirname "$0")" && pwd)"
 csv="$1"; reps="$2"; shift 2; levels="$*"
 RD="$(cd "$(dirname "$csv")" && pwd)"; mkdir -p "$RD/logs"
@@ -19,7 +23,7 @@ for rep in $(seq 1 "$reps"); do
         before=0; [ -f "$csv" ] && before=$(wc -l < "$csv")
         "$S/run-variant.sh" "$v" "$c" 6 10 2 "$csv" "$rep" > "$RD/last-run.log" 2>&1
         cp "$RD/last-run.log" "$RD/logs/rep${rep}-c${c}-${v}-a${attempt}.log"
-        grep -E "THROUGHPUT|CPU |DRAIN|log errors|idle before" "$RD/last-run.log"
+        grep -E "THROUGHPUT|CPU |DRAIN|FAILURE|log errors|idle before" "$RD/last-run.log"
         after=0; [ -f "$csv" ] && after=$(wc -l < "$csv")
         # no CSV row = the run never reached the driver (e.g. a port still busy); retry once
         [ "$after" -gt "$before" ] && break

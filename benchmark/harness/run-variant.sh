@@ -7,54 +7,17 @@
 # The original needs host port 8080: stop the client-project-game-room-manager-1 container first.
 set -uo pipefail
 v="$1"; conc="$2"; epochs="$3"; epochSecs="$4"; warmup="$5"; csv="${6:-}"; rep="${7:-0}"
-S="$(cd "$(dirname "$0")/.." && pwd)"
-R="$(dirname "$S")"
-JAVA="${JAVA:-/opt/homebrew/opt/openjdk@21/bin/java}"
-FLAGS=(--enable-preview --add-exports java.base/jdk.internal.misc=ALL-UNNAMED --add-opens java.base/jdk.internal.util=ALL-UNNAMED)
+source "$(dirname "$0")/lib.sh"
+variant_setup "$v" || exit 2
+MEM_CSV=""; [ -n "$csv" ] && MEM_CSV="${csv%.csv}-memory.csv"
 
-case "$v" in
-  original) L="$S/run/original"; PP=8081; CP=8080; SCHEMA=full ;;
-  spring)   L="$S/run/ours";     PP=18081; CP=18080; SCHEMA=lite ;;
-  plain)    L="$S/run/plain";    PP=18081; CP=18080; SCHEMA=lite ;;
-  *) echo "unknown variant $v"; exit 2 ;;
-esac
-mkdir -p "$L"
-
-stop_all() {
-  local pids="" pid
-  for p in coordinator proxy cart product; do
-    if [ -f "$L/$p.pid" ]; then pid="$(cat "$L/$p.pid")"; pids="$pids $pid"; kill "$pid" 2>/dev/null; rm -f "$L/$p.pid"; fi
-  done
-  # wait until every process has really exited, so the next run starts on free ports
-  for pid in $pids; do
-    for _ in $(seq 1 20); do kill -0 "$pid" 2>/dev/null || break; sleep 0.5; done
-    kill -0 "$pid" 2>/dev/null && { echo "pid $pid ignored SIGTERM, killing"; kill -9 "$pid"; }
-  done
-  return 0
-}
-wait_listen() { # port, seconds
-  for _ in $(seq 1 $(( $2 * 2 ))); do
-    lsof -nP -iTCP:"$1" -sTCP:LISTEN >/dev/null 2>&1 && return 0; sleep 0.5
-  done
-  echo "port $1 never listened"; return 1
-}
-
-for port in $PP $CP 8091; do
-  if lsof -nP -iTCP:$port -sTCP:LISTEN >/dev/null 2>&1; then echo "port $port busy"; exit 1; fi
-done
-rm -rf ~/vms ~/vms_product ~/vms_cart
+check_ports_and_clean || exit 1
 rm -f "$L/driver.started"
-
-case "$v" in
-  original) "$S/launch/start-original.sh" product; "$S/launch/start-original.sh" cart ;;
-  # decision 2: the original's own app.properties values (product max_sleep=100, cart 250)
-  spring)   "$S/launch/start-ours.sh" product --vmodb.logging=true --vmodb.checkpointing=true --vmodb.max-sleep=100
-            "$S/launch/start-ours.sh" cart --vmodb.logging=true --vmodb.checkpointing=true --vmodb.max-sleep=250 ;;
-  plain)    "$S/launch/start-plain.sh" product; "$S/launch/start-plain.sh" cart ;;
-esac
-wait_listen $PP 60 && wait_listen $CP 60 || { stop_all; exit 1; }
+start_vmses || { stop_all; exit 1; }
 echo "--- product properties: $(grep -A1 '^Properties:' "$L/product.log" | tail -1)"
 echo "--- cart properties:    $(grep -A1 '^Properties:' "$L/cart.log" | tail -1)"
+# no forced GC before the load: it would lower every later RSS reading (see mem_sample in lib.sh)
+mem_sample started nogc
 
 "$JAVA" "$S/driver/SeedProducts.java" "http://localhost:$PP" 1000 10 $SCHEMA || { stop_all; exit 1; }
 
@@ -73,25 +36,16 @@ for _ in $(seq 1 60); do grep -q "Setting up consumption from producer" "$L/cart
 grep -q "Setting up consumption from producer" "$L/cart.log" || { echo "handshake never completed"; stop_all; exit 1; }
 sleep 1
 
-COORD=coordinator; [ "$v" = original ] && COORD=proxy
-cpu_secs() { ps -o time= -p "$1" | awk -F: '{s=0; for(i=1;i<=NF;i++) s=s*60+$i; print s}'; }
-
-# OM §7.2.1: "after data population, we ensure CPU usage returns to idle before initializing
-# transaction submission". Whole-machine idle can never be reached here: the coordinator/proxy
-# busy-polls one core by design (max_sleep=0, the original's own setting). So idle = product and
-# cart each using < 0.05 CPU-s over a 1 s window (seeding work and its JIT done), for at most 30s.
-idle=no
-for _ in $(seq 1 30); do
-  p0=$(cpu_secs "$(cat "$L/product.pid")"); c0=$(cpu_secs "$(cat "$L/cart.pid")"); sleep 1
-  p1=$(cpu_secs "$(cat "$L/product.pid")"); c1=$(cpu_secs "$(cat "$L/cart.pid")")
-  if awk -v a="$p0" -v b="$p1" -v c="$c0" -v d="$c1" 'BEGIN{exit !((b-a) < 0.05 && (d-c) < 0.05)}'; then idle=yes; break; fi
-done
+wait_idle
 echo "--- product+cart idle before submission: $idle"
+mem_sample seeded nogc
 
 out="$L/driver.out"
 PIDS="product:$(cat "$L/product.pid"),cart:$(cat "$L/cart.pid"),coordinator:$(cat "$L/$COORD.pid")"
 "$JAVA" -Dbench.pids="$PIDS" "$S/driver/BenchmarkDriver.java" http://localhost:8091 "$conc" "$epochs" "$epochSecs" "$warmup" | tee "$out"
 rc=${PIPESTATUS[0]}
+# after the measured window and the drain, so this forced GC cannot touch the CPU measurement
+mem_sample after_load gc
 errors=$(grep -iE 'exception|severe' "$L"/*.log | grep -v AsynchronousClose | grep -vc "driver.out")
 echo "--- .llog files written (logging=true): $(ls ~/vms/*.llog 2>/dev/null | wc -l | tr -d ' ')"
 echo "--- log errors: $errors"

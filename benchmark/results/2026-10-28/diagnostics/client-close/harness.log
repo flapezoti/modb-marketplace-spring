@@ -1,0 +1,25 @@
+product pid 1953
+cart pid 1961
+--- product properties: {network_send_timeout=0, checkpointing=true, vms_thread_pool_size=4, network_buffer_size=0, so_buffer_size=0, network_thread_pool_size=4, max_sleep=100, num_vms_workers=1, logging=true, max_records=0}
+--- cart properties:    {network_send_timeout=0, checkpointing=true, vms_thread_pool_size=4, network_buffer_size=0, so_buffer_size=0, network_thread_pool_size=4, max_sleep=250, num_vms_workers=1, logging=true, max_records=0}
+Seeded 10000 products (lite schema) in 1.2s
+Verified: 10000 ok, 0 missing, 0 wrong row (of 10000)
+--- product+cart idle before submission: yes
+FAILURE #1 at 1793223695481 (epoch ms) after 11 ms on Thread-2: java.io.IOException: HTTP/1.1 header parser received no bytes; request {"sellerId":898,"productId":1,"price":40.0,"version":"0","instanceId":"945568"}
+target=http://localhost:8091 concurrency=4 epochs=6x10s warmup=2 keys=1000x10 cpus=10
+epoch 1 (warm-up): committed_tps=15545.1 accepted_rps=15956.6 backlog=0
+epoch 2 (warm-up): committed_tps=20427.6 accepted_rps=20317.6 backlog=0
+epoch 3: committed_tps=20402.5 accepted_rps=20522.2 backlog=0
+epoch 4: committed_tps=19952.2 accepted_rps=19838.7 backlog=0
+epoch 5: committed_tps=18111.1 accepted_rps=18391.6 backlog=0
+epoch 6: committed_tps=18552.8 accepted_rps=18081.3 backlog=0
+HTTP: 1131165 accepted, 1 failed; driver used 1.91 cores
+THROUGHPUT (epochs 3-6) committed_tps=19254.7 accepted_rps=19208.5 backlog_at_end=0
+CPU product: 72.18 cpu-s over epochs 3-6 (1.80 cores), 93.71 cpu-us per committed tx
+CPU cart: 25.55 cpu-s over epochs 3-6 (0.64 cores), 33.17 cpu-us per committed tx
+CPU coordinator: 67.89 cpu-s over epochs 3-6 (1.70 cores), 88.14 cpu-us per committed tx
+DRAIN ok: submitted=1131166 (expected 1131165), committed=1131166, after 0.42s
+RESULT,4,19254.7,19208.5,0,1.91,1,drained,0.42
+CPU_RESULT,93.715,33.173,88.145
+--- .llog files written (logging=true): 6
+--- log errors: 0

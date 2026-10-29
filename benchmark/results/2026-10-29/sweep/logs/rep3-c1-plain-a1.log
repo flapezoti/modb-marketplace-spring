@@ -1,0 +1,32 @@
+product pid 81330
+cart pid 81338
+--- product properties: {network_send_timeout=0, checkpointing=true, vms_thread_pool_size=4, network_buffer_size=0, logging_type=default, network_thread_pool_size=4, so_buffer_size=0, max_sleep=100, num_vms_workers=1, logging=true, max_records=0}
+--- cart properties:    {checkpointing=true, vms_thread_pool_size=4, network_buffer_size=0, max_records.cart_items=1000000, network_send_timeout=0, logging_type=default, network_thread_pool_size=4, so_buffer_size=0, max_sleep=250, num_vms_workers=1, logging=true, max_records=0}
+--- memory started product: rss=132768KB heap_used=44182KB heap_live=-KB metaspace=15770KB classes=3870
+--- memory started cart: rss=132032KB heap_used=43779KB heap_live=-KB metaspace=15725KB classes=3870
+Seeded 10000 products (lite schema) in 2.5s
+Verified: 10000 ok, 0 missing, 0 wrong row (of 10000)
+--- product+cart idle before submission: yes
+--- memory seeded product: rss=222288KB heap_used=112761KB heap_live=-KB metaspace=18567KB classes=4339
+--- memory seeded cart: rss=111376KB heap_used=49006KB heap_live=-KB metaspace=17730KB classes=4234
+--- memory seeded coordinator: rss=82608KB heap_used=11298KB heap_live=-KB metaspace=8515KB classes=2440
+target=http://localhost:8091 concurrency=1 epochs=6x10s warmup=2 keys=1000x10 cpus=10
+epoch 1 (warm-up): committed_tps=7640.3 accepted_rps=7837.7 backlog=0
+epoch 2 (warm-up): committed_tps=11360.3 accepted_rps=11383.0 backlog=0
+epoch 3: committed_tps=10787.7 accepted_rps=10743.6 backlog=0
+epoch 4: committed_tps=10679.5 accepted_rps=10691.6 backlog=0
+epoch 5: committed_tps=8239.2 accepted_rps=8116.3 backlog=0
+epoch 6: committed_tps=7945.2 accepted_rps=8042.7 backlog=0
+HTTP: 568180 accepted, 0 failed; driver used 0.89 cores
+THROUGHPUT (epochs 3-6) committed_tps=9413.0 accepted_rps=9398.7 backlog_at_end=0
+CPU product: 42.08 cpu-s over epochs 3-6 (1.05 cores), 111.77 cpu-us per committed tx
+CPU cart: 14.09 cpu-s over epochs 3-6 (0.35 cores), 37.42 cpu-us per committed tx
+CPU coordinator: 51.02 cpu-s over epochs 3-6 (1.28 cores), 135.51 cpu-us per committed tx
+DRAIN ok: submitted=568180 (expected 568180), committed=568180, after 0.31s
+RESULT,1,9413.0,9398.7,0,0.89,0,drained,0.31
+CPU_RESULT,111.766,37.424,135.511
+--- memory after_load product: rss=464736KB heap_used=291558KB heap_live=204224KB metaspace=19581KB classes=4591
+--- memory after_load cart: rss=276384KB heap_used=316258KB heap_live=173067KB metaspace=18868KB classes=4431
+--- memory after_load coordinator: rss=309440KB heap_used=84186KB heap_live=4829KB metaspace=9475KB classes=2576
+--- .llog files written (logging=true): 6
+--- log errors: 0

@@ -1,0 +1,28 @@
+product pid 84111
+cart pid 84119
+--- product properties: {network_send_timeout=0, checkpointing=true, vms_thread_pool_size=4, network_buffer_size=0, so_buffer_size=0, network_thread_pool_size=4, max_sleep=100, num_vms_workers=1, logging=true, max_records=0}
+--- cart properties:    {network_send_timeout=0, checkpointing=true, vms_thread_pool_size=4, network_buffer_size=0, so_buffer_size=0, network_thread_pool_size=4, max_sleep=250, num_vms_workers=1, logging=true, max_records=0}
+Seeded 10000 products (lite schema) in 1.3s
+Verified: 10000 ok, 0 missing, 0 wrong row (of 10000)
+--- product+cart idle before submission: yes
+FAILURE #1 at 1793217358603 (epoch ms) after 5 ms on Thread-0: java.io.IOException: HTTP/1.1 header parser received no bytes; request {"sellerId":575,"productId":2,"price":88.0,"version":"0","instanceId":"13414"}
+FAILURE #2 at 1793218303496 (epoch ms) after 168 ms on Thread-1: java.net.http.HttpTimeoutException: request timed out; request {"sellerId":381,"productId":1,"price":78.0,"version":"0","instanceId":"469530"}
+FAILURE #3 at 1793218303499 (epoch ms) after 170 ms on Thread-3: java.net.http.HttpTimeoutException: request timed out; request {"sellerId":388,"productId":6,"price":58.0,"version":"0","instanceId":"469531"}
+FAILURE #4 at 1793218303500 (epoch ms) after 171 ms on Thread-2: java.net.http.HttpTimeoutException: request timed out; request {"sellerId":83,"productId":9,"price":66.0,"version":"0","instanceId":"469532"}
+target=http://localhost:8091 concurrency=4 epochs=6x10s warmup=2 keys=1000x10 cpus=10
+epoch 1 (warm-up): committed_tps=18165.2 accepted_rps=18559.0 backlog=0
+epoch 2 (warm-up): committed_tps=19519.9 accepted_rps=19136.4 backlog=0
+epoch 3: committed_tps=13108.0 accepted_rps=13164.5 backlog=0
+epoch 4: committed_tps=10884.8 accepted_rps=11282.0 backlog=0
+epoch 5: committed_tps=12355.6 accepted_rps=11979.3 backlog=0
+epoch 6: committed_tps=11636.8 accepted_rps=11638.3 backlog=0
+HTTP: 857650 accepted, 4 failed; driver used 1.93 cores
+THROUGHPUT (epochs 3-6) committed_tps=11995.9 accepted_rps=12015.8 backlog_at_end=0
+CPU product: 71.10 cpu-s over epochs 3-6 (1.78 cores), 148.17 cpu-us per committed tx
+CPU cart: 25.34 cpu-s over epochs 3-6 (0.63 cores), 52.81 cpu-us per committed tx
+CPU coordinator: 67.69 cpu-s over epochs 3-6 (1.69 cores), 141.06 cpu-us per committed tx
+DRAIN ok: submitted=857654 (expected 857650), committed=857654, after 0.42s
+RESULT,4,11995.9,12015.8,0,1.93,4,drained,0.42
+CPU_RESULT,148.166,52.806,141.060
+--- .llog files written (logging=true): 6
+--- log errors: 0

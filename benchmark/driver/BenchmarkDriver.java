@@ -98,14 +98,16 @@ public class BenchmarkDriver {
                             + ",\"price\":" + price
                             + ",\"version\":\"0\""
                             + ",\"instanceId\":\"" + instanceIds.incrementAndGet() + "\"}";
+                    long sendStart = System.nanoTime();
                     try {
                         HttpResponse<Void> resp = CLIENT.send(HttpRequest.newBuilder(URI.create(base + "/product"))
                                 .timeout(Duration.ofSeconds(5))
                                 .method("PATCH", HttpRequest.BodyPublishers.ofString(body))
                                 .build(), HttpResponse.BodyHandlers.discarding());
-                        if (resp.statusCode() == 200) sent.incrementAndGet(); else failed.incrementAndGet();
+                        if (resp.statusCode() == 200) sent.incrementAndGet();
+                        else reportFailure(failed, sendStart, "HTTP " + resp.statusCode(), body);
                     } catch (Exception e) {
-                        failed.incrementAndGet();
+                        reportFailure(failed, sendStart, e.toString(), body);
                     }
                 }
             });
@@ -190,6 +192,20 @@ public class BenchmarkDriver {
     }
 
     /** Total CPU seconds of "name:pid" so far, from ps's cumulative TIME ([[h:]m:]s.cc). */
+    // Failures are rare (a few per ~1M requests), so each one is printed: what failed, after how
+    // long (a 5 s wait is the request timeout, not an error response), and which input it carried,
+    // so it can be matched against the drain count (a lost response still commits).
+    private static final int MAX_FAILURES_PRINTED = 20;
+
+    private static void reportFailure(AtomicLong failed, long sendStart, String what, String body) {
+        long n = failed.incrementAndGet();
+        if (n <= MAX_FAILURES_PRINTED) {
+            System.out.printf("FAILURE #%d at %d (epoch ms) after %d ms on %s: %s; request %s%n", n,
+                    System.currentTimeMillis(), (System.nanoTime() - sendStart) / 1_000_000,
+                    Thread.currentThread().getName(), what, body);
+        }
+    }
+
     private static double cpuSeconds(String pidSpec) throws Exception {
         String pid = pidSpec.split(":")[1];
         Process ps = new ProcessBuilder("ps", "-o", "time=", "-p", pid).redirectErrorStream(true).start();
