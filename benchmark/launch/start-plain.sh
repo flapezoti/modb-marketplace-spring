@@ -10,7 +10,7 @@ B="$(cd "$(dirname "$0")/.." && pwd)"
 REPO="$(dirname "$B")"
 L="$B/run/plain"
 mkdir -p "$L"
-JAVA="${JAVA:-/opt/homebrew/opt/openjdk@21/bin/java}"
+JAVA="${JAVA:-$(command -v /opt/homebrew/opt/openjdk@21/bin/java || command -v java)}"
 FLAGS=(--enable-preview --add-exports java.base/jdk.internal.misc=ALL-UNNAMED --add-opens java.base/jdk.internal.util=ALL-UNNAMED)
 CPF="$B/run/$m-plain.cp"
 [ -f "$CPF" ] || (cd "$REPO/$m-plain" && mvn -q dependency:build-classpath -Dmdep.outputFile="$CPF")

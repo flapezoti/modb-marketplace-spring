@@ -23,7 +23,7 @@ for rep in $(seq 1 "$reps"); do
         before=0; [ -f "$csv" ] && before=$(wc -l < "$csv")
         "$S/run-variant.sh" "$v" "$c" 6 10 2 "$csv" "$rep" > "$RD/last-run.log" 2>&1
         cp "$RD/last-run.log" "$RD/logs/rep${rep}-c${c}-${v}-a${attempt}.log"
-        grep -E "THROUGHPUT|CPU |DRAIN|FAILURE|log errors|idle before" "$RD/last-run.log"
+        grep -E "THROUGHPUT|LATENCY |DRAIN|FAILURE|log errors|idle before" "$RD/last-run.log"
         after=0; [ -f "$csv" ] && after=$(wc -l < "$csv")
         # no CSV row = the run never reached the driver (e.g. a port still busy); retry once
         [ "$after" -gt "$before" ] && break

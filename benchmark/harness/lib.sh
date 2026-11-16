@@ -2,8 +2,11 @@
 # and, for mem_sample, rep, conc and MEM_CSV, then call variant_setup.
 S="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 R="$(dirname "$S")"
-JAVA="${JAVA:-/opt/homebrew/opt/openjdk@21/bin/java}"
+# Homebrew's JDK 21 on the Mac, else the java on PATH (Linux: apt's openjdk-21). Exported so the
+# launch scripts use the same one.
+export JAVA="${JAVA:-$(command -v /opt/homebrew/opt/openjdk@21/bin/java || command -v java)}"
 JDK_BIN="$(dirname "$JAVA")"
+CLK_TCK="$(getconf CLK_TCK)"
 FLAGS=(--enable-preview --add-exports java.base/jdk.internal.misc=ALL-UNNAMED --add-opens java.base/jdk.internal.util=ALL-UNNAMED)
 
 variant_setup() { # <variant>: sets L (run dir), PP/CP (product/cart ports), SCHEMA, COORD
@@ -29,9 +32,14 @@ stop_all() {
   return 0
 }
 
+listening() { # port: ss on Linux (lsof is often not installed there), lsof on macOS (no ss)
+  if command -v ss >/dev/null; then ss -Hltn "sport = :$1" | grep -q .
+  else lsof -nP -iTCP:"$1" -sTCP:LISTEN >/dev/null 2>&1; fi
+}
+
 wait_listen() { # port, seconds
   for _ in $(seq 1 $(( $2 * 2 ))); do
-    lsof -nP -iTCP:"$1" -sTCP:LISTEN >/dev/null 2>&1 && return 0; sleep 0.5
+    listening "$1" && return 0; sleep 0.5
   done
   echo "port $1 never listened"; return 1
 }
@@ -39,7 +47,7 @@ wait_listen() { # port, seconds
 # Fresh state for every run (both papers: OM §7.2.1, vMODB §7.1). Fails if a port is still taken.
 check_ports_and_clean() {
   for port in $PP $CP 8091; do
-    if lsof -nP -iTCP:$port -sTCP:LISTEN >/dev/null 2>&1; then echo "port $port busy"; return 1; fi
+    if listening $port; then echo "port $port busy"; return 1; fi
   done
   rm -rf ~/vms ~/vms_product ~/vms_cart
 }
@@ -56,7 +64,13 @@ start_vmses() {
   wait_listen $PP 60 && wait_listen $CP 60
 }
 
-cpu_secs() { ps -o time= -p "$1" | awk -F: '{s=0; for(i=1;i<=NF;i++) s=s*60+$i; print s}'; }
+# Total CPU seconds of a pid. Linux: utime + stime from /proc (clock ticks, 10 ms), because Linux
+# ps prints whole seconds only, too coarse for wait_idle's 0.05 s threshold. macOS: ps's TIME
+# (10 ms). In /proc/<pid>/stat utime/stime are fields 14/15, i.e. 12/13 after "pid (comm) ".
+cpu_secs() {
+  if [ -r "/proc/$1/stat" ]; then awk -v t="$CLK_TCK" '{sub(/^.*\) /, ""); print ($12 + $13) / t}' "/proc/$1/stat"
+  else ps -o time= -p "$1" | awk -F: '{s=0; for(i=1;i<=NF;i++) s=s*60+$i; print s}'; fi
+}
 
 # OM §7.2.1: "after data population, we ensure CPU usage returns to idle before initializing
 # transaction submission". Whole-machine idle can never be reached here: the coordinator/proxy

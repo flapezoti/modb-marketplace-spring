@@ -16,20 +16,28 @@ how to run it.
 
 ## Prerequisites
 
-- JDK 21 (default path `/opt/homebrew/opt/openjdk@21/bin/java`; override with `JAVA=...`).
+- JDK 21: Homebrew's `/opt/homebrew/opt/openjdk@21/bin/java` if present, else `java` on the
+  PATH; override with `JAVA=...`.
 - `mvn install` in this repo (the start scripts take the dependency classpath from `~/.m2`) and
   `mvn package` in `../modb-original-marketplace`, both on JDK 21.
-- Ports 8080, 8081, 8091, 18080, 18081 free. **Each run deletes `~/vms`, `~/vms_product` and
-  `~/vms_cart`** (VMODB's data directories), following both papers' clean-state-per-run rule.
+- `python3` for the analysis scripts.
+- Ports 8080, 8081, 8091, 18080, 18081 free (checked with `ss` on Linux, `lsof` on macOS).
+  **Each run deletes `~/vms`, `~/vms_product` and `~/vms_cart`** (VMODB's data directories),
+  following both papers' clean-state-per-run rule.
+
+Runs on macOS and Linux. On a UCloud job, see "Running on UCloud" below.
 
 ## Layout
 
 ```
 benchmark/
   harness/    run-variant.sh, sweep.sh   - what you run
+              footprint.sh, lib.sh   - startup-memory runs; shared helpers
+              ucloud-setup.sh, env-record.sh   - prepare a UCloud job; record the environment
   launch/     start-original.sh, start-ours.sh, start-plain.sh   - start one process (used by run-variant.sh)
   driver/     BenchmarkDriver.java, SeedProducts.java   - load generator and data seeder (single-file Java)
   analysis/   aggregate.py   - turns a sweep CSV into the results table
+              memory.py   - memory table from the *-memory.csv files
   results/    one folder per date
   run/        runtime state: process logs, pids, cached classpaths (gitignored)
 ```
@@ -42,7 +50,45 @@ benchmark/
   with 6 × 10 s epochs, 2 warm-up; variant order rotated per block; per-run logs go to `logs/`
   next to the CSV. Example: `harness/sweep.sh results/<date>/sweep/sweep.csv 5 1 4 8 16 32`.
 - `analysis/aggregate.py <csv>`: mean ± 95% t-interval per (variant, concurrency) for committed
-  tx/s and CPU µs per committed transaction for product, cart, coordinator; lists excluded runs.
+  tx/s and latency (avg, p50, p99); lists excluded runs. October CSVs, which have CPU µs per
+  committed transaction per process instead of latency, still aggregate.
+
+### Metrics (decision of 2026-11-16)
+
+The metrics are throughput and end-to-end latency, the two both papers report. Memory per process
+is still sampled (`*-memory.csv`, `footprint.sh`). CPU per transaction, the October sweeps' main
+metric, is no longer measured.
+
+- **Throughput:** committed TIDs per second over the measured epochs, from the coordinator's
+  counter.
+- **Latency:** vMODB §7.1, "from a transaction being emitted to its commit being received by the
+  client". The driver polls the committed TID every 5 ms on its own connection. Each request's
+  TID is the submitted TID at the start plus its acceptance order, and its latency ends at the
+  first poll that saw that TID committed.
+  - Reported for requests sent in the measured epochs: avg, p50, p75, p90 and p99 in ms.
+  - Matching by TID stays correct when a backlog makes requests wait several batches.
+  - The official driver's commit stream (`Accept: text/event-stream`) cannot be used: VMODB's
+    `ModbHttpServer` never registers a subscriber in `SSE_CLIENTS`, in the original as in the fork.
+- **Idle check before the load:** on Linux it reads `/proc`, because Linux `ps` only counts whole
+  seconds.
+- **Driver load:** `driver_cores` is the driver's own CPU use, for OM §7.2.1's "resource usage
+  ... under 80%" check.
+
+## Running on UCloud
+
+Plan and decisions: Section 0 of the plan, 2026-11-11. Stage 1 runs everything on one job.
+
+1. Start a **Terminal Ubuntu** job on `cpu-amd-zen5` with **Enable SSH server** ticked, and the
+   folder that holds the four repos added: `vmodb-fork`, `vmodb-spring-starter`,
+   `vmodb-marketplace` and `modb-original-marketplace`, at the versions being measured.
+2. Run `harness/ucloud-setup.sh /work/<folder>`. It installs JDK 21, Maven, iproute2, python3,
+   tmux and iperf3, keeps Maven's repository in `/work/<folder>/.m2`, and builds all four repos.
+   Run it in every new job, because UCloud keeps only `/work`.
+3. Run `harness/env-record.sh results/<date>/environment-<job>.txt`. It records the CPU, cgroup
+   limits, the JVM's default heap and CPU count, and the repo versions. The write-up has to state
+   the hardware, since the paper's `u1-standard` no longer exists.
+4. Run inside `tmux`, so a dropped SSH session does not stop a sweep. Keep results under `/work`,
+   and stop the job when done: it is charged for its vCPUs while it runs, idle or not.
 
 ## Results
 

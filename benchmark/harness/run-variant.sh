@@ -41,8 +41,7 @@ echo "--- product+cart idle before submission: $idle"
 mem_sample seeded nogc
 
 out="$L/driver.out"
-PIDS="product:$(cat "$L/product.pid"),cart:$(cat "$L/cart.pid"),coordinator:$(cat "$L/$COORD.pid")"
-"$JAVA" -Dbench.pids="$PIDS" "$S/driver/BenchmarkDriver.java" http://localhost:8091 "$conc" "$epochs" "$epochSecs" "$warmup" | tee "$out"
+"$JAVA" "$S/driver/BenchmarkDriver.java" http://localhost:8091 "$conc" "$epochs" "$epochSecs" "$warmup" | tee "$out"
 rc=${PIPESTATUS[0]}
 # after the measured window and the drain, so this forced GC cannot touch the CPU measurement
 mem_sample after_load gc
@@ -50,12 +49,12 @@ errors=$(grep -iE 'exception|severe' "$L"/*.log | grep -v AsynchronousClose | gr
 echo "--- .llog files written (logging=true): $(ls ~/vms/*.llog 2>/dev/null | wc -l | tr -d ' ')"
 echo "--- log errors: $errors"
 if [ -n "$csv" ]; then
-  [ -f "$csv" ] || echo "variant,rep,concurrency,committed_tps,accepted_rps,backlog_at_end,driver_cores,http_failed,drain,drain_secs,idle_before,log_errors,exit,product_cpu_us_tx,cart_cpu_us_tx,coordinator_cpu_us_tx" > "$csv"
+  [ -f "$csv" ] || echo "variant,rep,concurrency,committed_tps,accepted_rps,backlog_at_end,driver_cores,http_failed,drain,drain_secs,idle_before,log_errors,exit,lat_avg_ms,lat_p50_ms,lat_p75_ms,lat_p90_ms,lat_p99_ms,lat_n" > "$csv"
   line=$(grep '^RESULT,' "$out" | sed 's/^RESULT,//')
   [ -n "$line" ] || line="$conc,,,,,,,"
-  cpu=$(grep '^CPU_RESULT,' "$out" | sed 's/^CPU_RESULT//')
-  [ -n "$cpu" ] || cpu=",,,"
-  echo "$v,$rep,$line,$idle,$errors,$rc$cpu" >> "$csv"
+  lat=$(grep '^LATENCY_RESULT,' "$out" | sed 's/^LATENCY_RESULT//')
+  [ -n "$lat" ] || lat=",,,,,,"
+  echo "$v,$rep,$line,$idle,$errors,$rc$lat" >> "$csv"
 fi
 stop_all
 exit $rc

@@ -7,7 +7,7 @@ B="$(cd "$(dirname "$0")/.." && pwd)"
 ORIGINAL="${ORIGINAL_REPO:-$(dirname "$(dirname "$B")")/modb-original-marketplace}"
 L="$B/run/original"
 mkdir -p "$L"
-JAVA="${JAVA:-/opt/homebrew/opt/openjdk@21/bin/java}"
+JAVA="${JAVA:-$(command -v /opt/homebrew/opt/openjdk@21/bin/java || command -v java)}"
 FLAGS=(--enable-preview --add-exports java.base/jdk.internal.misc=ALL-UNNAMED --add-opens java.base/jdk.internal.util=ALL-UNNAMED)
 cd "$ORIGINAL"
 nohup "$JAVA" "${FLAGS[@]}" -jar "$m/target/$m-1.0-SNAPSHOT-jar-with-dependencies.jar" > "$L/$m.log" 2>&1 &
