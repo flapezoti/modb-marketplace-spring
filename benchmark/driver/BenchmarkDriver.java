@@ -229,8 +229,9 @@ public class BenchmarkDriver {
         double drainSecs = (System.nanoTime() - drainStart) / 1e9;
         System.out.printf("DRAIN %s: submitted=%d (expected %d), committed=%d, after %.2fs%n",
                 drained ? "ok" : "TIMED OUT", submitted, target, committed, drainSecs);
-        System.out.printf("RESULT,%d,%.1f,%.1f,%d,%.2f,%d,%s,%.2f%n", concurrency, committedTps, acceptedRps, backlog,
-                driverCores, failed.get(), drained ? "drained" : "not_drained", drainSecs);
+        // driver_cpus last: with driver_cores it gives the driver's utilization (OM §7.2.1: under 80%)
+        System.out.printf("RESULT,%d,%.1f,%.1f,%d,%.2f,%d,%s,%.2f,%d%n", concurrency, committedTps, acceptedRps, backlog,
+                driverCores, failed.get(), drained ? "drained" : "not_drained", drainSecs, os.getAvailableProcessors());
 
         // let the poller see the final commits, then stop it
         long pollWaitStart = System.nanoTime();

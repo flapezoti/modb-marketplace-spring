@@ -76,19 +76,38 @@ metric, is no longer measured.
 
 ## Running on UCloud
 
-Plan and decisions: Section 0 of the plan, 2026-11-11. Stage 1 runs everything on one job.
+Plan and decisions: Section 0 of the plan, from 2026-11-11 on. The main layout is two jobs,
+following OM §7.2.1's separate instances for driver and platform. **`platform`** runs product,
+cart, the coordinator/proxy and the harness. **`driver`** runs only `BenchmarkDriver`, started
+from `platform` over ssh.
 
-1. Start a **Terminal Ubuntu** job on `cpu-amd-zen5` with **Enable SSH server** ticked, and the
-   folder that holds the four repos added: `vmodb-fork`, `vmodb-spring-starter`,
-   `vmodb-marketplace` and `modb-original-marketplace`, at the versions being measured.
-2. Run `harness/ucloud-setup.sh /work/<folder>`. It installs JDK 21, Maven, iproute2, python3,
-   tmux and iperf3, keeps Maven's repository in `/work/<folder>/.m2`, and builds all four repos.
-   Run it in every new job, because UCloud keeps only `/work`.
-3. Run `harness/env-record.sh results/<date>/environment-<job>.txt`. It records the CPU, cgroup
-   limits, the JVM's default heap and CPU count, and the repo versions. The write-up has to state
-   the hardware, since the paper's `u1-standard` no longer exists.
-4. Run inside `tmux`, so a dropped SSH session does not stop a sweep. Keep results under `/work`,
-   and stop the job when done: it is charged for its vCPUs while it runs, idle or not.
+1. **Start the jobs.** Start two **Terminal Ubuntu** jobs on `cpu-amd-zen5`, named and hostnamed
+   `platform` and `driver` (under "Connect to other jobs"), on the **same private network**. Tick
+   **Enable SSH server** on both, and add the same folder to both: the one that holds
+   `vmodb-fork`, `vmodb-spring-starter`, `vmodb-marketplace` and `modb-original-marketplace`.
+   - Short hostnames resolve between the jobs through the cluster network (`eth0`). Checked
+     2026-11-16: 26 Gbit/s, 0.2 ms RTT. The private network's own interface (`net1`) is slower.
+2. **Set up `platform` first:** `harness/ucloud-setup.sh /work/<folder>`.
+   - It installs JDK 21, Maven, iproute2, python3, tmux and iperf3, keeps Maven's repository in
+     `/work/<folder>/.m2`, and builds all four repos.
+   - It also creates the job's ssh key and publishes the public half in `<folder>/.bench-keys/`.
+   - Run it in every new job, because UCloud keeps only `/work`.
+3. **Then set up `driver`:** `harness/ucloud-setup.sh /work/<folder> --no-build`. It installs the
+   packages and authorizes the published keys, so `platform` can start the driver there.
+4. **On `platform`, inside `tmux`:** run `DRIVER_HOST=driver harness/sweep.sh results/<date>/sweep/sweep.csv <reps> <levels...>`.
+   - `tmux` keeps the sweep running if the ssh session drops.
+   - The sweep first checks that it can reach `driver`, then writes `environment-platform.txt` and
+     `environment-driver.txt` next to the CSV (CPU, cgroup limits, the JVM's default heap and CPU
+     count, repo versions). The write-up has to state the hardware, since the paper's
+     `u1-standard` no longer exists.
+   - A single run works the same way: `DRIVER_HOST=driver harness/run-variant.sh ...`.
+5. **Check the driver's load.** `aggregate.py` shows each cell's highest driver utilization
+   (`driver_cores / driver_cpus`) and flags cells over OM §7.2.1's 80%. Give the driver job enough
+   vCPUs that nothing is flagged.
+6. **Stop both jobs when done.** Results stay under `/work`. Jobs are charged for their vCPUs while
+   they run, idle or not.
+
+Without `DRIVER_HOST`, everything runs on one machine, as on the Mac.
 
 ## Results
 

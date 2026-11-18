@@ -8,8 +8,14 @@
 # Maven's repository is kept in <root>/.m2 (symlinked from ~/.m2), so later jobs reuse the
 # downloads; the build still runs every time, so the jars match the checked-out sources.
 #
+# Two-job layout (DRIVER_HOST in run-variant.sh): the platform job starts the driver on the driver
+# job over ssh. Each job creates an ssh key, publishes its PUBLIC half in <root>/.bench-keys/,
+# and authorizes every key published there, so set up the platform job before the driver job (or
+# re-run the driver's setup). Only public keys are shared; keys live in ~/.ssh, so they disappear
+# when a job stops and the next job makes new ones.
+#
 # usage: ucloud-setup.sh <root> [--no-build]
-#   --no-build: install packages only (e.g. on the driver job, which needs only JDK 21)
+#   --no-build: packages and keys only (the driver job, which needs only JDK 21)
 set -euo pipefail
 [ "$(uname -s)" = Linux ] || { echo "ucloud-setup.sh is for the UCloud Linux jobs only"; exit 2; }
 ROOT="$(cd "$1" && pwd)"
@@ -18,6 +24,15 @@ sudo apt-get update -y
 sudo DEBIAN_FRONTEND=noninteractive apt-get install -y \
     openjdk-21-jdk-headless maven iproute2 procps python3 git tmux iperf3
 java -version 2>&1 | head -1
+
+mkdir -p ~/.ssh "$ROOT/.bench-keys"; chmod 700 ~/.ssh
+[ -f ~/.ssh/id_ed25519 ] || ssh-keygen -q -t ed25519 -N "" -C "bench-$(hostname)" -f ~/.ssh/id_ed25519
+cp ~/.ssh/id_ed25519.pub "$ROOT/.bench-keys/$(hostname).pub"
+touch ~/.ssh/authorized_keys; chmod 600 ~/.ssh/authorized_keys
+for key in "$ROOT"/.bench-keys/*.pub; do
+  grep -qxF "$(cat "$key")" ~/.ssh/authorized_keys || cat "$key" >> ~/.ssh/authorized_keys
+done
+echo "ssh keys authorized here: $(ls "$ROOT/.bench-keys" | tr '\n' ' ')"
 
 if [ "${2:-}" = --no-build ]; then exit 0; fi
 

@@ -4,6 +4,8 @@
 # first/last in a block: environment drift then spreads across variants instead of biasing one.
 # Per-run logs are kept in logs/ next to the CSV.
 # usage: sweep.sh <csvFile> <reps> <level...>
+# With DRIVER_HOST set (see run-variant.sh), every run's driver runs on that machine; the sweep
+# checks it is reachable first, and records both machines' environments next to the CSV.
 set -uo pipefail
 # a macOS idle sleep mid-run freezes every process and breaks that run, so keep the machine awake
 if [ -z "${CAFFEINATED:-}" ] && command -v caffeinate >/dev/null; then
@@ -12,6 +14,14 @@ fi
 S="$(cd "$(dirname "$0")" && pwd)"
 csv="$1"; reps="$2"; shift 2; levels="$*"
 RD="$(cd "$(dirname "$csv")" && pwd)"; mkdir -p "$RD/logs"
+if [ -n "${DRIVER_HOST:-}" ]; then
+  ssh -n -o BatchMode=yes -o StrictHostKeyChecking=accept-new -o ConnectTimeout=10 "$DRIVER_HOST" true \
+    || { echo "cannot ssh to driver host '$DRIVER_HOST' (run ucloud-setup.sh on it after this job's)"; exit 1; }
+  "$S/env-record.sh" "$RD/environment-platform.txt"
+  ssh -n -o BatchMode=yes "$DRIVER_HOST" "$(printf '%q ' "$S/env-record.sh" "$RD/environment-driver.txt")"
+else
+  "$S/env-record.sh" "$RD/environment.txt"
+fi
 VARIANTS=(original spring plain)
 k=0
 for rep in $(seq 1 "$reps"); do

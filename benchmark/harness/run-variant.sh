@@ -5,6 +5,11 @@
 # Restarting every process and clearing state each run follows both papers (OM §7.2.1, vMODB §7.1).
 # usage: run-variant.sh <original|spring|plain> <concurrency> <epochs> <epochSeconds> <warmupEpochs> [csvFile] [rep]
 # The original needs host port 8080: stop the client-project-game-room-manager-1 container first.
+#
+# Two-machine layout (OM §7.2.1: driver and platform on separate instances): set DRIVER_HOST to the
+# driver machine's hostname (e.g. DRIVER_HOST=driver on UCloud). Everything else stays on this
+# machine; only the driver runs there, over ssh, against http://<this hostname>:8091. Both machines
+# must see this repo at the same path (UCloud: the same /work folder) and have java on the PATH.
 set -uo pipefail
 v="$1"; conc="$2"; epochs="$3"; epochSecs="$4"; warmup="$5"; csv="${6:-}"; rep="${7:-0}"
 source "$(dirname "$0")/lib.sh"
@@ -41,17 +46,23 @@ echo "--- product+cart idle before submission: $idle"
 mem_sample seeded nogc
 
 out="$L/driver.out"
-"$JAVA" "$S/driver/BenchmarkDriver.java" http://localhost:8091 "$conc" "$epochs" "$epochSecs" "$warmup" | tee "$out"
+if [ -n "${DRIVER_HOST:-}" ]; then
+  # -n: never read this script's stdin (sweep.sh loops); ssh returns the driver's exit code
+  ssh -n -o BatchMode=yes -o StrictHostKeyChecking=accept-new "$DRIVER_HOST" \
+      "$(printf '%q ' java "$S/driver/BenchmarkDriver.java" "http://$(hostname):8091" "$conc" "$epochs" "$epochSecs" "$warmup")" | tee "$out"
+else
+  "$JAVA" "$S/driver/BenchmarkDriver.java" http://localhost:8091 "$conc" "$epochs" "$epochSecs" "$warmup" | tee "$out"
+fi
 rc=${PIPESTATUS[0]}
-# after the measured window and the drain, so this forced GC cannot touch the CPU measurement
+# after the measured window and the drain, so this forced GC cannot touch the measurements
 mem_sample after_load gc
 errors=$(grep -iE 'exception|severe' "$L"/*.log | grep -v AsynchronousClose | grep -vc "driver.out")
 echo "--- .llog files written (logging=true): $(ls ~/vms/*.llog 2>/dev/null | wc -l | tr -d ' ')"
 echo "--- log errors: $errors"
 if [ -n "$csv" ]; then
-  [ -f "$csv" ] || echo "variant,rep,concurrency,committed_tps,accepted_rps,backlog_at_end,driver_cores,http_failed,drain,drain_secs,idle_before,log_errors,exit,lat_avg_ms,lat_p50_ms,lat_p75_ms,lat_p90_ms,lat_p99_ms,lat_n" > "$csv"
+  [ -f "$csv" ] || echo "variant,rep,concurrency,committed_tps,accepted_rps,backlog_at_end,driver_cores,http_failed,drain,drain_secs,driver_cpus,idle_before,log_errors,exit,lat_avg_ms,lat_p50_ms,lat_p75_ms,lat_p90_ms,lat_p99_ms,lat_n" > "$csv"
   line=$(grep '^RESULT,' "$out" | sed 's/^RESULT,//')
-  [ -n "$line" ] || line="$conc,,,,,,,"
+  [ -n "$line" ] || line="$conc,,,,,,,,"
   lat=$(grep '^LATENCY_RESULT,' "$out" | sed 's/^LATENCY_RESULT//')
   [ -n "$lat" ] || lat=",,,,,,"
   echo "$v,$rep,$line,$idle,$errors,$rc$lat" >> "$csv"

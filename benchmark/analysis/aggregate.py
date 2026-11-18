@@ -37,12 +37,17 @@ bad = []
 with open(sys.argv[1]) as f:
     reader = csv.DictReader(f)
     METRICS = [m for m in ALL_METRICS if m[0] in reader.fieldnames]
+    # CSVs since 2026-11-18 record the CPUs the driver saw, so its utilization can be checked
+    DRIVER_UTIL = "driver_cpus" in reader.fieldnames
     for r in reader:
         ok = r["drain"] == "drained" and r["log_errors"] == "0" and r["committed_tps"] != ""
         (rows[(r["variant"], int(r["concurrency"]))] if ok else bad).append(r)
 
 header = f"{'variant':9} {'conc':>4} {'n':>2}" + "".join(f" {label:>22}" for _, label, _ in METRICS) + f" {'backlog':>8} {'idle':>5} {'http_failed':>11}"
+if DRIVER_UTIL:
+    header += f" {'driver max':>10}"
 print(header)
+over = 0
 last_c = None
 for (v, c) in sorted(rows, key=lambda k: (k[1], k[0])):
     if last_c is not None and c != last_c:
@@ -60,7 +65,16 @@ for (v, c) in sorted(rows, key=lambda k: (k[1], k[0])):
     backlog = statistics.mean(float(r["backlog_at_end"]) for r in rs)
     idle = sum(r["idle_before"] == "yes" for r in rs)
     failed = sum(int(r["http_failed"]) for r in rs)
-    print(line + f" {backlog:>8.0f} {idle:>2}/{len(rs)} {failed:>11}")
+    line += f" {backlog:>8.0f} {idle:>2}/{len(rs)} {failed:>11}"
+    if DRIVER_UTIL:
+        # highest driver utilization in the cell; "!" marks OM §7.2.1's 80% limit being exceeded
+        util = max(float(r["driver_cores"]) / int(r["driver_cpus"]) for r in rs)
+        over += util > 0.8
+        line += f" {util:>9.0%}{'!' if util > 0.8 else ' '}"
+    print(line)
+
+if over:
+    print(f"\n{over} cell(s) with driver utilization over 80% (OM §7.2.1): the driver may be the bottleneck there")
 
 if bad:
     print(f"\n{len(bad)} run(s) excluded (failed checks):")
